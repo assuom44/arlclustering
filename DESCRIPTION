@@ -1,11 +1,14 @@
 Package: arlclustering
 Type: Package
-Title: What the Package Does (Title Case)
+Title: ARL CLUSTERING METHOD FOR SOCIAL NETWORK ANALYSIS
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: MED TIJANI
+Maintainer: The package maintainer <me.elmoussaoui@gmail.com>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Imports:
+    dplyr,
+    ggplot2
