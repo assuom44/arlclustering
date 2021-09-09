@@ -1,37 +1,49 @@
-## Welcome to GitHub Pages
+# arlclustering: an R package for ARL Clustering method for Social Network Analysis (Community detection)
 
-You can use the [editor on GitHub](https://github.com/assuom44/arlclustering/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+Welcome to the website for my R package, `arlclustering`!  This package is created as part of the Advanced Data Science oriented to a research paper based on Community Detection.  The purpose of this package is to use github for the implementation tasks.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Used Dataset
+The used dataset for this research paper is a manual dataset representing a synthetic social network, based on interactions of users. The highlited link is represented with the shared relationships of the network users.
 
-### Markdown
+### `plot_candy()` function
+The main function of this package is called `plot_candy`.  The function takes in the following parameters:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### `first_function()` function
 
-```markdown
-Syntax highlighted code block
+### `second_function()` function
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+1) `df`: The name of the data frame
+2) `n`: The number of top candies to plot (default is 10)
+3) `candy_name_col`: The name of the column in the data frame `df` containing the candy names
+4) `rank_col`: The name of the column in the data frame `df` containing the candy rankings
 
-1. Numbered
-2. List
+The output of the function is a `ggplot` object, depicting the top `n` ranked candies in the dataset.
 
-**Bold** and _Italic_ and `Code` text
+### Using the package
+In order to use the package, you must first install it from this GitHub repo, which can be done using the `devtools` package:
 
-[Link](url) and ![Image](src)
+```
+library(devtools)
+devtools::install_github('[USERNAME]/arlclustering')
+```
+Next, you must load the R package:
+
+```
+library(arlclustering)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Here's an example of how to use :
+1) the `plot_candy()` function:
+```
+plot_candy(candy_data, candy_name_col = "competitorname", rank_col = "winpercent")
+```
+2) The first function
+```
+first_function(candy_data, candy_name_col = "competitorname", rank_col = "winpercent")
+```
+3) The second function
+```
+second_function(candy_data, candy_name_col = "competitorname", rank_col = "winpercent")
+```
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/assuom44/arlclustering/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
