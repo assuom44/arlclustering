@@ -1,6 +1,6 @@
 # Function for getting the best apriori thresholds:
 
-get_thresholds <- function (transactions, support_range, confidence_range){
+get_best_thresholds <- function (transactions, support_range, confidence_range){
   # Initialize variables to store the best support, confidence, and rules
   best_support <- 0
   best_confidence <- 0
