@@ -1,1 +1,8 @@
 exportPattern("^[[:alpha:]]+")
+
+library("igraph")
+library("tools")
+library("arules")
+library ("arulesViz")
+library("igraphdata")
+library(Matrix)
