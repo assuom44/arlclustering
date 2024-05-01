@@ -1,30 +1,50 @@
-# Function to generate gross rules based on the best obtained thresholds
+#' Get Apriori Thresholds
+#'
+#' This function generates gross rules based on the best obtained thresholds.
+#'
+#' @description This function takes a transaction dataset and ranges for support and confidence,
+#' computes the best thresholds, and returns the best minimum support, minimum confidence,
+#' best lift, total number of gross rules, and ratio of generated rules to total number of transactions.
+#'
+#' @param trx A transaction dataset.
+#' @param supportRange A sequence of values representing the range for minimum support.
+#' @param confidenceRange A sequence of values representing the range for minimum confidence.
+#'
+#' @return A list containing the best minimum support, minimum confidence, best lift,
+#' total number of gross rules, and ratio of generated rules to total number of transactions.
+#'
+#' @examples
+#' get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+#' @export
 
-get_apriori_thresholds <- function (trx, supportRange, confidenceRange) {
-  # suppose the parmater supportRange to be introduced as a sequence with seq(minSupport, maxSupport, by =stepSupport) 
-  # suppose the parmater confidenceRange to be introduced as a sequence with seq(minConfidence, maxConfidence, by = stepConfidence)
-  
+get_apriori_thresholds <- function(trx, supportRange, confidenceRange) {
+  # Initialize variables
   minSupp <- 0
   minConf <- 0
   bestLift <- 0
   lenRules <- 0
   
-  output_list <- get_thresholds (trx, supportRange, confidenceRange) #, minLenRules, maxLenRules)
+  # Get thresholds based on support and confidence ranges
+  output_list <- get_thresholds(trx, supportRange, confidenceRange) #, minLenRules, maxLenRules)
   
-  #gross_rules <- output_list[best_rules]
+  # Assign values from output_list
   minSupp <- output_list[[1]]
-  print (paste('Best Minimum Support   : ', format(minSupp, scientific = FALSE)))
+  print(paste('Best Minimum Support   : ', format(minSupp, scientific = FALSE)))
   
   minConf <- output_list[[2]]
-  print (paste('Best Minimum Confidence: ', format(output_list[[2]], scientific = FALSE)))
+  print(paste('Best Minimum Confidence: ', format(minConf, scientific = FALSE)))
   
   bestLift <- output_list[[3]]
-  print (paste('Best Lift              : ', format(output_list[[3]], scientific = FALSE)))
+  print(paste('Best Lift              : ', format(bestLift, scientific = FALSE)))
   
   lenRules <- output_list[[4]]
-  print (paste ('Total gross rules     : ', lenRules))
+  print(paste('Total gross rules     : ', lenRules))
   
-  print (paste ('-- > Generated rules represents approximativelly ', round(lenRules/length(trx), digits = 0), ' times the total number of nodes'))
-
-  return (minSupp, minConf, bestLift, lenRules, round(lenRules/length(trx), digits = 0))
+  print(paste('-- > Generated rules represent approximately ', 
+              round(lenRules / length(trx), digits = 0), 
+              ' times the total number of transactions'))
+  
+  # Return results as a list
+  return(list(minSupp = minSupp, minConf = minConf, bestLift = bestLift, 
+              lenRules = lenRules, ratio = round(lenRules / length(trx), digits = 0)))
 }
