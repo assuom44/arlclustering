@@ -7,10 +7,10 @@ start_time <- Sys.time()
   if (genFileLog) {
     if (substr(file, start = nchar(file)-3, stop = nchar(file)) == ".gml")
       {traceFileName <- paste0("output_", substr(file, start = 1, stop = nchar(file)-4),".spool")}
-    else 
+    else
       {traceFileName <- paste0("output_", file,".spool")}
-    sink(traceFileName, append = FALSE) 
-    
+    sink(traceFileName, append = FALSE)
+
     # Parameters Display:
     cat ('=== Computation Parameters :=================\n')
     cat ('Graph Name                              : ', graphLabel)
@@ -38,19 +38,19 @@ for (i in 1:length(all_sets)) {
     if (genFileLog && debugMode) {cat (' --> The set <current_set> already processed' )}
     next
   }
-    
+
   for (j in 1:length(all_sets)) {
     if (i == j) {next}
     if (genFileLog && debugMode) {cat ('\n  SUB-ITERATION', j)}
 
     targeted_set <- all_sets[[j]]
     if (genFileLog && debugMode) {cat ('    targeted_set   :', targeted_set) }
-    
+
     if (any(sapply(sets_to_exclude, function(set) all(targeted_set %in% set)))) {
       #cat ("==> set already exist in Excluded List")
       next
     }
-  
+
     projection_set <- current_set[which(current_set %in% targeted_set)]
     if (genFileLog && debugMode) {cat ('    projection_set :', projection_set)}
 
