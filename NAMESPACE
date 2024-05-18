@@ -1,4 +1,6 @@
 exportPattern("^[[:alpha:]]+")
+export(Fct_CleanOverlappingTrans)
+
 
 import(igraph)
 import(igraphdata)
