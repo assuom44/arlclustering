@@ -1,13 +1,2 @@
 exportPattern("^[[:alpha:]]+")
-export(Fct_CleanOverlappingTrans)
-importFrom(igraph, graph_from_data_frame, vcount, ecount, degree)
-importFrom(arules, apriori, is.significant)
 
-
-import(igraph)
-import(igraphdata)
-import(tools)
-import(arules)
-import(arulesViz)
-import(methods)
-import(Matrix)
