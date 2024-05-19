@@ -18,10 +18,10 @@ Suggests:
     dplyr,
     tidyr
 Imports:
-    igraph,
-    igraphdata,
     tools,
-    arules,
     arulesViz,
     Matrix,
-    methods
+    methods,
+    igraph (>= 1.2.6),
+    igraphdata (>= 1.0.1),
+    arules (>= 1.6-8)
