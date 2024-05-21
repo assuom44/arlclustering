@@ -1,46 +1,44 @@
 #' Get Network Dataset
 #'
-#' This function loads a network dataset and creates a graph object.
+#' This function loads a network dataset from a specified GML file and computes basic graph properties.
 #'
-#' @description This function takes the name of a dataset as input, loads the dataset, and creates a graph object from the data.
+#' @description This function reads a network dataset from a GML file, assigns node names, and calculates
+#' various properties of the graph such as total edges, total nodes, and average degree.
 #'
-#' @param dataset The name of the dataset to be loaded. Default is set to DS.
+#' @param file The name of the GML file to be loaded.
+#' @param label A label for the graph.
 #'
-#' @return A graph object representing the network dataset.
+#' @return A list containing the graph object and its properties: total edges, total nodes, and average degree.
 #'
 #' @examples
-#' get_network_dataset("karate")
+#' result <- get_network_dataset("karate.gml", "Karate Club")
+#' print(result$graph)
+#' print(result$total_edges)
+#' print(result$total_nodes)
+#' print(result$average_degree)
 #' @import igraph
 #' @export
+get_network_dataset <- function(file, label) {
+  # Load the graph from the GML file
+  graphG <- igraph::read.graph(file = file, format = "gml")
 
-get_network_dataset <- function(dataset = "karate") {
-  # Load dataset
-  network_data <- igraphdata::get.data.graph(dataset)
-  
-  # Create a graph object
-  graph <- igraph::graph_from_data_frame(network_data$edges, directed = FALSE)
-  
-  return(graph)
+  # Assign names to the vertices
+  graphG$names <- igraph::V(graphG)$name
+
+  # Compute graph properties
+  total_edges <- igraph::gsize(graphG)
+  total_nodes <- igraph::vcount(graphG)
+  average_degree <- mean(igraph::degree(graphG))
+
+  # Create a label for the graph
+  graphLabel <- paste0(label, ' Network')
+
+  # Return a list containing the graph and its properties
+  return(list(
+    graph = graphG,
+    graphLabel = graphLabel,
+    total_edges = total_edges,
+    total_nodes = total_nodes,
+    average_degree = average_degree
+  ))
 }
-
-
-
-
-
-## Funciton to load network dataset
-
-#get_network_dataset <- function (dataset = DS) {
-#  # Create an empty graph object
-#  graph <- graph.empty()
-  
-#  # Load dataset
-#  network_data <- read.table(DS, header = FALSE)
-  
-#  # Add edges to the graph
-#  graph <- graph_from_data_frame(network_data, directed = FALSE)
-
-#  return (graph)
-#}
-
-
-
