@@ -1,23 +1,5 @@
-#' Get Best Apriori Thresholds
-#'
-#' This function determines the best Apriori thresholds for a given transaction dataset.
-#'
-#' @description This function takes a transaction dataset and ranges for support and confidence,
-#' runs the Apriori algorithm with various combinations of support and confidence values,
-#' and returns the best support, confidence, lift, and number of rules found.
-#'
-#' @param transactions A transaction dataset.
-#' @param support_range A sequence of values representing the range for minimum support.
-#' @param confidence_range A sequence of values representing the range for minimum confidence.
-#'
-#' @return A numeric vector containing the best support, confidence, lift, and number of rules found.
-#'
-#' @examples
-#' arlc_get_best_apriori_thresholds(transactions, support_range = seq(0.1, 0.9, by = 0.1),
-#'                     confidence_range = seq(0.5, 0.9, by = 0.1))
-#' @export
 
-arlc_get_best_apriori_thresholds <- function(transactions, support_range, confidence_range) {
+arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, confidence_range) {
   # Initialize variables to store the best support, confidence, lift, and rules
   best_support <- 0
   best_confidence <- 0
