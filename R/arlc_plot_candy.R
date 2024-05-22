@@ -10,12 +10,12 @@
 #' @return a ggplot object
 #'
 #' @examples
-#' plot_candy(candy_data, candy_name_col = "competitorname", rank_col = "winpercent")
+#' arlc_plot_candy(candy_data, candy_name_col = "competitorname", rank_col = "winpercent")
 #' @import dplyr
 #' @import ggplot2
 #' @export
 
-plot_candy = function(df, n = 10, candy_name_col, rank_col){
+arlc_plot_candy = function(df, n = 10, candy_name_col, rank_col){
   p = ggplot(df %>% top_n(n, wt=get(rank_col))) +
     geom_bar(aes(x = stats::reorder(get(candy_name_col),get(rank_col)), y = get(rank_col)), stat="identity") +
     coord_flip() +

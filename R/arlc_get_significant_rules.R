@@ -2,7 +2,7 @@
 #'
 #' This function filters significant rules from a set of non-redundant rules.
 #'
-#' @description This function takes all transactions and a set of non-redundant rules as input, 
+#' @description This function takes all transactions and a set of non-redundant rules as input,
 #' and returns significant rules based on a specified method and adjustment.
 #'
 #' @param all_trans A dataframe containing all transactions.
@@ -13,24 +13,24 @@
 #' @return A list containing the total number of significant non-redundant rules and the significant rules themselves.
 #'
 #' @examples
-#' get_sig_rules(all_transactions, non_redundant_rules, method = "fisher", adjust = "bonferroni")
+#' arlc_get_significant_rules(all_transactions, non_redundant_rules, method = "fisher", adjust = "bonferroni")
 #' @import arules
 #' @export
 
-get_sig_rules <- function(all_trans, nonRR_rules, method = "fisher", adjust = "bonferroni") {
+arlc_get_significant_rules <- function(all_trans, nonRR_rules, method = "fisher", adjust = "bonferroni") {
   # Get significant rules
-  sigR_nnRR_Rules <- arules::is.significant(nonRR_rules, 
-                                            all_trans, 
-                                            method = method, 
+  sigR_nnRR_Rules <- arules::is.significant(nonRR_rules,
+                                            all_trans,
+                                            method = method,
                                             adjust = adjust)
-  
+
   if (length(sigR_nnRR_Rules) < 1) {
     cat('rule set is null')
     sigR_nnRR_Rules <- nonRR_rules
   }
-  
+
   total_nonRedandant_signif_rules <- length(sigR_nnRR_Rules)
-  
+
   return(list(total_nonRedandant_signif_rules = total_nonRedandant_signif_rules, sigR_nnRR_Rules = sigR_nnRR_Rules))
 }
 
@@ -46,9 +46,9 @@ get_sig_rules <- function(all_trans, nonRR_rules, method = "fisher", adjust = "b
 #get_sig_rules <- function (all_trans, nonRR_rules) {
 #  # significant rules
 #  sigR_nnRR_Rules <- NULL
-#  sigR_nnRR_Rules <- nonRR_rules[!is.significant( nonRR_rules, 
-#                                                   all_trans, 
-#                                                   method = "fisher", 
+#  sigR_nnRR_Rules <- nonRR_rules[!is.significant( nonRR_rules,
+#                                                   all_trans,
+#                                                   method = "fisher",
 #                                                   adjust = "bonferroni" #'bonferroni', 'holm'
 #                                                  )]
 #  if (length(sigR_nnRR_Rules) < 1 ) {

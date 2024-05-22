@@ -14,37 +14,35 @@
 #' total number of gross rules, and ratio of generated rules to total number of transactions.
 #'
 #' @examples
-#' get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+#' arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
 #' @export
 
-get_apriori_thresholds <- function(trx, supportRange, confidenceRange) {
+arlc_get_apriori_thresholds <- function(trx, supportRange, confidenceRange) {
   # Initialize variables
   minSupp <- 0
   minConf <- 0
   bestLift <- 0
   lenRules <- 0
-  
+
   # Get thresholds based on support and confidence ranges
-  output_list <- get_thresholds(trx, supportRange, confidenceRange) #, minLenRules, maxLenRules)
-  
+  output_list <- arlc_get_best_apriori_thresholds(trx,
+                                                  supportRange,
+                                                  confidenceRange) #, minLenRules, maxLenRules)
+
   # Assign values from output_list
-  minSupp <- output_list[[1]]
-  print(paste('Best Minimum Support   : ', format(minSupp, scientific = FALSE)))
-  
-  minConf <- output_list[[2]]
-  print(paste('Best Minimum Confidence: ', format(minConf, scientific = FALSE)))
-  
-  bestLift <- output_list[[3]]
-  print(paste('Best Lift              : ', format(bestLift, scientific = FALSE)))
-  
+  minSupp <- format(output_list[[1]], scientific = FALSE)
+  minConf <- format(output_list[[2]], scientific = FALSE)
+  bestLift <-  format(output_list[[3]], scientific = FALSE)
   lenRules <- output_list[[4]]
-  print(paste('Total gross rules     : ', lenRules))
-  
-  print(paste('-- > Generated rules represent approximately ', 
-              round(lenRules / length(trx), digits = 0), 
-              ' times the total number of transactions'))
-  
+
+  ##print(paste('-- > Generated rules represent approximately ', round(lenRules / length(trx), digits = 0), ' times the total number of transactions'))
+
   # Return results as a list
-  return(list(minSupp = minSupp, minConf = minConf, bestLift = bestLift, 
-              lenRules = lenRules, ratio = round(lenRules / length(trx), digits = 0)))
+  return(list(minSupp = minSupp,
+              minConf = minConf,
+              bestLift = bestLift,
+              lenRules = lenRules,
+              ratio = round(lenRules / length(trx), digits = 0)
+            )
+         )
 }

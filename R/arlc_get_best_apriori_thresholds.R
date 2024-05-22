@@ -13,11 +13,11 @@
 #' @return A numeric vector containing the best support, confidence, lift, and number of rules found.
 #'
 #' @examples
-#' get_best_thresholds(transactions, support_range = seq(0.1, 0.9, by = 0.1), 
+#' arlc_get_best_apriori_thresholds(transactions, support_range = seq(0.1, 0.9, by = 0.1),
 #'                     confidence_range = seq(0.5, 0.9, by = 0.1))
 #' @export
 
-get_best_thresholds <- function(transactions, support_range, confidence_range) {
+arlc_get_best_apriori_thresholds <- function(transactions, support_range, confidence_range) {
   # Initialize variables to store the best support, confidence, lift, and rules
   best_support <- 0
   best_confidence <- 0

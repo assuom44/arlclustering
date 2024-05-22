@@ -18,7 +18,8 @@
 #' print(result$average_degree)
 #' @import igraph
 #' @export
-get_network_dataset <- function(file, label) {
+
+arlc_get_network_dataset <- function(file, label) {
   # Load the graph from the GML file
   graphG <- igraph::read.graph(file = file, format = "gml")
 

@@ -1,5 +1,20 @@
-# Function that extracts pure and overlapped communities
-Fct_CleanOverlappingTrans <- function(all_sets, file, genFileLog = FALSE, debugMode = FALSE) {
+#' Clean Transactional Datasets
+#'
+#' This function filters out fully overlapping sets from a list of transaction sets.
+#'
+#' @param all_sets A list of transaction sets.
+#' @param file A string representing the file name used for logging.
+#' @param genFileLog A boolean flag indicating whether to generate a log file. Default is FALSE.
+#' @param debugMode A boolean flag indicating whether to print debug information. Default is FALSE.
+#'
+#' @return A list of filtered transaction sets.
+#'
+#' @examples
+#' arlc_clean_transactions(list(c(1,2,3), c(2,3), c(1,2,3,4)), "example_file", TRUE, TRUE)
+#' @export
+
+
+arlc_clean_transactions <- function(all_sets, file, genFileLog = FALSE, debugMode = FALSE) {
   # Start measuring time
   start_time <- Sys.time()
 

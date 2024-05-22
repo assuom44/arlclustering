@@ -10,11 +10,11 @@
 #' @return A cleaned vector of rules.
 #'
 #' @examples
-#' clean_final_rules(final_rules)
+#' arlc_clean_final_rules(final_rules)
 #' @import stringr
 #' @export
 
-clean_final_rules <- function(final_rules) {
+arlc_clean_final_rules <- function(final_rules) {
   ## Cleaning generated rules for further processing :
 
   # Convert S4 object to data frame

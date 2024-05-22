@@ -10,17 +10,17 @@
 #' @return A list containing the total number of non-redundant rules and the non-redundant rules.
 #'
 #' @examples
-#' get_NonR_rules(gross_rules)
+#' arlc_get_NonR_rules(gross_rules)
 #' @export
 
-get_NonR_rules <- function(gross_rules) {
+arlc_get_NonR_rules <- function(gross_rules) {
   ## Cleaning rules
   # Remove redundant rules
   nonRR_rules <- gross_rules[!is.redundant(gross_rules)]
-  
+
   # Compute number of non-redundant rules
   total_nonRedandunt_rules <- length(nonRR_rules)
-  
+
   # Return result as a list
   return(list(total_nonRedandunt_rules = total_nonRedandunt_rules, nonRR_rules = nonRR_rules))
 }
@@ -35,7 +35,7 @@ get_NonR_rules <- function(gross_rules) {
 #  # 1. Non redendant rules
 #  nonRR_rules <- NULL
 #  nonRR_rules <- gross_rules[!is.redundant(gross_rules)]
-  
+
 #  # Compute number of Non Redundant rules:
 #  total_nonRedandunt_rules <- 0
 #  total_nonRedandunt_rules <- length(nonRR_rules)

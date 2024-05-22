@@ -13,11 +13,10 @@
 #' @return A list of potential clusters.
 #'
 #' @examples
-#' generate_clusters(vec, minSupp = 0.5, minConf = 0.6)
-#' @import Fct_CleanOverlappingTrans
+#' arlc_generate_clusters(vec, minSupp = 0.5, minConf = 0.6)
 #' @export
 
-generate_clusters <- function(vec, minSupp, minConf) {
+arlc_generate_clusters <- function(vec, minSupp, minConf) {
   # Combine elements starting with the same value and remove duplicates
   combined_result <- lapply(vec, function(v) unique(unlist(v)))
 
@@ -30,7 +29,7 @@ generate_clusters <- function(vec, minSupp, minConf) {
   # Call external function to generate clusters
   genFileLog <- TRUE # Activate generated spool (FALSE if not)
   debugModeOption <- FALSE # Disable debug mode (TRUE if activated option)
-  clusters <- Fct_CleanOverlappingTrans(sorted_result,
+  clusters <- arlc_clean_transactions(sorted_result,
                                          genFileLog = genFileLog,
                                          debugMode  = debugModeOption)
 
