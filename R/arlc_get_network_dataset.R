@@ -20,6 +20,8 @@
 #' @export
 
 arlc_get_network_dataset <- function(file, label) {
+
+  stopifnot("label should be not null" = length(label) == 0)
   # Load the graph from the GML file
   graphG <- igraph::read.graph(file = file, format = "gml")
 
