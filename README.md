@@ -20,15 +20,27 @@ An overview of the main functions provided by the ARLClustering package:
 
 ### `get_network_dataset()` function
 Loads a network dataset and converts it into a graph object.
+```R
+g <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
+```
 
-### `get_trans()` function
+### `arlc_gen_transactions()` function
 Generates a transactional dataset from a graph for association rule mining.
+```R
+trx <- arlc_gen_transactions(g$graph)
+```
 
-### `get_apriori_thresholds()` function
+### `arlc_get_apriori_thresholds()` function
 Finds the best thresholds for the Apriori algorithm based on the provided dataset.
+```R
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+```
 
-### `get_gross_rules()` function
+### `arlc_gen_gross_rules()` function
 Executes the Apriori algorithm to generate gross association rules.
+```R
+grossRules <- arlc_gen_gross_rules(trx, minSupp = params$minSupp, minConf = params$minConf, minLenRules = 1, maxLenRules = params$lenRules)
+```
 
 ### `clean_final_rules()` function
 Cleans the preprocessed rules to remove redundancy and insignificance.
