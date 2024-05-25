@@ -18,18 +18,9 @@ arlc_fct_clean_transactions <- function(all_sets, file, genFileLog = FALSE, debu
 
   # Iterate over each set
   for (i in seq_along(all_sets)) {
-    if (genFileLog && debugMode) {
-      cat('\nITERATION', i)
-    }
     current_set <- all_sets[[i]]
-    if (genFileLog && debugMode) {
-      cat('->current_set:', current_set)
-    }
 
     if (any(sapply(sets_to_exclude, function(set) all(current_set %in% set)))) {
-      if (genFileLog && debugMode) {
-        cat(' --> The set <current_set> already processed')
-      }
       next
     }
 
@@ -37,23 +28,15 @@ arlc_fct_clean_transactions <- function(all_sets, file, genFileLog = FALSE, debu
       if (i == j) {
         next
       }
-      if (genFileLog && debugMode) {
-        cat('\n  SUB-ITERATION', j)
-      }
 
       targeted_set <- all_sets[[j]]
-      if (genFileLog && debugMode) {
-        cat('    targeted_set   :', targeted_set)
-      }
 
       if (any(sapply(sets_to_exclude, function(set) all(targeted_set %in% set)))) {
         next
       }
 
       projection_set <- current_set[which(current_set %in% targeted_set)]
-      if (genFileLog && debugMode) {
-        cat('    projection_set :', projection_set)
-      }
+
 
       if (identical(projection_set, targeted_set)) {
         if (genFileLog && debugMode) {
