@@ -1,3 +1,5 @@
+#' @export
+#'
 
 arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, confidence_range) {
   # Initialize variables to store the best support, confidence, lift, and rules

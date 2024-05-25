@@ -22,10 +22,24 @@ various properties of the graph such as total edges, total nodes, and average de
 This function loads a network dataset from a specified GML file and computes basic graph properties.
 }
 \examples{
-result <- arlc_get_network_dataset("../data/karate.gml", "Karate Club")
-print(result$graph)
-print(result$graphName)
-print(result$totalEdges)
-print(result$totalNodes)
-print(result$averageDegree)
+loaded_karate <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
+loaded_karate
+print(loaded_karate$graph)
+print(loaded_karate$graphLabel)
+print(loaded_karate$totalEdges)
+print(loaded_karate$graphEdges)
+print(loaded_karate$totalNodes)
+print(loaded_karate$graphNodes)
+print(loaded_karate$averageDegree)
+
+loaded_dolphins <- arlc_get_network_dataset("./data/dolphins.gml", "Dolphins")
+loaded_dolphins
+print(loaded_dolphins$graph)
+print(loaded_dolphins$graphLabel)
+print(loaded_dolphins$totalEdges)
+print(loaded_dolphins$graphEdges)
+print(loaded_dolphins$totalNodes)
+print(loaded_dolphins$graphNodes)
+print(loaded_dolphins$averageDegree)
+
 }

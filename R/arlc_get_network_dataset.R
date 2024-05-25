@@ -11,12 +11,26 @@
 #' @return A list containing the graph object and its properties: total edges, total nodes, and average degree.
 #'
 #' @examples
-#' result <- arlc_get_network_dataset("../data/karate.gml", "Karate Club")
-#' print(result$graph)
-#' print(result$graphName)
-#' print(result$totalEdges)
-#' print(result$totalNodes)
-#' print(result$averageDegree)
+#' loaded_karate <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
+#' loaded_karate
+#' print(loaded_karate$graph)
+#' print(loaded_karate$graphLabel)
+#' print(loaded_karate$totalEdges)
+#' print(loaded_karate$graphEdges)
+#' print(loaded_karate$totalNodes)
+#' print(loaded_karate$graphNodes)
+#' print(loaded_karate$averageDegree)
+#'
+#' loaded_dolphins <- arlc_get_network_dataset("./data/dolphins.gml", "Dolphins")
+#' loaded_dolphins
+#' print(loaded_dolphins$graph)
+#' print(loaded_dolphins$graphLabel)
+#' print(loaded_dolphins$totalEdges)
+#' print(loaded_dolphins$graphEdges)
+#' print(loaded_dolphins$totalNodes)
+#' print(loaded_dolphins$graphNodes)
+#' print(loaded_dolphins$averageDegree)
+#'
 #' @import igraph
 #' @export
 
@@ -24,45 +38,41 @@ arlc_get_network_dataset <- function(file_path, label) {
 
     # Check if file exists and is readable
     if (!file.exists(file_path)) {
-      stop("File does not exist: ", file_path)
+      stop("The network file does not exist: ", file_path)
     }
     if (file.access(file_path, 4) != 0) {
-      stop("File is not readable: ", file_path)
+      stop("The network file is not readable: ", file_path)
     }
 
-    # Attempt to read the GML file
-    tryCatch({
-      g <- igraph::read.graph(file_path, format = "gml")
-      cat("Successfully loaded the network:", network_name, "\n")
-      return(g)
-    }, error = function(e) {
-      stop("Error in reading GML file: ", file_path, "\n", e$message)
-    })
+  # --------------------------------------------------------------------------------------
+  # Attempt to read the GML file
+  tryCatch({
+    # Load the graph from the GML file
+    graphG <- read.graph(file = file_path, format = "gml")
 
+    # Assign names to the vertices
+    graphG$names <- V(graphG)
+    graphG$edges <- E(graphG)
 
+    # Compute graph properties
+    total_edges <- gsize(graphG)
+    total_nodes <- vcount(graphG)
+    average_degree <- mean(degree(graphG))
 
-  #stopifnot("label should be not null" = length(label) == 0)
-  # Load the graph from the GML file
-  graphG <- igraph::read.graph(file = file_path, format = "gml")
+    # Create a label for the graph
+    graph_label <- paste0(label, ' Network')
 
-  # Assign names to the vertices
-  graphG$names <- igraph::V(graphG)$name
-
-  # Compute graph properties
-  total_edges <- igraph::gsize(graphG)
-  total_nodes <- igraph::vcount(graphG)
-  average_degree <- mean(igraph::degree(graphG))
-
-  # Create a label for the graph
-  graphLabel <- paste0(label, ' Network')
-
-  # Return a list containing the graph and its properties
-  return(list(
-    graph = graphG,
-    graphName = graphLabel,
-    graphLabel = graphLabel,
-    totalEdges = total_edges,
-    totalNodes = total_nodes,
-    averageDegree = average_degree
-  ))
+    # Return a list containing the graph and its properties
+    return(list(
+      graph = graphG,
+      graphLabel = graph_label,
+      totalEdges = total_edges,
+      graphEdges = graphG$edges,
+      totalNodes = total_nodes,
+      graphNodes = graphG$names,
+      averageDegree = average_degree
+    ))
+  }, error = function(e) {
+    stop("Error in reading GML file: ", file_path, "\n", e$message)
+  })
 }

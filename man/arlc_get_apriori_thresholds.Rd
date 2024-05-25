@@ -16,6 +16,8 @@ arlc_get_apriori_thresholds(trx, supportRange, confidenceRange)
 \value{
 A list containing the best minimum support, minimum confidence, best lift,
 total number of gross rules, and ratio of generated rules to total number of transactions.
+g <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
+trx <- arlc_gen_transactions(g$graph)
 }
 \description{
 This function takes a transaction dataset and ranges for support and confidence,
@@ -27,4 +29,5 @@ This function generates gross rules based on the best obtained thresholds.
 }
 \examples{
 arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+best_params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
 }
