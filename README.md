@@ -16,7 +16,7 @@ You can install the ARLClustering package directly from GitHub using the `devtoo
 devtools::install_github("assuom44/arlclustering")
 ```
 ## Functions
-An overview of the main functions provided by the ARLClustering package:
+An overview of the main functions provided by the ARLClustering package, using the synthetic networks provided with the package. Karate Club network dataset as example:
 
 ### `get_network_dataset()` function
 Loads a network dataset and converts it into a graph object.
@@ -40,6 +40,18 @@ params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1
 Executes the Apriori algorithm to generate gross association rules.
 ```R
 grossRules <- arlc_gen_gross_rules(trx, minSupp = params$minSupp, minConf = params$minConf, minLenRules = 1, maxLenRules = params$lenRules)
+```
+
+### `arlc_get_NonR_rules ()` function
+Eliminate non redundant rules from the gross rules generated from previous step.
+```R
+NonRedRules <- arlc_get_NonR_rules (grossRules$gross_rules)
+```
+
+### `arlc_get_significant_rules ()` function
+Choose significant rules from the non redundant rules generated from previous step.
+```R
+NonRSigRules <- arlc_get_significant_rules (NonRedRules$nonRR_rules)
 ```
 
 ### `clean_final_rules()` function

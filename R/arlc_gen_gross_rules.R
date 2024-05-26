@@ -15,15 +15,25 @@
 #'
 #' @examples
 #' arlc_gen_gross_rules(transactions, minSupp = 0.1, minConf = 0.5, minLenRules = 1, maxLenRules = 3)
+#' @import arules
 #' @export
 
 arlc_gen_gross_rules <- function(trx, minSupp, minConf, minLenRules, maxLenRules) {
+  # Ensure the transactional data is of class transactions
+  if (!inherits(trx, "transactions")) {
+    stop("The trx object must be of class 'transactions'.")
+  }
+  # Ensure minSupp and minConf are numeric
+  #if (!is.numeric(minSupp) || !is.numeric(minConf) || !is.numeric(minLenRules) || !is.numeric(maxLenRules) ) {
+  #  stop("minSupp, minConf, minLenRules and maxLenRules must be numeric values.")
+  #}
+
   # Execute Apriori algorithm with specified parameters
   gross_rules <- apriori(trx,
-                         parameter = list(support = minSupp,
-                                          confidence = minConf,
-                                          minlen = minLenRules,
-                                          maxlen = maxLenRules),
+                         parameter = list(support = as.numeric(minSupp),
+                                          confidence = as.numeric(minConf),
+                                          minlen = as.numeric(minLenRules),
+                                          maxlen = as.numeric(maxLenRules)),
                          target = "rules")
 
   # Compute the total number of gross rules with length filter
