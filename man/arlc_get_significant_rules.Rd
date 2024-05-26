@@ -4,12 +4,7 @@
 \alias{arlc_get_significant_rules}
 \title{Get Significant Rules}
 \usage{
-arlc_get_significant_rules(
-  all_trans,
-  nonRR_rules,
-  method = "fisher",
-  adjust = "bonferroni"
-)
+arlc_get_significant_rules(all_trans, nonRR_rules)
 }
 \arguments{
 \item{all_trans}{A dataframe containing all transactions.}

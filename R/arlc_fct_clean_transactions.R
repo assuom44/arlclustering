@@ -1,18 +1,7 @@
 
 
-arlc_fct_clean_transactions <- function(all_sets, file, genFileLog = FALSE, debugMode = FALSE) {
-  # Start measuring time
-  start_time <- Sys.time()
+arlc_fct_clean_transactions <- function(all_sets) {
 
-  # Check if the file variable is provided and properly handle the trace file name
-  if (genFileLog) {
-    if (substr(file, start = nchar(file) - 3, stop = nchar(file)) == ".gml") {
-      traceFileName <- paste0("output_", substr(file, start = 1, stop = nchar(file) - 4), ".spool")
-    } else {
-      traceFileName <- paste0("output_", file, ".spool")
-    }
-    sink(traceFileName, append = FALSE)
-  }
 
   sets_to_exclude <- NULL
 
@@ -20,28 +9,18 @@ arlc_fct_clean_transactions <- function(all_sets, file, genFileLog = FALSE, debu
   for (i in seq_along(all_sets)) {
     current_set <- all_sets[[i]]
 
-    if (any(sapply(sets_to_exclude, function(set) all(current_set %in% set)))) {
-      next
-    }
+    if (any(sapply(sets_to_exclude, function(set) all(current_set %in% set)))) {next}
 
     for (j in seq_along(all_sets)) {
-      if (i == j) {
-        next
-      }
+      if (i == j) {next}
 
       targeted_set <- all_sets[[j]]
 
-      if (any(sapply(sets_to_exclude, function(set) all(targeted_set %in% set)))) {
-        next
-      }
+      if (any(sapply(sets_to_exclude, function(set) all(targeted_set %in% set)))) {next}
 
       projection_set <- current_set[which(current_set %in% targeted_set)]
 
-
       if (identical(projection_set, targeted_set)) {
-        if (genFileLog && debugMode) {
-          cat(' --> Both <target_set> & <projection_set> ARE IDENTICAL')
-        }
         sets_to_exclude <- c(sets_to_exclude, list(targeted_set))
       }
     }
@@ -50,33 +29,30 @@ arlc_fct_clean_transactions <- function(all_sets, file, genFileLog = FALSE, debu
   # Print the merged sets
   if (length(sets_to_exclude) == 0) {
     cat('\n ***** No full overlapped sets have been detected')
+    total_overlapped_clusters <- 0
   } else {
-    cat('\n ***** Total Fully Overlapped Communities: ', length(sets_to_exclude))
-    cat("\n ==================================")
+    #cat('\n ***** Total Fully Overlapped Communities: ', length(sets_to_exclude))
+    total_overlapped_clusters <- length(sets_to_exclude)
+
     for (i in seq_along(sets_to_exclude)) {
-      cat("\n  Set ", i, ":", paste(sets_to_exclude[[i]], collapse = " "))
+      overlapped_clusters <- paste0("\n  Set ", i, ":", paste(sets_to_exclude[[i]], collapse = " "))
     }
   }
 
   filtered_sets <- all_sets[!sapply(all_sets, function(x) any(sapply(sets_to_exclude, function(y) all(x %in% y))))]
-  cat('\n ***** Total Non Overlapped Communities: ', length(filtered_sets))
-  cat("\n ==================================")
+  total_non_overlapped_clusters <- length(filtered_sets)
+
+  #cat('\n ***** Total Non Overlapped Communities: ', length(filtered_sets))
   for (i in seq_along(filtered_sets)) {
-    cat("\n  Set ", i, ":", paste(filtered_sets[[i]], collapse = " "))
-  }
-
-  # Stop measuring time
-  end_time <- Sys.time()
-  # Calculate the elapsed time
-  elapsed_time <- end_time - start_time
-  # Print the elapsed time
-  cat('\n=============================================')
-  print(elapsed_time)
-
-  # Close the text file
-  if (genFileLog) {
-    sink()
+    non_overlapped_clusters <- paste0("\n  Set ", i, ":", paste(filtered_sets[[i]], collapse = " "))
   }
 
   return(filtered_sets)
+
+  return(list(
+    TotOverlapedCommunity = total_overlapped_clusters,
+    OverlapedCommunity = overlapped_clusters,
+    TotNonOverlapedCommunity = total_non_overlapped_clusters,
+    NonOverlapedCommunity = non_overlapped_clusters
+  ))
 }

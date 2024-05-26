@@ -17,12 +17,13 @@
 #' @import arules
 #' @export
 
-arlc_get_significant_rules <- function(all_trans, nonRR_rules, method = "fisher", adjust = "bonferroni") {
+arlc_get_significant_rules <- function(all_trans, nonRR_rules) {
+  # is.significant filter Parameters
+  method = "fisher"
+  adjust = "bonferroni" #'bonferroni', 'holm'
+
   # Get significant rules
-  sigR_nnRR_Rules <- arules::is.significant(nonRR_rules,
-                                            all_trans,
-                                            method = method,
-                                            adjust = adjust)
+  sigR_nnRR_Rules <- nonRR_rules[!is.significant(nonRR_rules, all_trans, method = method, adjust = adjust)]
 
   if (length(sigR_nnRR_Rules) < 1) {
     cat('rule set is null')
@@ -31,7 +32,10 @@ arlc_get_significant_rules <- function(all_trans, nonRR_rules, method = "fisher"
 
   total_nonRedandant_signif_rules <- length(sigR_nnRR_Rules)
 
-  return(list(total_nonRedandant_signif_rules = total_nonRedandant_signif_rules, sigR_nnRR_Rules = sigR_nnRR_Rules))
+  return(list(total_nonRedandant_signif_rules = total_nonRedandant_signif_rules,
+              sigR_nnRR_Rules = sigR_nnRR_Rules
+              )
+         )
 }
 
 

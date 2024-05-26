@@ -11,29 +11,21 @@
 #'
 #' @examples
 #' arlc_clean_final_rules(final_rules)
-#' @import stringr
 #' @export
 
 arlc_clean_final_rules <- function(final_rules) {
   ## Cleaning generated rules for further processing :
-
+  rules_subset <- final_rules
   # Convert S4 object to data frame
-  #df <- as(rules_subset, "data.frame")
-  df <- as.data.frame(final_rules)
-
-  # Removing extra characters from rules structure
-  #   clean_df <- gsub('[{}=>"]', "", df$rules)
-  #   clean_df <- gsub("  ", ",", clean_df)
-  #   clean_df <- gsub(" ", ",", clean_df)
+  df <- as(rules_subset, "data.frame")
+  #head(df$rules) # v
   clean_df <- gsub('[{}=>"]', "", df$rules)
-  clean_df <- gsub("\\s+", ",", clean_df)
-
-  # Splitting rules into components and converting to numeric values
-  #values <- lapply(strsplit(clean_df, ","), as.numeric)
+  clean_df <- gsub("  ", ",", clean_df)
+  clean_df <- gsub(" ", ",", clean_df)
+  #head(clean_df[1])
   values <- lapply(strsplit(clean_df, ","), as.numeric)
-
-  # Sorting and removing duplicates
-  vec <- unique(lapply(values, function(x) sort(unique(x))))
+  clean_df <- lapply(values, sort)
+  vec <- unique (clean_df)
 
   return(vec)
 }

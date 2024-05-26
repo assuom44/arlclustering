@@ -51,12 +51,14 @@ NonRedRules <- arlc_get_NonR_rules (grossRules$gross_rules)
 ### `arlc_get_significant_rules ()` function
 Choose significant rules from the non redundant rules generated from previous step.
 ```R
-NonRSigRules <- arlc_get_significant_rules (NonRedRules$nonRR_rules)
+NonRSigRules <- arlc_get_significant_rules (trx, NonRedRules$nonRR_rules)
 ```
 
-### `clean_final_rules()` function
+### `arlc_clean_final_rules()` function
 Cleans the preprocessed rules to remove redundancy and insignificance.
-
+```R
+cleanedRules <- arlc_clean_final_rules (NonRSigRules$sigR_nnRR_Rules)
+```
 ### `generate_clusters()` function
 Generates potential clusters based on the preprocessed rules.
 
