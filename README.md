@@ -59,59 +59,16 @@ Cleans the preprocessed rules to remove redundancy and insignificance.
 ```R
 cleanedRules <- arlc_clean_final_rules (NonRSigRules$sigR_nnRR_Rules)
 ```
-### `generate_clusters()` function
+### `arlc_generate_clusters()` function
 Generates potential clusters based on the preprocessed rules.
-
-
-
-# Using the package
-
-## Load required libraries
-```library(ARLClustering)
-library(igraph)
+```R
+c <- arlc_generate_clusters (cleanedRules) 
 ```
 
-## Load network dataset
-```
-graph <- get_network_dataset(dataset = "your_dataset_name")
-```
-
-## Generate transactional dataset
-```
-trx <- get_trans(graph)
-```
-
-## Find the best thresholds
-```
-minSupp <- 0.1
-minConf <- 0.5
-best_thresholds <- get_apriori_thresholds(trx, support_range = seq(0.1, 0.5, by = 0.1), 
-                                           confidence_range = seq(0.5, 1, by = 0.1))
-```
-## Generate gross rules
-```
-gross_rules <- get_gross_rules(trx, minSupp, minConf, minLenRules = 1, maxLenRules = Inf)
-```
-## Clean final rules
-```
-cleaned_rules <- clean_final_rules(gross_rules)
-```
-## Generate clusters
-```
-clusters <- generate_clusters(cleaned_rules, minSupp, minConf)
-```
-
-## Dependencies
-In order to use the package, you must first install it from this GitHub repo, which can be done using the `devtools` package:
-
-```
-library(devtools)
-devtools::install_github('[USERNAME]/arlclustering')
-```
-Next, you must load the R package:
-
-```
-library(arlclustering)
+### `arlc_clusters_plot()` function
+Displays the obtained result as a plot.
+```R
+arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
 ```
 
 ## Contribution

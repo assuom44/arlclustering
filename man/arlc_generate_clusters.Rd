@@ -4,7 +4,7 @@
 \alias{arlc_generate_clusters}
 \title{Generate Clusters}
 \usage{
-arlc_generate_clusters(vec, minSupp, minConf)
+arlc_generate_clusters(vec)
 }
 \arguments{
 \item{vec}{A vector of preprocessed rules.}
