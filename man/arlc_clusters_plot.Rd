@@ -9,6 +9,8 @@ arlc_clusters_plot(g, graphLabel, clusters)
 \arguments{
 \item{g}{An igraph object representing the graph.}
 
+\item{graphLabel}{A character string for the graph label to be displayed in the title.}
+
 \item{clusters}{A list of clusters to highlight in the plot.}
 }
 \value{
@@ -21,6 +23,6 @@ This function plots a graph with specified aesthetics and highlights communities
 \dontrun{
 library(igraph)
 g <- make_ring(10)
-arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
+arlc_clusters_plot(g, "Example Graph", list(1:5, 6:10))
 }
 }
