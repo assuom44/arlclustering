@@ -45,7 +45,7 @@ grossRules <- arlc_gen_gross_rules(trx, minSupp = params$minSupp, minConf = para
 ### `arlc_get_NonR_rules ()` function
 Eliminate non redundant rules from the gross rules generated from previous step.
 ```R
-NonRedRules <- arlc_get_NonR_rules (grossRules$gross_rules)
+NonRedRules <- arlc_get_NonR_rules (grossRules$GrossRules)
 ```
 
 ### `arlc_get_significant_rules ()` function

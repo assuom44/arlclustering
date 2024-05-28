@@ -18,7 +18,6 @@
 #'
 #' @examples
 #' arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
-#' best_params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
 #' @export
 
 arlc_get_apriori_thresholds <- function(trx, supportRange, confidenceRange) {
@@ -29,7 +28,7 @@ arlc_get_apriori_thresholds <- function(trx, supportRange, confidenceRange) {
   len_rules <- 0
 
   # Get thresholds based on support and confidence ranges
-  output_list <- arlclustering::arlc_fct_get_best_apriori_thresholds( trx,
+  output_list <- arlc_fct_get_best_apriori_thresholds( trx,
                                                        supportRange,
                                                        confidenceRange) #, minLenRules, maxLenRules)
 

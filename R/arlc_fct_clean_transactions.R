@@ -40,12 +40,12 @@ arlc_fct_clean_transactions <- function(all_sets) {
   # }
 
   filtered_sets <- all_sets[!sapply(all_sets, function(x) any(sapply(sets_to_exclude, function(y) all(x %in% y))))]
-  total_non_overlapped_clusters <- length(filtered_sets)
+  #total_non_overlapped_clusters <- length(filtered_sets)
 
   #cat('\n ***** Total Non Overlapped Communities: ', length(filtered_sets))
-  for (i in seq_along(filtered_sets)) {
-    non_overlapped_clusters <- paste0("\n  Set ", i, ":", paste(filtered_sets[[i]], collapse = " "))
-  }
+  #for (i in seq_along(filtered_sets)) {
+  #  non_overlapped_clusters <- paste0("\n  Set ", i, ":", paste(filtered_sets[[i]], collapse = " "))
+  #}
 
   return(filtered_sets)
 

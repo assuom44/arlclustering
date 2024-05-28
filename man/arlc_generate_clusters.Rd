@@ -8,10 +8,6 @@ arlc_generate_clusters(vec)
 }
 \arguments{
 \item{vec}{A vector of preprocessed rules.}
-
-\item{minSupp}{The minimum support threshold for generating clusters.}
-
-\item{minConf}{The minimum confidence threshold for generating clusters.}
 }
 \value{
 A list of potential clusters.
@@ -25,5 +21,5 @@ within each segment, and returns potential clusters.
 This function generates potential clusters based on preprocessed rules.
 }
 \examples{
-arlc_generate_clusters(vec, minSupp = 0.5, minConf = 0.6)
+arlc_generate_clusters(vec)
 }

@@ -10,10 +10,6 @@ arlc_get_significant_rules(all_trans, nonRR_rules)
 \item{all_trans}{A dataframe containing all transactions.}
 
 \item{nonRR_rules}{A list of non-redundant rules.}
-
-\item{method}{The method used to determine significance (e.g., "fisher").}
-
-\item{adjust}{The adjustment method for p-values (e.g., "bonferroni").}
 }
 \value{
 A list containing the total number of significant non-redundant rules and the significant rules themselves.
@@ -26,5 +22,5 @@ and returns significant rules based on a specified method and adjustment.
 This function filters significant rules from a set of non-redundant rules.
 }
 \examples{
-arlc_get_significant_rules(all_transactions, non_redundant_rules, method = "fisher", adjust = "bonferroni")
+arlc_get_significant_rules(all_transactions, non_redundant_rules)
 }

@@ -7,13 +7,11 @@
 #' within each segment, and returns potential clusters.
 #'
 #' @param vec A vector of preprocessed rules.
-#' @param minSupp The minimum support threshold for generating clusters.
-#' @param minConf The minimum confidence threshold for generating clusters.
 #'
 #' @return A list of potential clusters.
 #'
 #' @examples
-#' arlc_generate_clusters(vec, minSupp = 0.5, minConf = 0.6)
+#' arlc_generate_clusters(vec)
 #' @export
 
 arlc_generate_clusters <- function(vec) {

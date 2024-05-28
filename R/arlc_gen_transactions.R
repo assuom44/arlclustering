@@ -13,8 +13,6 @@
 #'
 #' @examples
 #' trans <- arlc_gen_transactions(g$graph)
-#' @import igraph
-#' @import arules
 #' @export
 
 arlc_gen_transactions <- function(graph) {

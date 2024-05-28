@@ -14,15 +14,13 @@ arlc_clusters_plot(g, graphLabel, clusters)
 \item{clusters}{A list of clusters to highlight in the plot.}
 }
 \value{
-No return value. The function produces a plot as a side effect.
+The function produces a plot as a side effect.
 }
 \description{
 This function plots a graph with specified aesthetics and highlights communities.
 }
 \examples{
 \dontrun{
-library(igraph)
-g <- make_ring(10)
-arlc_clusters_plot(g, "Example Graph", list(1:5, 6:10))
+arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
 }
 }

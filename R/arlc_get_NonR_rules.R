@@ -22,7 +22,8 @@ arlc_get_NonR_rules <- function(gross_rules) {
   total_nonRedandunt_rules <- length(nonRR_rules)
 
   # Return result as a list
-  return(list(total_nonRedandunt_rules = total_nonRedandunt_rules, nonRR_rules = nonRR_rules))
+  return(list(TotNonRedanduntRules = total_nonRedandunt_rules,
+              nonRR_rules = nonRR_rules))
 }
 
 

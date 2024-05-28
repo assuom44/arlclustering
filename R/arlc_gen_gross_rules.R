@@ -40,6 +40,6 @@ arlc_gen_gross_rules <- function(trx, minSupp, minConf, minLenRules, maxLenRules
   total_rules_with_length_filter <- length(gross_rules)
 
   # Return the total number of gross rules with length filter and the gross rules themselves
-  return(list(total_rules_with_length_filter = total_rules_with_length_filter,
-              gross_rules = gross_rules))
+  return(list(TotalRulesWithLengthFilter = total_rules_with_length_filter,
+              GrossRules = gross_rules))
 }
