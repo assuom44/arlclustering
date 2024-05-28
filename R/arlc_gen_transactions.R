@@ -15,7 +15,6 @@
 #' trans <- arlc_gen_transactions(g$graph)
 #' @export
 
-
 arlc_gen_transactions <- function(graph) {
   # Build the adjacency matriw
   adjMat <- as_adjacency_matrix(graph)
