@@ -16,12 +16,20 @@ You can install the ARLClustering package directly from GitHub using the `devtoo
 devtools::install_github("assuom44/arlclustering")
 ```
 ## Functions
-An overview of the main functions provided by the ARLClustering package, using the synthetic networks provided with the package. Karate Club network dataset as example:
+An overview of the main functions provided by the ARLClustering package, using the synthetic networks provided with the package:
 
 ### `get_network_dataset()` function
 Loads a network dataset and converts it into a graph object.
 ```R
 g <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
+g <- arlc_get_network_dataset("./data/dolphins.gml", "Dolphins Network")
+g <- arlc_get_network_dataset("./data/lesmiserables.gml", "LesMiserables Network")
+g <- arlc_get_network_dataset("./data/word_adjacencies.gml", "Word Adjacencies Network")
+g <- arlc_get_network_dataset("./data/ChanFacebook.gml", "Chan Facebook Network")
+g <- arlc_get_network_dataset("./data/netscience.gml", "NetScience Network")
+g <- arlc_get_network_dataset("./data/facebook.gml", "Facebook Network")
+g <- arlc_get_network_dataset("./data/power_grid.gml", "PowerGrid Network")
+
 ```
 
 ### `arlc_gen_transactions()` function
@@ -34,6 +42,8 @@ trx <- arlc_gen_transactions(g$graph)
 Finds the best thresholds for the Apriori algorithm based on the provided dataset.
 ```R
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
 ```
 
 ### `arlc_gen_gross_rules()` function
@@ -75,3 +85,4 @@ arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
 Contributions to the ARLClustering package are welcome! If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request on GitHub.
 
 # Triggering version bump
+# Triggering version bump2
