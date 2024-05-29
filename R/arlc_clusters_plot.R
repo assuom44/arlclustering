@@ -17,11 +17,11 @@
 arlc_clusters_plot <- function(g, graphLabel, clusters) {
   # Display obtained clusters
   cat ("Total Identified Clusters: ", length(clusters))
-  cat ("=========================  ")
+  cat ("\n =========================  ")
   for (i in 1:length(clusters)) {
     cat("\n  Set ", i, ":", paste(clusters[[i]], collapse = " "))
   }
-  cat ("=========================  ")
+  cat ("\n =========================  ")
 
   if (vcount (g) <= 70)
   {

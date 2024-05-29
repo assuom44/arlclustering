@@ -41,9 +41,16 @@ trx <- arlc_gen_transactions(g$graph)
 ### `arlc_get_apriori_thresholds()` function
 Finds the best thresholds for the Apriori algorithm based on the provided dataset.
 ```R
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- Kerate
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- Dolphins
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- LesMiserables
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- WordAdjacency
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- ChanFacebook
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by = 0.001), confidenceRange = seq(0.5, 0.7, by = 0.1)) -- NetScience
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- Facebook
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- PowerGrid
+
+
 ```
 
 ### `arlc_gen_gross_rules()` function
@@ -84,5 +91,3 @@ arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
 ## Contribution
 Contributions to the ARLClustering package are welcome! If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request on GitHub.
 
-# Triggering version bump
-# Triggering version bump2
