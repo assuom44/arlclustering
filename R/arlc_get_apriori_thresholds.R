@@ -6,18 +6,33 @@
 #' computes the best thresholds, and returns the best minimum support, minimum confidence,
 #' best lift, total number of gross rules, and ratio of generated rules to total number of transactions.
 #'
-#' @param trx A transaction dataset.
+#' @param trx A transaction dataset of class `transactions` from the `arules` package.
 #' @param supportRange A sequence of values representing the range for minimum support.
 #' @param confidenceRange A sequence of values representing the range for minimum confidence.
 #'
-#' @return A list containing the best minimum support, minimum confidence, best lift,
-#' total number of gross rules, and ratio of generated rules to total number of transactions.
-#' g <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
-#' trx <- arlc_gen_transactions(g$graph)
+#' @return A list containing:
+#' \item{minSupp}{The best minimum support value.}
+#' \item{minConf}{The best minimum confidence value.}
+#' \item{bestLift}{The highest lift value obtained.}
+#' \item{lenRules}{The total number of gross rules generated.}
+#' \item{ratio}{The ratio of generated rules to the total number of transactions.}
 #'
+#' @details This function iterates through the given ranges of support and confidence values,
+#' applies the Apriori algorithm to find association rules for each pair of values, and selects
+#' the pair that produces rules with the highest lift. The function then returns the best thresholds
+#' along with the lift, number of rules, and their ratio to the total transactions.
 #'
 #' @examples
-#' arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+#' \dontrun{
+#' library(arules)
+#' data(Groceries)
+#' supportRange <- seq(0.1, 0.9, by = 0.1)
+#' confidenceRange <- seq(0.5, 0.9, by = 0.1)
+#' result <- arlc_get_apriori_thresholds(Groceries, supportRange, confidenceRange)
+#' print(result)
+#' }
+#'
+#' @importFrom arules apriori
 #' @export
 
 arlc_get_apriori_thresholds <- function(trx, supportRange, confidenceRange) {

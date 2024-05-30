@@ -1,5 +1,26 @@
-#' @export
+#' Clean Transactions by Removing Overlapping Sets
 #'
+#' This function processes a list of sets and removes those that are fully overlapped by other sets.
+#'
+#' @param all_sets A list of sets where each set is a vector of elements.
+#'
+#' @return A list of sets with fully overlapped sets removed.
+#'
+#' @details The function iterates through each set and checks if it is fully overlapped by any other set. If a set is fully overlapped, it is excluded from the final list of sets. The result is a list of sets with no fully overlapped sets.
+#'
+#' @examples
+#' \dontrun{
+#' all_sets <- list(
+#'   c(1, 2, 3),
+#'   c(2, 3),
+#'   c(4, 5),
+#'   c(5, 6, 7)
+#' )
+#' cleaned_sets <- arlc_fct_clean_transactions(all_sets)
+#' print(cleaned_sets)
+#' }
+#'
+#' @export
 
 arlc_fct_clean_transactions <- function(all_sets) {
 

@@ -14,10 +14,8 @@
 #' @export
 
 arlc_clean_final_rules <- function(final_rules) {
-  ## Cleaning generated rules for further processing :
-  rules_subset <- final_rules
   # Convert S4 object to data frame
-  df <- as(rules_subset, "data.frame")
+  df <- as(final_rules, "data.frame")
   #head(df$rules) # v
   clean_df <- gsub('[{}=>"]', "", df$rules)
   clean_df <- gsub("  ", ",", clean_df)

@@ -23,4 +23,5 @@ This function generates a transactional dataset from a graph dataset.
 }
 \examples{
 trans <- arlc_gen_transactions(g$graph)
+
 }

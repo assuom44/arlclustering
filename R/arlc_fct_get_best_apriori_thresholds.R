@@ -1,5 +1,31 @@
-#' @export
+#' Get Best Apriori Thresholds
 #'
+#' This function finds the best support and confidence thresholds for the Apriori algorithm
+#' to maximize the lift of the generated association rules.
+#'
+#' @param transactions A transaction dataset of class `transactions` from the `arules` package.
+#' @param support_range A numeric vector specifying the range of support values to be tested.
+#' @param confidence_range A numeric vector specifying the range of confidence values to be tested.
+#'
+#' @return A numeric vector containing the best support, best confidence, highest lift, and the number of rules found.
+#' The return value is a named vector with elements \code{best_support}, \code{best_confidence}, \code{best_lift}, and \code{len_rules}.
+#'
+#' @details This function iterates through the given ranges of support and confidence values,
+#' applies the Apriori algorithm to find association rules for each pair of values, and selects
+#' the pair that produces rules with the highest lift.
+#'
+#' @examples
+#' \dontrun{
+#' library(arules)
+#' data(Groceries)
+#' support_range <- seq(0.001, 0.01, by = 0.001)
+#' confidence_range <- seq(0.1, 0.9, by = 0.1)
+#' best_thresholds <- arlc_fct_get_best_apriori_thresholds(Groceries, support_range, confidence_range)
+#' print(best_thresholds)
+#' }
+#'
+#' @importFrom arules apriori
+#' @export
 
 arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, confidence_range) {
   # Initialize variables to store the best support, confidence, lift, and rules

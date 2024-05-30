@@ -7,17 +7,19 @@
 arlc_get_apriori_thresholds(trx, supportRange, confidenceRange)
 }
 \arguments{
-\item{trx}{A transaction dataset.}
+\item{trx}{A transaction dataset of class \code{transactions} from the \code{arules} package.}
 
 \item{supportRange}{A sequence of values representing the range for minimum support.}
 
 \item{confidenceRange}{A sequence of values representing the range for minimum confidence.}
 }
 \value{
-A list containing the best minimum support, minimum confidence, best lift,
-total number of gross rules, and ratio of generated rules to total number of transactions.
-g <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
-trx <- arlc_gen_transactions(g$graph)
+A list containing:
+\item{minSupp}{The best minimum support value.}
+\item{minConf}{The best minimum confidence value.}
+\item{bestLift}{The highest lift value obtained.}
+\item{lenRules}{The total number of gross rules generated.}
+\item{ratio}{The ratio of generated rules to the total number of transactions.}
 }
 \description{
 This function takes a transaction dataset and ranges for support and confidence,
@@ -26,7 +28,20 @@ best lift, total number of gross rules, and ratio of generated rules to total nu
 }
 \details{
 This function generates gross rules based on the best obtained thresholds.
+
+This function iterates through the given ranges of support and confidence values,
+applies the Apriori algorithm to find association rules for each pair of values, and selects
+the pair that produces rules with the highest lift. The function then returns the best thresholds
+along with the lift, number of rules, and their ratio to the total transactions.
 }
 \examples{
-arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+\dontrun{
+library(arules)
+data(Groceries)
+supportRange <- seq(0.1, 0.9, by = 0.1)
+confidenceRange <- seq(0.5, 0.9, by = 0.1)
+result <- arlc_get_apriori_thresholds(Groceries, supportRange, confidenceRange)
+print(result)
+}
+
 }

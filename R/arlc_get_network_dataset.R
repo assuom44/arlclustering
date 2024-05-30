@@ -5,7 +5,7 @@
 #' @description This function reads a network dataset from a GML file, assigns node names, and calculates
 #' various properties of the graph such as total edges, total nodes, and average degree.
 #'
-#' @param file The name of the GML file to be loaded.
+#' @param file_name The file name
 #' @param label A label for the graph.
 #'
 #' @return A list containing the graph object and its properties: total edges, total nodes, and average degree.
@@ -34,15 +34,13 @@
 #' @import igraph
 #' @export
 
-arlc_get_network_dataset <- function(file_path, label) {
+arlc_get_network_dataset <- function(file_name, label) {
 
-    # Check if file exists and is readable
-    if (!file.exists(file_path)) {
-      stop("The network file does not exist: ", file_path)
-    }
-    if (file.access(file_path, 4) != 0) {
-      stop("The network file is not readable: ", file_path)
-    }
+  # Check if file exists and is readable
+  if (!file.exists(file_name)) {
+    stop("The network file does not exist: ", file_name)
+  }
+  file_path <- system.file("extdata", file_name, package = "ARLClustering")
 
   # --------------------------------------------------------------------------------------
   # Attempt to read the GML file

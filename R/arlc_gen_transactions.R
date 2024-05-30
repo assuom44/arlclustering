@@ -13,6 +13,11 @@
 #'
 #' @examples
 #' trans <- arlc_gen_transactions(g$graph)
+#'
+#' @importFrom grDevices rainbow
+#' @importFrom graphics legend par
+#' @importFrom methods as
+#' @importFrom stats median sd
 #' @export
 
 arlc_gen_transactions <- function(graph) {

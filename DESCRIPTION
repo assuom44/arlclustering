@@ -28,4 +28,7 @@ Imports:
     dplyr,
     ggplot2,
     igraph,
-    arules
+    arules,
+    grDevices,
+    graphics,
+    stats

@@ -4,12 +4,12 @@
 \alias{arlc_get_network_dataset}
 \title{Get Network Dataset}
 \usage{
-arlc_get_network_dataset(file_path, label)
+arlc_get_network_dataset(file_name, label)
 }
 \arguments{
-\item{label}{A label for the graph.}
+\item{file_name}{The file name}
 
-\item{file}{The name of the GML file to be loaded.}
+\item{label}{A label for the graph.}
 }
 \value{
 A list containing the graph object and its properties: total edges, total nodes, and average degree.
