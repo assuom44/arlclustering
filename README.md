@@ -57,14 +57,14 @@ An overview of the main functions provided by the `ARLClustering` package:
 Here is examples of the `arlc_get_network_dataset` call for each of the provided synthetic network datasets, the network is loaded then on variable `g`:
 
 ``` r
-g <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
-g <- arlc_get_network_dataset("./data/dolphins.gml", "Dolphins Network")
-g <- arlc_get_network_dataset("./data/lesmiserables.gml", "LesMiserables Network")
-g <- arlc_get_network_dataset("./data/word_adjacencies.gml", "Word Adjacencies Network")
-g <- arlc_get_network_dataset("./data/ChanFacebook.gml", "Chan Facebook Network")
-g <- arlc_get_network_dataset("./data/netscience.gml", "NetScience Network")
-g <- arlc_get_network_dataset("./data/facebook.gml", "Facebook Network")
-g <- arlc_get_network_dataset("./data/power_grid.gml", "PowerGrid Network")
+g <- arlc_get_network_dataset("./inst/extdata/karate.gml", "Karate Club")
+g <- arlc_get_network_dataset("./inst/extdata/dolphins.gml", "Dolphins Network")
+g <- arlc_get_network_dataset("./inst/extdata/lesmiserables.gml", "LesMiserables Network")
+g <- arlc_get_network_dataset("./inst/extdata/word_adjacencies.gml", "Word Adjacencies Network")
+g <- arlc_get_network_dataset("./inst/extdata/ChanFacebook.gml", "Chan Facebook Network")
+g <- arlc_get_network_dataset("./inst/extdata/netscience.gml", "NetScience Network")
+g <- arlc_get_network_dataset("./inst/extdata/facebook.gml", "Facebook Network")
+g <- arlc_get_network_dataset("./inst/extdata/power_grid.gml", "PowerGrid Network")
 ```
 
 Generating the transactions into the variable trx:

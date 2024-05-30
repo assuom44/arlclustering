@@ -5,13 +5,13 @@
 #' @description This function reads a network dataset from a GML file, assigns node names, and calculates
 #' various properties of the graph such as total edges, total nodes, and average degree.
 #'
-#' @param file_name The file name
+#' @param file_path The file path to the GML file to be loaded.
 #' @param label A label for the graph.
 #'
 #' @return A list containing the graph object and its properties: total edges, total nodes, and average degree.
 #'
 #' @examples
-#' loaded_karate <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
+#' loaded_karate <- arlc_get_network_dataset("./inst/extdata/karate.gml", "Karate Club")
 #' loaded_karate
 #' print(loaded_karate$graph)
 #' print(loaded_karate$graphLabel)
@@ -21,7 +21,7 @@
 #' print(loaded_karate$graphNodes)
 #' print(loaded_karate$averageDegree)
 #'
-#' loaded_dolphins <- arlc_get_network_dataset("./data/dolphins.gml", "Dolphins")
+#' loaded_dolphins <- arlc_get_network_dataset("./inst/extdata/dolphins.gml", "Dolphins")
 #' loaded_dolphins
 #' print(loaded_dolphins$graph)
 #' print(loaded_dolphins$graphLabel)
@@ -34,13 +34,15 @@
 #' @import igraph
 #' @export
 
-arlc_get_network_dataset <- function(file_name, label) {
+arlc_get_network_dataset <- function(file_path, label) {
 
-  # Check if file exists and is readable
-  if (!file.exists(file_name)) {
-    stop("The network file does not exist: ", file_name)
-  }
-  file_path <- system.file("extdata", file_name, package = "ARLClustering")
+    # Check if file exists and is readable
+    if (!file.exists(file_path)) {
+      stop("The network file does not exist: ", file_path)
+    }
+    if (file.access(file_path, 4) != 0) {
+      stop("The network file is not readable: ", file_path)
+    }
 
   # --------------------------------------------------------------------------------------
   # Attempt to read the GML file

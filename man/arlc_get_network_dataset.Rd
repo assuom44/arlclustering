@@ -4,10 +4,10 @@
 \alias{arlc_get_network_dataset}
 \title{Get Network Dataset}
 \usage{
-arlc_get_network_dataset(file_name, label)
+arlc_get_network_dataset(file_path, label)
 }
 \arguments{
-\item{file_name}{The file name}
+\item{file_path}{The file path to the GML file to be loaded.}
 
 \item{label}{A label for the graph.}
 }
@@ -22,7 +22,7 @@ various properties of the graph such as total edges, total nodes, and average de
 This function loads a network dataset from a specified GML file and computes basic graph properties.
 }
 \examples{
-loaded_karate <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
+loaded_karate <- arlc_get_network_dataset("./inst/extdata/karate.gml", "Karate Club")
 loaded_karate
 print(loaded_karate$graph)
 print(loaded_karate$graphLabel)
@@ -32,7 +32,7 @@ print(loaded_karate$totalNodes)
 print(loaded_karate$graphNodes)
 print(loaded_karate$averageDegree)
 
-loaded_dolphins <- arlc_get_network_dataset("./data/dolphins.gml", "Dolphins")
+loaded_dolphins <- arlc_get_network_dataset("./inst/extdata/dolphins.gml", "Dolphins")
 loaded_dolphins
 print(loaded_dolphins$graph)
 print(loaded_dolphins$graphLabel)
