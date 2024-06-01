@@ -140,7 +140,9 @@ In case the total number of nodes is less than 70 nodes, a plot of the `ARLClust
 
 Total Identified Clusters: 5
 
-`========================= Set 1 : 1 2 3 4 5 6 7 8 11 14`
+`=========================`
+
+`Set 1 : 1 2 3 4 5 6 7 8 11 14`
 
 `Set 2 : 3 4 8 9 14 34`
 
