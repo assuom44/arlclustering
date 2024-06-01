@@ -1,3 +1,7 @@
+---
+output: html_document
+---
+
 # ARLClustering Package
 
 `ARLClustering` is an R package designed for network data analysis, leveraging association rules to examine node interactions within networks. This package introduces a novel approach to community detection using data-mining techniques to highlight communities within the social network.
@@ -38,19 +42,19 @@ An overview of the main functions provided by the `ARLClustering` package:
 
 -   `arlc_gen_transactions():`Generates a transactional dataset from a graph for association rule mining.
 
--   `arlc_get_apriori_thresholds():`Finds the best thresholds for the Apriori algorithm based on the provided dataset.
+-   `arlc_get_apriori_thresholds():`Finds the best thresholds for the `Apriori` algorithm based on the provided dataset.
 
--   `arlc_gen_gross_rules():`Executes the Apriori algorithm to generate gross association rules.
+-   `arlc_gen_gross_rules():`Executes the `Apriori` algorithm to generate gross association rules.
 
 -   `arlc_get_NonR_rules():`Eliminate non redundant rules from the gross rules generated from previous step.
 
--   `arlc_get_significant_rules``():`Choose significant rules from the non redundant rules generated from previous step.
+-   ``` arlc_get_significant_rules``(): ```Choose significant rules from the non redundant rules generated from previous step.
 
--   `arlc_clean_final_rules``():`Cleans the preprocessed rules to remove redundancy and insignificance.
+-   ``` arlc_clean_final_rules``(): ```Cleans the preprocessed rules to remove redundancy and insignificance.
 
--   `arlc_generate_clusters``():`Generates potential clusters based on the preprocessed rules.
+-   ``` arlc_generate_clusters``(): ```Generates potential clusters based on the preprocessed rules.
 
--   `arlc_clusters_plot``():`Displays the obtained result as a plot if the total number of nodes less than 70. Otherwise, it displays the list of the identified communities.
+-   ``` arlc_clusters_plot``(): ```Displays the obtained result as a plot if the total number of nodes less than 70. Otherwise, it displays the list of the identified communities.
 
 ## **Example Usage**
 
@@ -73,7 +77,7 @@ Generating the transactions into the variable trx:
 trx <- arlc_gen_transactions(g$graph)
 ```
 
-Getting the apriori parameters, the computed parameters will be used for generating the best rule set. Here is an example of each of the provided dataset examples:
+Getting the `apriori` parameters, the computed parameters will be used for generating the best rule set. Here is an example of each of the provided dataset examples:
 
 ``` r
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- Kerate
@@ -84,10 +88,9 @@ params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by = 0.001), confidenceRange = seq(0.5, 0.7, by = 0.1)) -- NetScience
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- Facebook
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- PowerGrid
-
 ```
 
-Generating the gross rules using the computed apriori parameters. The result is stored in the the variable `grossRules`:
+Generating the gross rules using the computed `apriori` parameters. The result is stored in the the variable `grossRules`:
 
 ``` r
 grossRules <- arlc_gen_gross_rules(trx, minSupp = params$minSupp, minConf = params$minConf, minLenRules = 1, maxLenRules = params$lenRules)
@@ -120,6 +123,14 @@ Displaying results:
 ``` r
 arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
 ```
+
+In case the total number of nodes overseas the total of 70, a plot of the `ARLClustering` communities will be generated, otherwise a display of the list of Sets (communities) will be proposed.
+
+-   *`ARLClustering`'s outputs for Karate Club social network:*
+
+![](images/Karate Club-arlcustering-01)
+
+Total Identified Clusters: 5 `========================= Set 1 : 1 2 3 4 5 6 7 8 11 14 Set 2 : 3 4 8 9 14 34 Set 3 : 9 31 33 34 Set 4 : 24 30 33 34 Set 5 : 32 34 =========================`
 
 ## Contribution
 
