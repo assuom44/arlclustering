@@ -124,7 +124,7 @@ Displaying results:
 arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
 ```
 
-In case the total number of nodes overseas the total of 70, a plot of the `ARLClustering` communities will be generated, otherwise a display of the list of Sets (communities) will be proposed.
+In case the total number of nodes is less than 70 nodes, a plot of the `ARLClustering` communities will be generated, otherwise only a display of the list of Sets (communities) will be proposed.
 
 -   *`ARLClustering`'s outputs for Karate Club social network:*
 
