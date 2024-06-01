@@ -10,14 +10,14 @@ output: html_document
 
 -   **Community Detection**: Implements an innovative method for identifying communities within a network through association rule learning.
 -   **Synthetic Datasets**: Includes synthetic social network datasets for testing and validating the effectiveness of the proposed approach. The following are the used datasets:
-    -   Karate Club social network.
-    -   Dolphins social network.
-    -   LesMiserables social network.
-    -   Word Adjacencies social network.
-    -   Chan Facebook social network.
-    -   NetScience network.
-    -   Facebook social network.
-    -   PowerGrid network.
+    -   Karate Club social network: N=34; E=78
+    -   Dolphins social network: N=62; E=159
+    -   LesMiserables social network: N=77; E=254
+    -   Word Adjacencies social network: N=112; E=425
+    -   Chan Facebook social network: N=374; E=2986
+    -   NetScience network: N=1589; E=2742
+    -   Facebook social network: N=337; E=2531
+    -   PowerGrid network: N=4941; E=6594
 -   **Step-by-Step Implementation**: Guides users through the entire process, from loading the network dataset to identifying potential clusters.
 
 ## **Overview**
@@ -48,13 +48,13 @@ An overview of the main functions provided by the `ARLClustering` package:
 
 -   `arlc_get_NonR_rules():`Eliminate non redundant rules from the gross rules generated from previous step.
 
--   ``` arlc_get_significant_rules``(): ```Choose significant rules from the non redundant rules generated from previous step.
+-   `arlc_get_significant_rules():`Choose significant rules from the non redundant rules generated from previous step.
 
--   ``` arlc_clean_final_rules``(): ```Cleans the preprocessed rules to remove redundancy and insignificance.
+-   `arlc_clean_final_rules():`Cleans the pre-processed rules to remove redundancy and insignificance.
 
--   ``` arlc_generate_clusters``(): ```Generates potential clusters based on the preprocessed rules.
+-   `arlc_generate_clusters():`Generates potential clusters based on the pre-processed rules.
 
--   ``` arlc_clusters_plot``(): ```Displays the obtained result as a plot if the total number of nodes less than 70. Otherwise, it displays the list of the identified communities.
+-   `arlc_clusters_plot():`Displays the obtained result as a plot if the total number of nodes less than 70. Otherwise, it displays the list of the identified communities.
 
 ## **Example Usage**
 
@@ -80,14 +80,22 @@ trx <- arlc_gen_transactions(g$graph)
 Getting the `apriori` parameters, the computed parameters will be used for generating the best rule set. Here is an example of each of the provided dataset examples:
 
 ``` r
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- Kerate
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- Dolphins
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- LesMiserables
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- WordAdjacency
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- ChanFacebook
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by = 0.001), confidenceRange = seq(0.5, 0.7, by = 0.1)) -- NetScience
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- Facebook
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1)) -- PowerGrid
+-- Kerate
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+-- Dolphins
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+-- LesMiserables
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+-- WordAdjacency
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+-- ChanFacebook
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+-- NetScience
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by = 0.001), confidenceRange = seq(0.5, 0.7, by = 0.1))
+-- Facebook
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+-- PowerGrid
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
 ```
 
 Generating the gross rules using the computed `apriori` parameters. The result is stored in the the variable `grossRules`:
@@ -130,7 +138,19 @@ In case the total number of nodes is less than 70 nodes, a plot of the `ARLClust
 
 ![](images/Karate Club-arlcustering-01)
 
-Total Identified Clusters: 5 `========================= Set 1 : 1 2 3 4 5 6 7 8 11 14 Set 2 : 3 4 8 9 14 34 Set 3 : 9 31 33 34 Set 4 : 24 30 33 34 Set 5 : 32 34 =========================`
+Total Identified Clusters: 5
+
+`========================= Set 1 : 1 2 3 4 5 6 7 8 11 14`
+
+`Set 2 : 3 4 8 9 14 34`
+
+`Set 3 : 9 31 33 34`
+
+`Set 4 : 24 30 33 34`
+
+`Set 5 : 32 34`
+
+`=========================`
 
 ## Contribution
 
