@@ -11,8 +11,8 @@
 #' @return A list containing the graph object and its properties: total edges, total nodes, and average degree.
 #'
 #' @examples
-#' loaded_karate <- arlc_get_network_dataset("./inst/extdata/karate.gml", "Karate Club")
-#' loaded_karate
+#' \dontrun{
+#' loaded_karate <- arlc_get_network_dataset("inst/extdata/karate.gml", "Karate Club")
 #' print(loaded_karate$graph)
 #' print(loaded_karate$graphLabel)
 #' print(loaded_karate$totalEdges)
@@ -20,17 +20,7 @@
 #' print(loaded_karate$totalNodes)
 #' print(loaded_karate$graphNodes)
 #' print(loaded_karate$averageDegree)
-#'
-#' loaded_dolphins <- arlc_get_network_dataset("./inst/extdata/dolphins.gml", "Dolphins")
-#' loaded_dolphins
-#' print(loaded_dolphins$graph)
-#' print(loaded_dolphins$graphLabel)
-#' print(loaded_dolphins$totalEdges)
-#' print(loaded_dolphins$graphEdges)
-#' print(loaded_dolphins$totalNodes)
-#' print(loaded_dolphins$graphNodes)
-#' print(loaded_dolphins$averageDegree)
-#'
+#' }
 #' @import igraph
 #' @export
 

@@ -1,27 +1,30 @@
 #' Get Gross Rules
 #'
-#' This function executes the Apriori algorithm to generate gross rules based on the given parameters.
+#' This function generates gross association rules from transactions.
 #'
-#' @description This function takes a transaction dataset and minimum support, confidence, minimum length, and maximum length of rules,
-#' and executes the Apriori algorithm to generate gross rules.
+#' @param transactions A transactions object.
+#' @param minSupp Minimum support threshold.
+#' @param minConf Minimum confidence threshold.
+#' @param minLenRules Minimum length of rules.
+#' @param maxLenRules Maximum length of rules.
 #'
-#' @param trx A transaction dataset.
-#' @param minSupp Minimum support threshold for the Apriori algorithm.
-#' @param minConf Minimum confidence threshold for the Apriori algorithm.
-#' @param minLenRules Minimum length of the rules to be generated.
-#' @param maxLenRules Maximum length of the rules to be generated.
-#'
-#' @return A list containing the total number of gross rules with length filter and the gross rules themselves.
+#' @return A set of gross association rules.
 #'
 #' @examples
+#' \dontrun{
+#' library(arules)
+#' # Create a sample transactions dataset
+#' data("Adult")
+#' transactions <- as(Adult, "transactions")
+#' # Generate gross rules
 #' arlc_gen_gross_rules(transactions, minSupp = 0.1, minConf = 0.5, minLenRules = 1, maxLenRules = 3)
-#' @import arules
+#' }
 #' @export
 
-arlc_gen_gross_rules <- function(trx, minSupp, minConf, minLenRules, maxLenRules) {
+arlc_gen_gross_rules <- function(transactions, minSupp, minConf, minLenRules, maxLenRules) {
   # Ensure the transactional data is of class transactions
-  if (!inherits(trx, "transactions")) {
-    stop("The trx object must be of class 'transactions'.")
+  if (!inherits(transactions, "transactions")) {
+    stop("The transactions object must be of class 'transactions'.")
   }
   # Ensure minSupp and minConf are numeric
   #if (!is.numeric(minSupp) || !is.numeric(minConf) || !is.numeric(minLenRules) || !is.numeric(maxLenRules) ) {
@@ -29,7 +32,7 @@ arlc_gen_gross_rules <- function(trx, minSupp, minConf, minLenRules, maxLenRules
   #}
 
   # Execute Apriori algorithm with specified parameters
-  gross_rules <- apriori(trx,
+  gross_rules <- apriori(transactions,
                          parameter = list(support = as.numeric(minSupp),
                                           confidence = as.numeric(minConf),
                                           minlen = as.numeric(minLenRules),

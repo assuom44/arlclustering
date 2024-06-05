@@ -8,11 +8,20 @@
 #'
 #' @param vec A vector of preprocessed rules.
 #'
-#' @return A list of potential clusters.
+#' @return A list of unique and potential clusters.
 #'
 #' @examples
-#' arlc_generate_clusters(vec)
+#' \dontrun{
+#' # Create a sample vector
+#' vec <- list(c(1, 2, 3), c(2, 3, 4), c(5, 6))
+#' # Generate clusters
+#' clusters <- arlc_generate_clusters(vec)
+#' }
+#' @importFrom graphics legend par
+#' @importFrom grDevices rainbow
+#' @importFrom igraph plot.igraph layout_with_fr
 #' @export
+#'
 
 arlc_generate_clusters <- function(vec) {
   # Combine elements starting with the same value and remove duplicates

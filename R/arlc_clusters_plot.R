@@ -10,20 +10,26 @@
 #'
 #' @examples
 #' \dontrun{
-#' arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
+#' library(igraph)
+#' g <- make_ring(10)
+#' clusters <- list(1:5, 6:10)
+#' arlc_clusters_plot(g, "Sample Graph", clusters)
 #' }
-#' @import igraph
+#' @importFrom graphics legend par
+#' @importFrom grDevices rainbow
+#' @importFrom igraph plot.igraph layout_with_fr
 #' @export
+
 arlc_clusters_plot <- function(g, graphLabel, clusters) {
   # Display obtained clusters
   cat ("Total Identified Clusters: ", length(clusters))
   cat ("\n =========================  ")
   for (i in 1:length(clusters)) {
-    cat("\n  Set ", i, ":", paste(clusters[[i]], collapse = " "))
+    cat("\n  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "))
   }
   cat ("\n =========================  ")
 
-  if (vcount (g) <= 70)
+  if (vcount (g) <= 100)
   {
     # Calculate the layout once
     layout <- layout_with_fr(g)

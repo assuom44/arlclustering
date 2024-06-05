@@ -182,6 +182,7 @@ arlc_calculate_mode <- function(x) {
 #'
 #' @examples
 #' arlc_df_summary(data.frame(a = c(1, 2, 3, 4, 5), b = c(5, 4, 3, 2, 1)))
+#' @importFrom stats sd median
 #' @export
 arlc_df_summary <- function(df) {
   numeric_cols <- df[sapply(df, is.numeric)]

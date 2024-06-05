@@ -20,5 +20,10 @@ and returns the total number of non-redundant rules along with the non-redundant
 This function cleans the gross rules and provides non-redundant rules.
 }
 \examples{
-arlc_get_NonR_rules(gross_rules)
+\dontrun{
+library(arules)
+data("Groceries")
+rules <- apriori(Groceries, parameter = list(supp = 0.01, conf = 0.5))
+non_redundant_rules <- arlc_get_NonR_rules(rules)
+}
 }

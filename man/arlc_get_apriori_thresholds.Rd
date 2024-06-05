@@ -4,14 +4,14 @@
 \alias{arlc_get_apriori_thresholds}
 \title{Get Apriori Thresholds}
 \usage{
-arlc_get_apriori_thresholds(trx, supportRange, confidenceRange)
+arlc_get_apriori_thresholds(trx, supportRange, Conf)
 }
 \arguments{
 \item{trx}{A transaction dataset of class \code{transactions} from the \code{arules} package.}
 
 \item{supportRange}{A sequence of values representing the range for minimum support.}
 
-\item{confidenceRange}{A sequence of values representing the range for minimum confidence.}
+\item{Conf}{A sequence of values representing the range for minimum confidence.}
 }
 \value{
 A list containing:
@@ -39,8 +39,8 @@ along with the lift, number of rules, and their ratio to the total transactions.
 library(arules)
 data(Groceries)
 supportRange <- seq(0.1, 0.9, by = 0.1)
-confidenceRange <- seq(0.5, 0.9, by = 0.1)
-result <- arlc_get_apriori_thresholds(Groceries, supportRange, confidenceRange)
+Conf <- 0.5
+result <- arlc_get_apriori_thresholds(Groceries, supportRange, Conf)
 print(result)
 }
 

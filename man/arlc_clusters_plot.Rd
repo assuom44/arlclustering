@@ -21,6 +21,9 @@ This function plots a graph with specified aesthetics and highlights communities
 }
 \examples{
 \dontrun{
-arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
+library(igraph)
+g <- make_ring(10)
+clusters <- list(1:5, 6:10)
+arlc_clusters_plot(g, "Sample Graph", clusters)
 }
 }

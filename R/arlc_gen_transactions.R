@@ -1,23 +1,20 @@
 #' Get Transactional Dataset
 #'
-#' This function generates a transactional dataset from a graph dataset.
+#' This function generates a transactional dataset from a graph.
 #'
-#' @description This function takes a graph dataset as input, extracts its characteristics,
-#' converts it to an adjacency matrix, and then to transactional dataset.
-#' It filters out transactions with only one element and returns the resulting dataset.
-#'
-#' @param graph A graph object which could be loaded via the following call:
-#' g <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")
+#' @param graph A graph object.
 #'
 #' @return A transactional dataset.
 #'
 #' @examples
-#' trans <- arlc_gen_transactions(g$graph)
-#'
-#' @importFrom grDevices rainbow
-#' @importFrom graphics legend par
-#' @importFrom methods as
-#' @importFrom stats median sd
+#' \dontrun{
+#' library(igraph)
+#' # Create a sample graph
+#' g <- make_ring(10)
+#' # Generate transactional dataset
+#' trans <- arlc_gen_transactions(g)
+#' }
+#' @import methods
 #' @export
 
 arlc_gen_transactions <- function(graph) {

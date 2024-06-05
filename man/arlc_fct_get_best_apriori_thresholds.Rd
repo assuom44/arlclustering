@@ -4,18 +4,14 @@
 \alias{arlc_fct_get_best_apriori_thresholds}
 \title{Get Best Apriori Thresholds}
 \usage{
-arlc_fct_get_best_apriori_thresholds(
-  transactions,
-  support_range,
-  confidence_range
-)
+arlc_fct_get_best_apriori_thresholds(transactions, support_range, conf)
 }
 \arguments{
 \item{transactions}{A transaction dataset of class \code{transactions} from the \code{arules} package.}
 
 \item{support_range}{A numeric vector specifying the range of support values to be tested.}
 
-\item{confidence_range}{A numeric vector specifying the range of confidence values to be tested.}
+\item{conf}{A numeric value (0.5 or 1.0) specifying the confidence value.}
 }
 \value{
 A numeric vector containing the best support, best confidence, highest lift, and the number of rules found.
@@ -34,9 +30,9 @@ the pair that produces rules with the highest lift.
 \dontrun{
 library(arules)
 data(Groceries)
-support_range <- seq(0.001, 0.01, by = 0.001)
-confidence_range <- seq(0.1, 0.9, by = 0.1)
-best_thresholds <- arlc_fct_get_best_apriori_thresholds(Groceries, support_range, confidence_range)
+support_range <- seq(0.01, 0.03, by = 0.01)
+confidence <- 0.5
+best_thresholds <- arlc_fct_get_best_apriori_thresholds(Groceries, support_range, confidence)
 print(best_thresholds)
 }
 

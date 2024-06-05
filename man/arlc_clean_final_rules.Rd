@@ -7,18 +7,23 @@
 arlc_clean_final_rules(final_rules)
 }
 \arguments{
-\item{final_rules}{A dataframe containing the preprocessed rules.}
+\item{final_rules}{A set of final rules to be cleaned.}
 }
 \value{
-A cleaned vector of rules.
+A cleaned set of rules.
 }
 \description{
-This function takes a set of preprocessed rules, removes redundant
-and significant rules, and returns a cleaned vector of rules.
-}
-\details{
-Cleans the preprocessed rules by removing redundant and significant rules.
+This function cleans the final set of association rules.
 }
 \examples{
-arlc_clean_final_rules(final_rules)
+\dontrun{
+library(arules)
+# Create a sample transactions dataset
+data("Adult")
+transactions <- as(Adult, "transactions")
+# Generate rules
+rules <- apriori(transactions, parameter = list(supp = 0.5, conf = 0.9))
+# Clean the final rules
+cleaned_rules <- arlc_clean_final_rules(rules)
+}
 }

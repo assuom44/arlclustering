@@ -4,29 +4,32 @@
 \alias{arlc_gen_gross_rules}
 \title{Get Gross Rules}
 \usage{
-arlc_gen_gross_rules(trx, minSupp, minConf, minLenRules, maxLenRules)
+arlc_gen_gross_rules(transactions, minSupp, minConf, minLenRules, maxLenRules)
 }
 \arguments{
-\item{trx}{A transaction dataset.}
+\item{transactions}{A transactions object.}
 
-\item{minSupp}{Minimum support threshold for the Apriori algorithm.}
+\item{minSupp}{Minimum support threshold.}
 
-\item{minConf}{Minimum confidence threshold for the Apriori algorithm.}
+\item{minConf}{Minimum confidence threshold.}
 
-\item{minLenRules}{Minimum length of the rules to be generated.}
+\item{minLenRules}{Minimum length of rules.}
 
-\item{maxLenRules}{Maximum length of the rules to be generated.}
+\item{maxLenRules}{Maximum length of rules.}
 }
 \value{
-A list containing the total number of gross rules with length filter and the gross rules themselves.
+A set of gross association rules.
 }
 \description{
-This function takes a transaction dataset and minimum support, confidence, minimum length, and maximum length of rules,
-and executes the Apriori algorithm to generate gross rules.
-}
-\details{
-This function executes the Apriori algorithm to generate gross rules based on the given parameters.
+This function generates gross association rules from transactions.
 }
 \examples{
+\dontrun{
+library(arules)
+# Create a sample transactions dataset
+data("Adult")
+transactions <- as(Adult, "transactions")
+# Generate gross rules
 arlc_gen_gross_rules(transactions, minSupp = 0.1, minConf = 0.5, minLenRules = 1, maxLenRules = 3)
+}
 }

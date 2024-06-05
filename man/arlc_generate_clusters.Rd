@@ -10,7 +10,7 @@ arlc_generate_clusters(vec)
 \item{vec}{A vector of preprocessed rules.}
 }
 \value{
-A list of potential clusters.
+A list of unique and potential clusters.
 }
 \description{
 This function takes a vector of preprocessed rules, combines elements
@@ -21,5 +21,10 @@ within each segment, and returns potential clusters.
 This function generates potential clusters based on preprocessed rules.
 }
 \examples{
-arlc_generate_clusters(vec)
+\dontrun{
+# Create a sample vector
+vec <- list(c(1, 2, 3), c(2, 3, 4), c(5, 6))
+# Generate clusters
+clusters <- arlc_generate_clusters(vec)
+}
 }

@@ -5,7 +5,7 @@
 #'
 #' @param transactions A transaction dataset of class `transactions` from the `arules` package.
 #' @param support_range A numeric vector specifying the range of support values to be tested.
-#' @param confidence_range A numeric vector specifying the range of confidence values to be tested.
+#' @param conf A numeric value (0.5 or 1.0) specifying the confidence value.
 #'
 #' @return A numeric vector containing the best support, best confidence, highest lift, and the number of rules found.
 #' The return value is a named vector with elements \code{best_support}, \code{best_confidence}, \code{best_lift}, and \code{len_rules}.
@@ -18,16 +18,32 @@
 #' \dontrun{
 #' library(arules)
 #' data(Groceries)
-#' support_range <- seq(0.001, 0.01, by = 0.001)
-#' confidence_range <- seq(0.1, 0.9, by = 0.1)
-#' best_thresholds <- arlc_fct_get_best_apriori_thresholds(Groceries, support_range, confidence_range)
+#' support_range <- seq(0.01, 0.03, by = 0.01)
+#' confidence <- 0.5
+#' best_thresholds <- arlc_fct_get_best_apriori_thresholds(Groceries, support_range, confidence)
 #' print(best_thresholds)
 #' }
 #'
 #' @importFrom arules apriori
 #' @export
 
-arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, confidence_range) {
+arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, conf) {
+  # Validate supportRange
+  support_diff <- max(support_range) - min(support_range)
+  #if (support_diff != 0.02) {
+  if (!(support_diff %in% c("0.2", "0.02", "0.002"))){
+    stop("ERROR: The Support Range must cover a range of exactly 0.2, 0.02 or 0.002")
+  }
+
+  # Validate confidenceRange
+  # confidence_diff <- max(confidenceRange) - min(confidenceRange)
+  # if (confidence_diff != 0.2) {
+  #   stop("confidenceRange must cover a range of exactly 0.2")
+  # }
+  if (!(conf %in% c("0.5", "1.0"))){
+    stop("Confidence must either be 0.5 or 1.0")
+  }
+
   # Initialize variables to store the best support, confidence, lift, and rules
   best_support <- 0
   best_confidence <- 0
@@ -37,11 +53,11 @@ arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, co
 
   # Loop through the support and confidence values
   for (support in support_range) {
-    for (confidence in confidence_range) {
+    #for (confidence in confidence_range) {
       # Run Apriori algorithm with the current support and confidence
       gross_rules <- apriori(
         transactions,
-        parameter = list(support=support, confidence=confidence),
+        parameter = list(support=support, confidence=conf),
         target = "rules",
         control = list(verbose = FALSE)
       )
@@ -49,11 +65,11 @@ arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, co
       # Check if rules are found and if they have higher lift than the previous best rules
       if (length(gross_rules) > 0 && max(gross_rules@quality$lift) > best_lift) {
         best_support <- support
-        best_confidence <- confidence
+        best_confidence <- conf
         best_lift <- max(gross_rules@quality$lift)
         best_rules <- gross_rules
       }
-    }
+    #}
   }
 
   # Calculate the number of rules found

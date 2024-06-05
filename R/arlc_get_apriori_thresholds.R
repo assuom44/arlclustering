@@ -8,7 +8,7 @@
 #'
 #' @param trx A transaction dataset of class `transactions` from the `arules` package.
 #' @param supportRange A sequence of values representing the range for minimum support.
-#' @param confidenceRange A sequence of values representing the range for minimum confidence.
+#' @param Conf A sequence of values representing the range for minimum confidence.
 #'
 #' @return A list containing:
 #' \item{minSupp}{The best minimum support value.}
@@ -27,15 +27,15 @@
 #' library(arules)
 #' data(Groceries)
 #' supportRange <- seq(0.1, 0.9, by = 0.1)
-#' confidenceRange <- seq(0.5, 0.9, by = 0.1)
-#' result <- arlc_get_apriori_thresholds(Groceries, supportRange, confidenceRange)
+#' Conf <- 0.5
+#' result <- arlc_get_apriori_thresholds(Groceries, supportRange, Conf)
 #' print(result)
 #' }
 #'
 #' @importFrom arules apriori
 #' @export
 
-arlc_get_apriori_thresholds <- function(trx, supportRange, confidenceRange) {
+arlc_get_apriori_thresholds <- function(trx, supportRange, Conf) {
   # Initialize variables
   min_supp <- 0
   min_conf <- 0
@@ -45,7 +45,7 @@ arlc_get_apriori_thresholds <- function(trx, supportRange, confidenceRange) {
   # Get thresholds based on support and confidence ranges
   output_list <- arlc_fct_get_best_apriori_thresholds( trx,
                                                        supportRange,
-                                                       confidenceRange) #, minLenRules, maxLenRules)
+                                                       Conf) #, minLenRules, maxLenRules)
 
   # Assign values from output_list
   min_supp <- format(output_list[[1]], scientific = FALSE)

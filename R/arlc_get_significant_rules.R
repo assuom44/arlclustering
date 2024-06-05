@@ -11,7 +11,10 @@
 #' @return A list containing the total number of significant non-redundant rules and the significant rules themselves.
 #'
 #' @examples
-#' arlc_get_significant_rules(all_transactions, non_redundant_rules)
+#' \dontrun{
+#' arlc_get_significant_rules(all_trans, nonRR_rules)
+#' }
+#' @importFrom arules is.significant
 #' @export
 
 arlc_get_significant_rules <- function(all_trans, nonRR_rules) {

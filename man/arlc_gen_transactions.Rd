@@ -7,21 +7,20 @@
 arlc_gen_transactions(graph)
 }
 \arguments{
-\item{graph}{A graph object which could be loaded via the following call:
-g <- arlc_get_network_dataset("./data/karate.gml", "Karate Club")}
+\item{graph}{A graph object.}
 }
 \value{
 A transactional dataset.
 }
 \description{
-This function takes a graph dataset as input, extracts its characteristics,
-converts it to an adjacency matrix, and then to transactional dataset.
-It filters out transactions with only one element and returns the resulting dataset.
-}
-\details{
-This function generates a transactional dataset from a graph dataset.
+This function generates a transactional dataset from a graph.
 }
 \examples{
-trans <- arlc_gen_transactions(g$graph)
-
+\dontrun{
+library(igraph)
+# Create a sample graph
+g <- make_ring(10)
+# Generate transactional dataset
+trans <- arlc_gen_transactions(g)
+}
 }

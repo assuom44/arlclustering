@@ -22,5 +22,7 @@ and returns significant rules based on a specified method and adjustment.
 This function filters significant rules from a set of non-redundant rules.
 }
 \examples{
-arlc_get_significant_rules(all_transactions, non_redundant_rules)
+\dontrun{
+arlc_get_significant_rules(all_trans, nonRR_rules)
+}
 }

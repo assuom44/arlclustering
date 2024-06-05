@@ -81,21 +81,21 @@ Getting the `apriori` parameters, the computed parameters will be used for gener
 
 ``` r
 -- Kerate
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), 0.5)
 -- Dolphins
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
 -- LesMiserables
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
 -- WordAdjacency
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
 -- ChanFacebook
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
 -- NetScience
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by = 0.001), confidenceRange = seq(0.5, 0.7, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by = 0.001), 0.5)
 -- Facebook
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
 -- PowerGrid
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), confidenceRange = seq(0.5, 0.9, by = 0.1))
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
 ```
 
 Generating the gross rules using the computed `apriori` parameters. The result is stored in the the variable `grossRules`:
@@ -132,11 +132,11 @@ Displaying results:
 arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
 ```
 
-In case the total number of nodes is less than 70 nodes, a plot of the `ARLClustering` communities will be generated, otherwise only a display of the list of Sets (communities) will be proposed.
+In case the total number of nodes is less than 100 nodes, a plot of the `ARLClustering` communities will be generated, otherwise only a display of the list of Sets (communities) will be proposed.
 
 -   *`ARLClustering`'s outputs for Karate Club social network:*
 
-![](images/Karate Club-arlcustering-01)
+![](inst/images/KarateClub-arlcustering)
 
 Total Identified Clusters: 5
 

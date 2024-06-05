@@ -10,7 +10,13 @@
 #' @return A list containing the total number of non-redundant rules and the non-redundant rules.
 #'
 #' @examples
-#' arlc_get_NonR_rules(gross_rules)
+#' \dontrun{
+#' library(arules)
+#' data("Groceries")
+#' rules <- apriori(Groceries, parameter = list(supp = 0.01, conf = 0.5))
+#' non_redundant_rules <- arlc_get_NonR_rules(rules)
+#' }
+#' @importFrom arules is.redundant
 #' @export
 
 arlc_get_NonR_rules <- function(gross_rules) {
@@ -25,21 +31,3 @@ arlc_get_NonR_rules <- function(gross_rules) {
   return(list(TotNonRedanduntRules = total_nonRedandunt_rules,
               nonRR_rules = nonRR_rules))
 }
-
-
-
-
-## Function that clean the gross rules and provide non Redundant Rules
-
-#get_NonR_rules <- function (gross_rules) {
-#  ## Cleaning rules
-#  # 1. Non redendant rules
-#  nonRR_rules <- NULL
-#  nonRR_rules <- gross_rules[!is.redundant(gross_rules)]
-
-#  # Compute number of Non Redundant rules:
-#  total_nonRedandunt_rules <- 0
-#  total_nonRedandunt_rules <- length(nonRR_rules)
-
-#  return (total_nonRedandunt_rules, nonRR_rules)
-#}
