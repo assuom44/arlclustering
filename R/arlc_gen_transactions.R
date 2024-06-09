@@ -9,31 +9,44 @@
 #' @examples
 #' \dontrun{
 #' library(igraph)
-#' # Create a sample graph
+#' library(arules)
 #' g <- make_ring(10)
-#' # Generate transactional dataset
 #' trans <- arlc_gen_transactions(g)
 #' }
-#' @import methods
+#' @importFrom igraph get.adjacency
+#' @importFrom methods as
+#' @importFrom arules as
 #' @export
 
 arlc_gen_transactions <- function(graph) {
-  # Build the adjacency matriw
-  adjMat <- as_adjacency_matrix(graph)
-  #adjMat <- as.matrix(graph, "adjacency")
-  transactions <- apply(adjMat, 1, function(row) paste(which(row == 1), collapse = " "))
+  if (!"igraph" %in% class(graph)) {
+    stop("The input must be an igraph object.")
+  }
 
-  # Create an empty array to store the final result
-  transactions_list <- character(length(transactions))
+  # Convert the graph to an adjacency matrix
+  adjMat <- as.matrix(igraph::get.adjacency(graph))
 
-  for (i in seq_along(transactions_list)) {transactions_list[i] <- paste(i, transactions[i])}
+  # Convert the adjacency matrix to transactions
+  transactions_list <- apply(adjMat, 1, function(row) {
+    nodes <- which(row == 1)
+    if (length(nodes) > 1) {
+      nodes
+    } else {
+      NULL
+    }
+  })
 
-  # Filter out transactions with only one element
-  num_elements <- sapply(strsplit(transactions_list, " "), length)
-  transactions_list <- transactions_list[lengths(strsplit(transactions_list, " ")) >= min(num_elements)]
-  conv_all_trans <- strsplit(transactions_list, " ")
-  transunique <- as(conv_all_trans, "transactions")
-  trx <- as(unique (transunique), "transactions")
+  # Remove NULL values
+  transactions_list <- transactions_list[!sapply(transactions_list, is.null)]
 
-  return (trx)
+  # Ensure transactions_list is a list
+  transactions_list <- lapply(transactions_list, as.vector)
+
+  # Remove duplicate transactions
+  transunique <- unique(transactions_list)
+
+  # Convert to a transactions object
+  trx <- arules::as(transunique, "transactions")
+
+  return(trx)
 }

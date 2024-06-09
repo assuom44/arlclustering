@@ -15,7 +15,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Suggests: 
-    testthat,
+    testthat (>= 3.0.0),
     knitr,
     rmarkdown,
     tidyr
@@ -32,3 +32,4 @@ Imports:
     grDevices,
     graphics,
     stats
+Config/testthat/edition: 3

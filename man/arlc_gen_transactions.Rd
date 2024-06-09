@@ -18,9 +18,8 @@ This function generates a transactional dataset from a graph.
 \examples{
 \dontrun{
 library(igraph)
-# Create a sample graph
+library(arules)
 g <- make_ring(10)
-# Generate transactional dataset
 trans <- arlc_gen_transactions(g)
 }
 }
