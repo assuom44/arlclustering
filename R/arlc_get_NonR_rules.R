@@ -23,11 +23,14 @@ arlc_get_NonR_rules <- function(gross_rules) {
   ## Cleaning rules
   # Remove redundant rules
   nonRR_rules <- gross_rules[!is.redundant(gross_rules)]
-
+  if (length(nonRR_rules) < 1) {
+    cat('Non-redundant rule set is the same as the gross rule set...')
+    nonRR_rules <- gross_rules
+  }
   # Compute number of non-redundant rules
   total_nonRedandunt_rules <- length(nonRR_rules)
 
   # Return result as a list
-  return(list(TotNonRedanduntRules = total_nonRedandunt_rules,
-              nonRR_rules = nonRR_rules))
+  return(list(TotFiltredRules = total_nonRedandunt_rules,
+              FiltredRules = nonRR_rules))
 }

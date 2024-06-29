@@ -31,6 +31,10 @@ arlc_gen_gross_rules <- function(transactions, minSupp, minConf, minLenRules, ma
   #  stop("minSupp, minConf, minLenRules and maxLenRules must be numeric values.")
   #}
 
+  # if (maxLenRules > length(transactions))
+  # {
+  #   maxLenRules <- length(transactions)
+  # }
   # Execute Apriori algorithm with specified parameters
   gross_rules <- apriori(transactions,
                          parameter = list(support = as.numeric(minSupp),

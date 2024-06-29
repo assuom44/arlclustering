@@ -31,8 +31,8 @@ arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, co
   # Validate supportRange
   support_diff <- max(support_range) - min(support_range)
   #if (support_diff != 0.02) {
-  if (!(support_diff %in% c("0.2", "0.02", "0.002"))){
-    stop("ERROR: The Support Range must cover a range of exactly 0.2, 0.02 or 0.002")
+  if (!(support_diff %in% c("0, 0.2", "0.02", "0.002", "0.1", "0.01", "0.001"))){
+    stop("ERROR: The Support Range must be null or at least cover a ranges 0.1 or 0.2, 0.01 or 0.02, and 0.001 or 0.002")
   }
 
   # Validate confidenceRange

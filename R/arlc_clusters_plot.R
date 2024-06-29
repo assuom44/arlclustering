@@ -48,7 +48,7 @@ arlc_clusters_plot <- function(g, graphLabel, clusters) {
          vertex.label.dist = 0,
          edge.arrow.size = 0.3,
          edge.color = "gray",
-         main = "Initial")
+         main = paste0("Initial ", graphLabel))
 
     # Plot the network with clusters highlighted
     plot(g,
@@ -65,7 +65,17 @@ arlc_clusters_plot <- function(g, graphLabel, clusters) {
 
     # Add a legend to the second plot (optional)
     #legend("bottomright", legend = 1:length(clusters), fill = cluster_colors, title = "Clusters", cex = 0.8, inset = 0.02)
-    legend("topright", legend = 1:length(clusters), fill = cluster_colors, title = "Clusters", cex = 0.8, inset = 0.02, bty = "n", pt.cex = 1.5)
+    #legend("center",legend = 1:length(clusters),ncol = 2,fill = cluster_colors,title = "Clusters",cex = 0.8,inset = 0.02,bty = "n",pt.cex = 1.5)
+    legend("topleft",
+           legend = 1:length(clusters),
+           ncol = 5,
+           fill = cluster_colors,
+           title = "Clusters",
+           cex = 0.6,
+           inset = c(-0.1, 0),           # Adjusting the inset to place legend outside
+           bty = "n",
+           pt.cex = 1.0,
+           xpd = TRUE)                   # Allow legend to be drawn outside the plot
 
     # Reset to default single plot layout
     par(mfrow = c(1, 1))

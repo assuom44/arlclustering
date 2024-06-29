@@ -111,13 +111,13 @@ NonRedRules <- arlc_get_NonR_rules (grossRules$GrossRules)
 ```
 
 ``` r
-NonRSigRules <- arlc_get_significant_rules (trx, NonRedRules$nonRR_rules)
+NonRSigRules <- arlc_get_significant_rules (trx, NonRedRules$FiltredRules)
 ```
 
 Cleaning the obtained result:
 
 ``` r
-cleanedRules <- arlc_clean_final_rules (NonRSigRules$sigR_nnRR_Rules)
+cleanedRules <- arlc_clean_final_rules (NonRSigRules$FiltredRules)
 ```
 
 Generating clusters:
@@ -136,7 +136,7 @@ In case the total number of nodes is less than 100 nodes, a plot of the `ARLClus
 
 -   *`ARLClustering`'s outputs for Karate Club social network:*
 
-![](inst/images/KarateClub-arlcustering)
+![](inst/images/KarateClub-arlcustering.png)
 
 Total Identified Clusters: 5
 

@@ -15,7 +15,6 @@
 #' }
 #' @importFrom igraph get.adjacency
 #' @importFrom methods as
-#' @importFrom arules as
 #' @export
 
 arlc_gen_transactions <- function(graph) {
@@ -46,7 +45,7 @@ arlc_gen_transactions <- function(graph) {
   transunique <- unique(transactions_list)
 
   # Convert to a transactions object
-  trx <- arules::as(transunique, "transactions")
+  trx <- methods::as(transunique, "transactions")
 
   return(trx)
 }

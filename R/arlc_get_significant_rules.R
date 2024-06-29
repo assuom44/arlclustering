@@ -26,14 +26,14 @@ arlc_get_significant_rules <- function(all_trans, nonRR_rules) {
   sigR_nnRR_Rules <- nonRR_rules[!is.significant(nonRR_rules, all_trans, method, adjust)]
 
   if (length(sigR_nnRR_Rules) < 1) {
-    cat('Significant filter returns null rule set. The Redandunt rule set is then returned.')
+    cat('Significant rule set is the same as the redundant rule set...')
     sigR_nnRR_Rules <- nonRR_rules
   }
 
   total_nonRedandant_signif_rules <- length(sigR_nnRR_Rules)
 
-  return(list(TotNonRedandantSignifRules = total_nonRedandant_signif_rules,
-              sigR_nnRR_Rules = sigR_nnRR_Rules
+  return(list(TotFiltredRules = total_nonRedandant_signif_rules,
+              FiltredRules = sigR_nnRR_Rules
               )
          )
 }
