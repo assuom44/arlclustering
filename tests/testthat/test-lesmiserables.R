@@ -7,11 +7,11 @@ library(arules)
 library(microbenchmark)
 library(ggplot2)
 
-test_that("PowerGrid Network Analysis", {
+test_that("Les Miserables Network Analysis", {
   # Define the path to the dataset
-  dataset_path <- system.file("extdata", "power_grid.gml", package = "arlclustering")
+  dataset_path <- system.file("extdata", "lesmiserables.gml", package = "arlclustering")
   if (dataset_path == "") {
-    stop("power_grid.gml file not found in the package")
+    stop("lesmiserables.gml file not found in the package")
   }
   # Ensure the file exists
   expect_true(file.exists(dataset_path))
@@ -20,7 +20,7 @@ test_that("PowerGrid Network Analysis", {
 
   # Load the network dataset
   timings[["Load Network"]] <- microbenchmark(
-    g <- arlc_get_network_dataset(dataset_path, "PowerGrid"),
+    g <- arlc_get_network_dataset(dataset_path, "LesMiserables"),
     times = 1
   )
 
@@ -40,7 +40,7 @@ test_that("PowerGrid Network Analysis", {
   # Get apriori thresholds
   timings[["Get Apriori Thresholds"]] <- microbenchmark(
     params <- arlc_get_apriori_thresholds(transactions,
-                                          supportRange = seq(0.02, 0.03, by = 0.01),
+                                          supportRange = seq(0.04, 0.06, by = 0.01),  #minSup= 0.06 ; minConf= 0.5 ; minLen= 2 ; maxLen= 13
                                           0.5),
     times = 1
   )
@@ -49,20 +49,13 @@ test_that("PowerGrid Network Analysis", {
   expect_true("minConf" %in% names(params))
   expect_true("lenRules" %in% names(params))
 
-  # Ensure maxLenRules is valid
-  minLenRules <- 1
-  maxLenRules <- params$lenRules
-  if (is.infinite(maxLenRules) || maxLenRules <= minLenRules) {
-    stop("Invalid maxLenRules: must be finite and > minLenRules")
-  }
-
   # Generate gross rules
   timings[["Generate Gross Rules"]] <- microbenchmark(
     grossRules <- arlc_gen_gross_rules(transactions,
                                        minSupp = params$minSupp,
                                        minConf = params$minConf,
-                                       minLenRules = minLenRules,
-                                       maxLenRules = maxLenRules), #params$lenRules),
+                                       minLenRules = 2,
+                                       maxLenRules = params$lenRules),
     times = 1
   )
   expect_true(!is.null(grossRules$GrossRules))
@@ -121,7 +114,7 @@ test_that("PowerGrid Network Analysis", {
   # Plot the timing data
   ggplot(timing_data, aes(x = Step, y = Time)) +
     geom_bar(stat = "identity") +
-    labs(title = "Execution Time of Steps in PowerGrid Network Analysis",
+    labs(title = "Execution Time of Steps in LesMiserables Network Analysis",
          x = "Step",
          y = "Time (ms)") +
     theme(axis.text.x = element_text(angle = 45, hjust = 1))

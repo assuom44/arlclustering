@@ -61,14 +61,29 @@ An overview of the main functions provided by the `ARLClustering` package:
 Here is examples of the `arlc_get_network_dataset` call for each of the provided synthetic network datasets, the network is loaded then on variable `g`:
 
 ``` r
-g <- arlc_get_network_dataset("./inst/extdata/karate.gml", "Karate Club")
-g <- arlc_get_network_dataset("./inst/extdata/dolphins.gml", "Dolphins Network")
-g <- arlc_get_network_dataset("./inst/extdata/lesmiserables.gml", "LesMiserables Network")
-g <- arlc_get_network_dataset("./inst/extdata/word_adjacencies.gml", "Word Adjacencies Network")
-g <- arlc_get_network_dataset("./inst/extdata/ChanFacebook.gml", "Chan Facebook Network")
-g <- arlc_get_network_dataset("./inst/extdata/netscience.gml", "NetScience Network")
-g <- arlc_get_network_dataset("./inst/extdata/facebook.gml", "Facebook Network")
-g <- arlc_get_network_dataset("./inst/extdata/power_grid.gml", "PowerGrid Network")
+dataset_path <- system.file("extdata", "karate.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "Karate Club")
+
+dataset_path <- system.file("extdata", "dolphins.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "Dolphins Network")
+
+dataset_path <- system.file("extdata", "lesmiserables.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "LesMiserables Network")
+
+dataset_path <- system.file("extdata", "word_adjacencies.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "Word Adjacencies Network")
+
+dataset_path <- system.file("extdata", "ChanFacebook.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "Chan Facebook Network")
+
+dataset_path <- system.file("extdata", "netscience.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "NetScience Network")
+
+dataset_path <- system.file("extdata", "facebook.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "Facebook Network")
+
+dataset_path <- system.file("extdata", "power_grid.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "PowerGrid Network")
 ```
 
 Generating the transactions into the variable trx:
@@ -81,21 +96,28 @@ Getting the `apriori` parameters, the computed parameters will be used for gener
 
 ``` r
 -- Kerate
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.9, by = 0.1), 0.5)
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.2, by = 0.1), 0.5)
+
 -- Dolphins
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
+
 -- LesMiserables
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.04, 0.05, by = 0.01), 0.5)
+
 -- WordAdjacency
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
+
 -- ChanFacebook
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.2, by = 0.1), 0.5)
+
 -- NetScience
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by = 0.001), 0.5)
+
 -- Facebook
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
+
 -- PowerGrid
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.02, 0.03, by = 0.01), 0.5)
 ```
 
 Generating the gross rules using the computed `apriori` parameters. The result is stored in the the variable `grossRules`:
