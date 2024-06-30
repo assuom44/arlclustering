@@ -17,7 +17,6 @@ output: html_document
     -   Chan Facebook social network: N=374; E=2986
     -   NetScience network: N=1589; E=2742
     -   Facebook social network: N=337; E=2531
-    -   PowerGrid network: N=4941; E=6594
 -   **Step-by-Step Implementation**: Guides users through the entire process, from loading the network dataset to identifying potential clusters.
 
 ## **Overview**
@@ -81,9 +80,6 @@ g <- arlc_get_network_dataset(dataset_path, "NetScience Network")
 
 dataset_path <- system.file("extdata", "facebook.gml", package = "arlclustering")
 g <- arlc_get_network_dataset(dataset_path, "Facebook Network")
-
-dataset_path <- system.file("extdata", "power_grid.gml", package = "arlclustering")
-g <- arlc_get_network_dataset(dataset_path, "PowerGrid Network")
 ```
 
 Generating the transactions into the variable trx:
@@ -115,9 +111,6 @@ params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by =
 
 -- Facebook
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
-
--- PowerGrid
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.02, 0.03, by = 0.01), 0.5)
 ```
 
 Generating the gross rules using the computed `apriori` parameters. The result is stored in the the variable `grossRules`:
