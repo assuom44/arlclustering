@@ -157,15 +157,29 @@ Total Identified Clusters: 5
 
 `=========================`
 
-`Set 1 : 1 2 3 4 5 6 7 8 11 14`
+`Community  01 : 1 2 3 4 8 14`
 
-`Set 2 : 3 4 8 9 14 34`
+`Community  02 : 2 3 4 8 9 14`
 
-`Set 3 : 9 31 33 34`
+`Community  03 : 3 4 8 14 31 32 34`
 
-`Set 4 : 24 30 33 34`
+`Community  04 : 5 6`
 
-`Set 5 : 32 34`
+`Community  05 : 7 11`
+
+`Community  06 : 9 14 32 33`
+
+`Community  07 : 14 20`
+
+`Community  08 : 24 32 34`
+
+`Community  09 : 28 33`
+
+`Community  10 : 29 33`
+
+`Community  11 : 30 34`
+
+`Community  12 : 33 34`
 
 `=========================`
 
