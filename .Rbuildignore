@@ -3,3 +3,5 @@
 ^\.github$
 ^changelog.md$
 ^docs$
+^doc$
+^Meta$
