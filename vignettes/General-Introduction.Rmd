@@ -1,0 +1,42 @@
+---
+title: "Introduction to ARLClustering Package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ARLClustering Package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(arlclustering)
+```
+## Paper abstract
+This paper presents ARLClustering, an R package that introduces a novel approach for community detection in social networks using data mining techniques, particularly the Apriori algorithm. Building on the foundation of existing research, ARLClustering leverages association rules to identify and analyze meaningful communities based on node interactions. The package provides a suite of functions tailored for social network analysis and data mining, tested on various synthetic and real-world datasets such as the Karate Club, Dolphins, LesMiserables, and facebook networks. By addressing the gap in open-source implementations of association rule-based community detection, ARLClustering serves as a crucial tool for both researchers and practitioners. It bridges theoretical insights with practical utility, promoting advancements in methodologies for community detection in social networks.
+
+## Experimentation summary
+### Activity preparation:
+
+```{r}
+test_results <- data.frame(
+  Dataset = c("ChanFacebook", "dolphins", "Facebook", "karate", "lesmiserables", "NetScience", "wordadjacency"),
+  Transactions = c(334, 53, 304, 28, 59, 1140, 102),
+  Items = c(350, 62, 318, 34, 77, 1247, 112),
+  Min.Support = c(0.1, 0.05, 0.05, 0.1, 0.04, 0.011, 0.05),
+  Communities = c(6, 17, 16, 12, 7, 4, 10),
+  Time.s = c(2.9, 2.4, 8.7, 2.2, 2.6, 8.5, 1.9)
+)
+```
+
+### Obtained results:
+
+```{r}
+knitr::kable(test_results, caption = "ARLClustering Test Results Summary")
+```
+

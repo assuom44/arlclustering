@@ -1,8 +1,8 @@
 ---
-title: "Introduction to ARLClustering Package"
+title: "ARLClustering - Testing Karate dataset"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to ARLClustering Package}
+  %\VignetteIndexEntry{ARLClustering - Testing Karate dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,37 +17,19 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(arlclustering)
 ```
-# Experimentation summary
-## Activity preparation:
+## Dataset description
+The Karate Club social network dataset is provided as a gml file, containing 34 nodes and 78 edges.
 
-```{r}
-test_results <- data.frame(
-  Dataset = c("ChanFacebook", "dolphins", "Facebook", "karate", "lesmiserables", "NetScience", "wordadjacency"),
-  Transactions = c(334, 53, 304, 28, 59, 1140, 102),
-  Items = c(350, 62, 318, 34, 77, 1247, 112),
-  Min.Support = c(0.1, 0.05, 0.05, 0.1, 0.04, 0.011, 0.05),
-  Communities = c(6, 17, 16, 12, 7, 4, 10),
-  Time.s = c(2.9, 2.4, 8.7, 2.2, 2.6, 8.5, 1.9)
-)
-```
-
-## Obtained results:
-
-```{r}
-knitr::kable(test_results, caption = "ARLClustering Test Results Summary")
-```
-
-# Facebook network dataset:
 
 ## Loading network dataset
 
 ```{r}
-dataset_path <- system.file("extdata", "facebook.gml", package = "arlclustering")
+dataset_path <- system.file("extdata", "karate.gml", package = "arlclustering")
 if (dataset_path == "") {
-  stop("facebook.gml file not found in the package")
+  stop("karate.gml file not found in the package")
 }
 
-g <- arlc_get_network_dataset(dataset_path, "Facebook")
+g <- arlc_get_network_dataset(dataset_path, "Karate Club")
 ```
 
 ## Generate Transactions
@@ -65,7 +47,7 @@ We obtain the apriori thresholds for the generated transactions.
 
 ```{r}
 params <- arlc_get_apriori_thresholds(transactions,
-                                      supportRange = seq(0.05, 0.06, by = 0.01),
+                                      supportRange = seq(0.1, 0.2, by = 0.1),
                                       Conf = 0.5)
 print ("Apriori parameters ")
 paste0 ("  - Minimum Support: ", params$minSupp)
