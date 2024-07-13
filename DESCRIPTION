@@ -3,10 +3,7 @@ Type: Package
 Title: ARL Clustering Method for Social Network Analysis
 Version: 1.0.0
 Authors@R: c(
-    person("Mohamed", "El-Moussaoui", email = "med.elmoussaoui.ced@gmail.com", role = c("aut", "cre")),
-    person("Mohamed", "Hanine", email = "m.hanine.ensaj@gmail.com", role = "rev"),
-    person("Ali", "Kartit", email = "ali.kartit@gmail.com", role = "ths"),
-    person("Tarik", "Agouti", email = "tarik.agouti@gmail.com", role = "rev"))
+    person("Mohamed", "El-Moussaoui", email = "med.elmoussaoui.ced@gmail.com", role = c("aut", "cre")))
 Maintainer: The package maintainer <me.elmoussaoui@gmail.com>
 Description: ARLClustering is an R package designed for community detection in networks using Association Rules Mining (ARM) techniques. It provides functions to preprocess network data, generate association rules, and identify clusters within the network based on these rules. The package aims to facilitate advanced data science research in the field of social network analysis by leveraging ARM methodologies for community detection.
 License: GPL-3
