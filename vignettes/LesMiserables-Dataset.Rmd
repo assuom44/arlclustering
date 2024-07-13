@@ -1,0 +1,110 @@
+---
+title: "ARLClustering - Testing LesMiserables dataset"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ARLClustering - Testing LesMiserables dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(arlclustering)
+```
+
+## Dataset description
+The LesMiserables network dataset is provided as a gml file, containing 77 nodes and 254 edges.
+
+
+## Loading network dataset
+
+```{r}
+dataset_path <- system.file("extdata", "lesmiserables.gml", package = "arlclustering")
+if (dataset_path == "") {
+  stop("lesmiserables.gml file not found in the package")
+}
+
+g <- arlc_get_network_dataset(dataset_path, "LesMiserables")
+```
+
+## Generate Transactions
+
+Next, we generate transactions from the graph.
+
+```{r}
+transactions <- arlc_gen_transactions(g$graph)
+head(transactions)
+```
+
+## Get Apriori Thresholds
+
+We obtain the apriori thresholds for the generated transactions.
+
+```{r}
+params <- arlc_get_apriori_thresholds(transactions,
+                                      supportRange = seq(0.04, 0.06, by = 0.01),
+                                      Conf = 0.5)
+print ("Apriori parameters ")
+paste0 ("  - Minimum Support: ", params$minSupp)
+paste0 ("  - Rules lenght   : ", params$lenRules)
+paste0 ("  - Ratio          : ", params$ratio)
+
+```
+
+## Generate Gross Rules
+
+We use the obtained parameters to generate gross rules.
+
+```{r}
+minLenRules <- 1
+maxLenRules <- params$lenRules
+if (!is.finite(maxLenRules) || maxLenRules > 5*length(transactions)) {
+  maxLenRules <- 5*length(transactions)
+}
+
+grossRules <- arlc_gen_gross_rules(transactions,
+                                   minSupp = params$minSupp,
+                                   minConf = params$minConf,
+                                   minLenRules = minLenRules+1,
+                                   maxLenRules = maxLenRules)
+
+```
+
+## Filter Significant and Non-Redundant Rules
+
+We filter out redundant rules from the generated gross rules. Next, we filter out non-significant rules from the non-redundant rules.
+
+```{r}
+NonRedRules <- arlc_get_NonR_rules(grossRules$GrossRules)
+NonRSigRules <- arlc_get_significant_rules(transactions,
+                                           NonRedRules$FiltredRules)
+```
+
+## Clean and genarate final Rules
+
+We clean the final set of rules to prepare for clustering. Then, we generate clusters based on the cleaned rules.
+
+```{r}
+cleanedRules <- arlc_clean_final_rules(NonRSigRules$FiltredRules)
+clusters <- arlc_generate_clusters(cleanedRules)
+
+```
+
+## Plot Clusters
+
+Finally, we visualize the identified clusters.
+
+```{r}
+arlc_clusters_plot(g$graph,
+                   g$graphLabel,
+                   clusters$Clusters)
+
+```
+
+
