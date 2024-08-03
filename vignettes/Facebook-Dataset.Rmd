@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(arlclustering)
 ```
+
 ## Dataset description
 The Facebook social network dataset is a gml file, containing 337 nodes and 2531 edges.
 

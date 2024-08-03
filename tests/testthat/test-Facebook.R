@@ -9,9 +9,9 @@ library(ggplot2)
 
 test_that("Facebook Network Analysis", {
   # Define the path to the dataset
-  dataset_path <- system.file("extdata", "facebook.gml", package = "arlclustering")
+  dataset_path <- system.file("extdata", "Facebook_fiends.gml", package = "arlclustering")
   if (dataset_path == "") {
-    stop("facebook.gml file not found in the package")
+    stop("Facebook_fiends.gml file not found in the package")
   }
   # Ensure the file exists
   expect_true(file.exists(dataset_path))
@@ -20,7 +20,7 @@ test_that("Facebook Network Analysis", {
 
   # Load the network dataset
   timings[["Load Network"]] <- microbenchmark(
-    g <- arlc_get_network_dataset(dataset_path, "Facebook"),
+    g <- arlc_get_network_dataset(dataset_path, "Facebook Friends"),
     times = 1
   )
 
@@ -40,7 +40,7 @@ test_that("Facebook Network Analysis", {
   # Get apriori thresholds
   timings[["Get Apriori Thresholds"]] <- microbenchmark(
     params <- arlc_get_apriori_thresholds(transactions,
-                                          supportRange = seq(0.05, 0.06, by = 0.01),
+                                          supportRange = seq(0.04, 0.05, by = 0.01),
                                           0.5),
     times = 1
   )
