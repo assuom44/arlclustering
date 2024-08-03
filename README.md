@@ -15,6 +15,7 @@ output: html_document
     -   LesMiserables social network: N=77; E=254
     -   Word Adjacencies social network: N=112; E=425
     -   Chan Facebook social network: N=374; E=2986
+    -   Facebook Organization L1: N=5793; E=45266
     -   NetScience network: N=1589; E=2742
     -   Facebook social network: N=362; E=1988
 -   **Step-by-Step Implementation**: Guides users through the entire process, from loading the network dataset to identifying potential clusters.

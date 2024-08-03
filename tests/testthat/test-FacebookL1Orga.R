@@ -7,11 +7,11 @@ library(arules)
 library(microbenchmark)
 library(ggplot2)
 
-test_that("Facebook Friends Network Analysis", {
+test_that("Facebook Organisation (L1) Network Analysis", {
   # Define the path to the dataset
-  dataset_path <- system.file("extdata", "Facebook_fiends.gml", package = "arlclustering")
+  dataset_path <- system.file("extdata", "Facebook_Org_L1.gml", package = "arlclustering")
   if (dataset_path == "") {
-    stop("Facebook_fiends.gml file not found in the package")
+    stop("Facebook_Org_L1.gml file not found in the package")
   }
   # Ensure the file exists
   expect_true(file.exists(dataset_path))
@@ -20,7 +20,7 @@ test_that("Facebook Friends Network Analysis", {
 
   # Load the network dataset
   timings[["Load Network"]] <- microbenchmark(
-    g <- arlc_get_network_dataset(dataset_path, "Facebook Friends"),
+    g <- arlc_get_network_dataset(dataset_path, "Facebook L1 Organisation"),
     times = 1
   )
 
