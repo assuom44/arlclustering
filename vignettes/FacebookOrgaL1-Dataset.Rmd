@@ -1,8 +1,8 @@
 ---
-title: "ARLClustering - Testing Facebook Friends dataset"
+title: "ARLClustering - Testing Facebook L1 Organization dataset"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{ARLClustering - Testing Facebook Friends dataset}
+  %\VignetteIndexEntry{ARLClustering - Testing Facebook L1 Organization dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,18 +19,18 @@ library(arlclustering)
 ```
 
 ## Dataset description
-The Facebook Friends social network dataset is a gml file, containing 362 nodes and 1988 edges.
+The Facebook L1 organization social network dataset is a gml file, containing 5793 nodes and 45266 edges.
 
 
 ## Loading network dataset
 
 ```{r}
-dataset_path <- system.file("extdata", "Facebook_fiends.gml", package = "arlclustering")
+dataset_path <- system.file("extdata", "Facebook_Org_L1.gml", package = "arlclustering")
 if (dataset_path == "") {
-  stop("Facebook_fiends.gml file not found in the package")
+  stop("Facebook_Org_L1.gml file not found in the package")
 }
 
-g <- arlc_get_network_dataset(dataset_path, "Facebook Friends")
+g <- arlc_get_network_dataset(dataset_path, "Facebook L1 Organization")
 ```
 
 ## Generate Transactions
@@ -48,7 +48,7 @@ We obtain the apriori thresholds for the generated transactions.
 
 ```{r}
 params <- arlc_get_apriori_thresholds(transactions,
-                                      supportRange = seq(0.04, 0.05, by = 0.01),
+                                      supportRange = seq(0.002, 0.003, by = 0.001),
                                       Conf = 0.5)
 print ("Apriori parameters ")
 paste0 ("  - Minimum Support: ", params$minSupp)

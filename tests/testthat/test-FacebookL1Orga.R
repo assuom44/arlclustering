@@ -40,7 +40,7 @@ test_that("Facebook Organisation (L1) Network Analysis", {
   # Get apriori thresholds
   timings[["Get Apriori Thresholds"]] <- microbenchmark(
     params <- arlc_get_apriori_thresholds(transactions,
-                                          supportRange = seq(0.04, 0.05, by = 0.01),
+                                          supportRange = seq(0.002, 0.003, by = 0.001),
                                           0.5),
     times = 1
   )
