@@ -19,6 +19,7 @@
 #' # Generate gross rules
 #' arlc_gen_gross_rules(transactions, minSupp = 0.1, minConf = 0.5, minLenRules = 1, maxLenRules = 3)
 #' }
+#' @importFrom arules apriori
 #' @export
 
 arlc_gen_gross_rules <- function(transactions, minSupp, minConf, minLenRules, maxLenRules) {
@@ -36,12 +37,12 @@ arlc_gen_gross_rules <- function(transactions, minSupp, minConf, minLenRules, ma
   #   maxLenRules <- length(transactions)
   # }
   # Execute Apriori algorithm with specified parameters
-  gross_rules <- apriori(transactions,
-                         parameter = list(support = as.numeric(minSupp),
-                                          confidence = as.numeric(minConf),
-                                          minlen = as.numeric(minLenRules),
-                                          maxlen = as.numeric(maxLenRules)),
-                         target = "rules")
+  gross_rules <- arules::apriori(transactions,
+                                 parameter = list(support = as.numeric(minSupp),
+                                                  confidence = as.numeric(minConf),
+                                                  minlen = as.numeric(minLenRules),
+                                                  maxlen = as.numeric(maxLenRules)),
+                                 target = "rules")
 
   # Compute the total number of gross rules with length filter
   total_rules_with_length_filter <- length(gross_rules)

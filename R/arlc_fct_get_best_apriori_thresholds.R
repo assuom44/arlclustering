@@ -55,7 +55,7 @@ arlc_fct_get_best_apriori_thresholds <- function(transactions, support_range, co
   for (support in support_range) {
     #for (confidence in confidence_range) {
       # Run Apriori algorithm with the current support and confidence
-      gross_rules <- apriori(
+      gross_rules <- arules::apriori(
         transactions,
         parameter = list(support=support, confidence=conf),
         target = "rules",

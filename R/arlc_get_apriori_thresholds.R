@@ -32,7 +32,6 @@
 #' print(result)
 #' }
 #'
-#' @importFrom arules apriori
 #' @export
 
 arlc_get_apriori_thresholds <- function(trx, supportRange, Conf) {

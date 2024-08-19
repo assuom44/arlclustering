@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' library(arules)
-#' data("Groceries")
-#' rules <- apriori(Groceries, parameter = list(supp = 0.01, conf = 0.5))
+#' library(arlclustering)
+#' rules <- apriori(transactions, parameter = list(supp = 0.01, conf = 0.5))
 #' non_redundant_rules <- arlc_get_NonR_rules(rules)
 #' }
 #' @importFrom arules is.redundant

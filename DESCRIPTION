@@ -1,7 +1,7 @@
 Package: arlclustering
 Type: Package
 Title: Package for community detection in social network analysis
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
     person("Mohamed", "El-Moussaoui", email = "med.elmoussaoui.ced@gmail.com", role = c("aut", "cre")))
 Maintainer: Mohamed El-MOUSSAOUI <med.elmoussaoui.ced@gmail.com>

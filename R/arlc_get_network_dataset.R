@@ -38,7 +38,7 @@ arlc_get_network_dataset <- function(file_path, label) {
   # Attempt to read the GML file
   tryCatch({
     # Load the graph from the GML file
-    graphG <- read.graph(file = file_path, format = "gml")
+    graphG <- igraph::read.graph(file = file_path, format = "gml")
 
     # Assign names to the vertices
     graphG$names <- V(graphG)

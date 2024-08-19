@@ -1,0 +1,98 @@
+# test_arlc_utils.R
+
+library(testthat)
+#library(arlc_utils) # Adjust this if your package name is different
+
+test_that("arlc_is_numeric_vector works correctly", {
+  expect_true(arlc_is_numeric_vector(c(1, 2, 3)))
+  expect_false(arlc_is_numeric_vector(c(1, "a", 3)))
+  expect_false(arlc_is_numeric_vector(c("a", "b", "c")))
+})
+
+test_that("arlc_log_message logs messages correctly", {
+  log_file <- tempfile()
+  arlc_log_message("Test message", log_file)
+  log_contents <- readLines(log_file)
+  expect_equal(log_contents, "Test message")
+  unlink(log_file)
+})
+
+test_that("arlc_measure_time measures execution time", {
+  result <- arlc_measure_time(Sys.sleep, 1)
+  expect_equal(result, NULL)
+})
+
+test_that("arlc_list_to_df converts list to data frame correctly", {
+  lst <- list(a = c(x = 1, y = 2), b = c(x = 3, y = 4))
+  df <- arlc_list_to_df(lst)
+  expected_df <- data.frame(x = c(1, 3), y = c(2, 4), stringsAsFactors = FALSE)
+  rownames(expected_df) <- c("a", "b")
+  expect_equal(df, expected_df)
+})
+
+test_that("arlc_generate_uid generates unique identifiers", {
+  uid1 <- arlc_generate_uid()
+  uid2 <- arlc_generate_uid()
+  expect_equal(nchar(uid1), 10)
+  expect_true(uid1 != uid2)
+})
+
+test_that("arlc_file_exists_readable checks file existence and readability", {
+  test_file <- tempfile()
+  file.create(test_file)
+  expect_true(arlc_file_exists_readable(test_file))
+  unlink(test_file)
+})
+
+test_that("arlc_count_na counts NA values correctly", {
+  df <- data.frame(a = c(1, NA, 3), b = c(NA, NA, 3))
+  expect_equal(arlc_count_na(df), c(a = 1, b = 2))
+})
+
+test_that("arlc_replace_na replaces NA values correctly", {
+  vec <- c(1, NA, 3)
+  df <- data.frame(a = c(1, NA, 3), b = c(NA, NA, 3))
+  expect_equal(arlc_replace_na(vec, 0), c(1, 0, 3))
+  expect_equal(arlc_replace_na(df, 0), data.frame(a = c(1, 0, 3), b = c(0, 0, 3), stringsAsFactors = FALSE))
+})
+
+test_that("arlc_normalize_vector normalizes a vector correctly", {
+  vec <- c(1, 2, 3, 4, 5)
+  normalized_vec <- arlc_normalize_vector(vec)
+  expect_equal(normalized_vec, c(0, 0.25, 0.5, 0.75, 1))
+})
+
+test_that("arlc_calculate_mode calculates mode correctly", {
+  vec <- c(1, 2, 2, 3, 4)
+  expect_equal(arlc_calculate_mode(vec), 2)
+})
+
+test_that("arlc_df_summary creates a summary correctly", {
+  df <- data.frame(a = c(1, 2, 3, 4, 5), b = c(5, 4, 3, 2, 1))
+  summary_df <- arlc_df_summary(df)
+  expected_summary <- data.frame(
+    Column = c("a", "b"),
+    Count = c(5, 5),
+    Mean = c(3, 3),
+    Median = c(3, 3),
+    SD = c(1.58, 1.58),
+    stringsAsFactors = FALSE
+  )
+  rownames(expected_summary) <- c("a", "b")
+  expect_equal(summary_df, expected_summary, tolerance = 0.01)
+})
+
+
+test_that("arlc_convert_date_format converts date formats correctly", {
+  date_str <- "2023-01-01"
+  new_date <- arlc_convert_date_format(date_str, "%Y-%m-%d", "%d-%m-%Y")
+  expect_equal(new_date, "01-01-2023")
+})
+
+test_that("arlc_generate_date_sequence generates date sequences correctly", {
+  start_date <- "2023-01-01"
+  end_date <- "2023-01-10"
+  dates <- arlc_generate_date_sequence(start_date, end_date, "day")
+  expected_dates <- seq.Date(as.Date(start_date), as.Date(end_date), by = "day")
+  expect_equal(dates, expected_dates)
+})

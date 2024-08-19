@@ -17,7 +17,7 @@
 #' }
 #' @importFrom graphics legend par
 #' @importFrom grDevices rainbow
-#' @importFrom igraph plot.igraph layout_with_fr
+#' @import  igraph
 #' @export
 
 arlc_clusters_plot <- function(g, graphLabel, clusters) {
