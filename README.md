@@ -17,7 +17,7 @@ output: html_document
     -   Chan Facebook social network: N=374; E=2986
     -   Facebook L1 Organization: N=5793; E=45266
     -   NetScience network: N=1589; E=2742
-    -   Facebook social network: N=362; E=1988
+    -   Facebook Friend social network: N=362; E=1988
 -   **Step-by-Step Implementation**: Guides users through the entire process, from loading the network dataset to identifying potential clusters.
 
 ## **Overview**
@@ -102,15 +102,18 @@ params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.04, 0.05, by = 0.01), 0.5)
 
 -- WordAdjacency
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.03, 0.04, by = 0.01), 0.5)
 
 -- ChanFacebook
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.2, by = 0.1), 0.5)
 
 -- NetScience
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.003, 0.004, by = 0.001), 0.5)
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.011, 0.012, by = 0.001), 0.5)
 
--- Facebook
+-- Facebook-Freinds
+params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.04, 0.05, by = 0.01), 0.5)
+
+-- Facebook-L1-Organization
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.05, 0.06, by = 0.01), 0.5)
 ```
 
