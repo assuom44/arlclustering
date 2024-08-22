@@ -8,7 +8,6 @@ Maintainer: Mohamed El-MOUSSAOUI <med.elmoussaoui.ced@gmail.com>
 Description: This R package is designed for community detection in social networks using Association Rules Mining (ARM) techniques. It provides functions to preprocess network data, generate association rules, and identify clusters within the network based on these rules. The package aims to facilitate advanced data science research in the field of social network analysis by leveraging ARM methodologies for community detection.
 License: GPL-3
 Encoding: UTF-8
-LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Suggests: 
