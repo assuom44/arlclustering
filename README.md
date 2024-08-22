@@ -14,7 +14,6 @@ output: html_document
     -   Dolphins social network: N=62; E=159
     -   LesMiserables social network: N=77; E=254
     -   Word Adjacencies social network: N=112; E=425
-    -   Chan Facebook social network: N=374; E=2986
     -   Facebook L1 Organization: N=5793; E=45266
     -   NetScience network: N=1589; E=2742
     -   Facebook Friend social network: N=362; E=1988
@@ -73,14 +72,14 @@ g <- arlc_get_network_dataset(dataset_path, "LesMiserables Network")
 dataset_path <- system.file("extdata", "word_adjacencies.gml", package = "arlclustering")
 g <- arlc_get_network_dataset(dataset_path, "Word Adjacencies Network")
 
-dataset_path <- system.file("extdata", "ChanFacebook.gml", package = "arlclustering")
-g <- arlc_get_network_dataset(dataset_path, "Chan Facebook Network")
-
 dataset_path <- system.file("extdata", "netscience.gml", package = "arlclustering")
 g <- arlc_get_network_dataset(dataset_path, "NetScience Network")
 
-dataset_path <- system.file("extdata", "facebook.gml", package = "arlclustering")
-g <- arlc_get_network_dataset(dataset_path, "Facebook Network")
+dataset_path <- system.file("extdata", "Facebook_fiends.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "Facebook-friends Network")
+
+dataset_path <- system.file("extdata", "Facebook_Org_L1.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(dataset_path, "Facebook-L1-org Network")
 ```
 
 Generating the transactions into the variable trx:
@@ -103,9 +102,6 @@ params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.04, 0.05, by = 0
 
 -- WordAdjacency
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.03, 0.04, by = 0.01), 0.5)
-
--- ChanFacebook
-params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.1, 0.2, by = 0.1), 0.5)
 
 -- NetScience
 params <- arlc_get_apriori_thresholds(trx, supportRange = seq(0.011, 0.012, by = 0.001), 0.5)

@@ -23,7 +23,11 @@ The Karate Club social network dataset is provided as a gml file, containing 34 
 
 
 ## Loading network dataset
-
+## Loading network dataset
+- Graph Label    : Karate Club Network
+- Total Nodes    : 34
+- Total Edges    : 78
+- Average Degree : 4.588235
 ```{r}
 # Start the timer
 t1 <- system.time({
@@ -34,8 +38,10 @@ t1 <- system.time({
   }
   
   g <- arlc_get_network_dataset(dataset_path, "Karate Club")
-  vcount(g$graph)
-  ecount(g$graph)
+  g$graphLabel
+  g$totalNodes
+  g$totalEdges
+  g$averageDegree
 })
 
 # Display the total processing time
