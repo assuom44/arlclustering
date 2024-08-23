@@ -16,7 +16,6 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(arlclustering)
-library(igraph)
 ```
 
 ## Dataset description
@@ -122,7 +121,7 @@ t5 <- system.time({
   NonRedRules <- arlc_get_NonR_rules(grossRules$GrossRules)
   NonRSigRules <- arlc_get_significant_rules(transactions,
                                              NonRedRules$FiltredRules)
-  NonRSigRules$TotFiltredRules
+  #NonRSigRules$TotFiltredRules
 })
 # Display the total number of clusters and the total processing time
 cat("\nClearing rules Processing Time: ", t5["elapsed"], " seconds\n")
@@ -136,7 +135,7 @@ We clean the final set of rules to prepare for clustering. Then, we generate clu
 t6 <- system.time({
   cleanedRules <- arlc_clean_final_rules(NonRSigRules$FiltredRules)
   clusters <- arlc_generate_clusters(cleanedRules)
-  clusters$TotClusters
+  #clusters$TotClusters
 })
 # Display the total number of clusters and the total processing time
 cat("Cleaning final rules Processing Time: ", t6["elapsed"], " seconds\n")
