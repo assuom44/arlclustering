@@ -1,7 +1,6 @@
 # test_arlc_clusters_plot.R
 
 library(testthat)
-library(igraph)
 library(arlclustering)
 
 # Load example data
@@ -23,39 +22,25 @@ NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
 cleaned_rules <- arlc_clean_final_rules(NonRRSig_rules$FiltredRules)
 clusters <- arlc_generate_clusters(cleaned_rules)
 
-
-
-
-# test_that("arlc_clusters_plot works with a small graph", {
-#   g <- g$graph
-#   expect_output(arlc_clusters_plot(g, "Sample Graph", clusters), "Total Identified Clusters:  2")
-#   expect_output(arlc_clusters_plot(g, "Sample Graph", clusters), "Community 01: 1 2 3 4 5")
-#   expect_output(arlc_clusters_plot(g, "Sample Graph", clusters), "Community 02: 6 7 8 9 10")
-# })
-#
-# test_that("arlc_clusters_plot handles empty clusters", {
-#   g <- g$graph
-#   clusters <- list()
-#   expect_output(arlc_clusters_plot(g, "Sample Graph", clusters), "Total Identified Clusters:  0")
-# })
-#
-# test_that("arlc_clusters_plot handles a single cluster", {
-#   g <- g$graph
-#   clusters <- list(1:10)
-#   expect_output(arlc_clusters_plot(g, "Sample Graph", clusters), "Total Identified Clusters:  1")
-#   expect_output(arlc_clusters_plot(g, "Sample Graph", clusters), "Community 01: 1 2 3 4 5 6 7 8 9 10")
-# })
-
 test_that("arlc_clusters_plot plots: generates a set of communities", {
 
-  # Run the function to ensure it processes without error
-  expect_error({
-    arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters)
-  }, NA)
+  # Checking inputs
+  expect_type(g$graph, "list")
+  expect_s3_class(g$graph, "igraph")
+  expect_equal(g$graphLabel, "Karate Club Network")
+  expect_equal(g$totalNodes, vcount(g$graph))
+  expect_equal(g$totalNodes, 34)
+  expect_equal(g$totalEdges, gsize(g$graph))
+  expect_equal(g$totalEdges, 78)
+  expect_equal(g$averageDegree, mean(degree(g$graph)))
+  expect_true(all(c("graph", "graphLabel", "totalNodes", "totalEdges", "averageDegree") %in% names(g)))
+
+  # Run the function
+
   # Capture the console output
-  output <- capture.output({
-    arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters)
-  })
+  output <- capture.output({ arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters) })
+
+
   # Check that the output contains some key words:
   expect_true(any(grepl("Total Identified Clusters:", output)))
   expect_true(any(grepl("Community", output)))
@@ -65,11 +50,13 @@ test_that("arlc_clusters_plot plots: generates a set of communities", {
   expect_true(is.list(clusters$Clusters))
 
   # Check that the clusters list is not empty
-  expect_true(length(clusters$Clusters) > 0)
-  expect_true(length(clusters$Clusters) == clusters$TotClusters)
+  expect_true(length(clusters$Clusters) == 12)
 
   # Check that each element of the list is not empty
   expect_true(all(sapply(clusters$Clusters, length) > 0))
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters), NA)
 })
 
 

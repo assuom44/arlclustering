@@ -23,7 +23,8 @@ This function loads a network dataset from a specified GML file and computes bas
 }
 \examples{
 \dontrun{
-loaded_karate <- arlc_get_network_dataset("inst/extdata/karate.gml", "Karate Club")
+file_path <- system.file("extdata", "karate.gml", package = "arlclustering")
+loaded_karate <- arlc_get_network_dataset(file_path, "Karate Club")
 print(loaded_karate$graph)
 print(loaded_karate$graphLabel)
 print(loaded_karate$totalEdges)

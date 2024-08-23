@@ -22,18 +22,25 @@ NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
 cleaned_rules <- arlc_clean_final_rules(NonRRSig_rules$FiltredRules)
 
 
-
 # Test that arlc_generate_clusters works as expected
-test_that("arlc_generate_clusters works correctly", {
+test_that("arlc_generate_clusters function works correctly", {
+
+  # Checking inputs
+  expect_type(cleaned_rules, "list")
 
   # Generate clusters
   clusters <- arlc_generate_clusters(cleaned_rules)
 
-  # Check that the output is a list with the correct structure
+  # Test that the function returns
   expect_type(clusters, "list")
-  expect_named(clusters, c("TotClusters", "Clusters"))
+  expect_equal(clusters$TotClusters, 12) # Check the number of clusters
+  expect_type(clusters$Clusters, "list")
 
-  # Check the number of clusters
-  expect_equal(clusters$TotClusters, 12)
+  # Check that the output is a list with the correct structure
+  expect_named(clusters, c("TotClusters", "Clusters"))
+  expect_true(all(c("TotClusters", "Clusters") %in% names(clusters)))
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_generate_clusters(cleaned_rules), NA)
 
 })

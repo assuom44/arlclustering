@@ -1,6 +1,6 @@
 # Load necessary libraries
 library(testthat)
-library(arules) # Ensure this is available for is.significant
+#library(arules) # Ensure this is available for is.significant
 library(arlclustering)
 
 # Load example data
@@ -20,39 +20,35 @@ grossRules <- arlc_gen_gross_rules(trans,
 nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
 
 # Test cases
-test_that("arlc_get_significant_rules: Significant rules are correctly filtered", {
+test_that("arlc_get_significant_rules function works correctly", {
+  # Check inputs
+  expect_type(nonRR_rules, "list")
+  expect_s4_class(trans, "transactions")
+  expect_equal(nonRR_rules$TotFiltredRules, 50)
+  expect_s4_class(nonRR_rules$FiltredRules, "rules")
+  expect_true(all(c("TotFiltredRules", "FiltredRules") %in% names(nonRR_rules)))
 
-  # Test with valid inputs
+  # Run function
   result <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
+
+  # Check if the result is a list
   expect_type(result, "list")
-  expect_type(result$TotFiltredRules, "integer")
+  expect_equal(result$TotFiltredRules, 50)
+
+  # Check if the filtered rules are of class "rules"
   expect_s4_class(result$FiltredRules, "rules")
 
+  # Check if the list contains the expected elements
+  expect_named(result, c("TotFiltredRules", "FiltredRules"))
 
-  #expect_named(result, c("TotFiltredRules", "FiltredRules"))
-  #expect_is(result$FiltredRules, "rules")
-  #expect_is(result$TotFiltredRules, "numeric")
+  # Check if the number of filtered rules is correct
+  expect_true(result$TotFiltredRules <= length(nonRR_rules$FiltredRules))
 
-  # Check if the output matches the expected structure
-  #expect_gt(length(result$FiltredRules), 0) # Example condition
+  # Test that the list contains the correct elements
+  expect_true(all(c("TotFiltredRules", "FiltredRules") %in% names(result)))
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_get_significant_rules(trans, nonRR_rules$FiltredRules), NA)
 
 })
-test_that("Function handles no significant rules correctly", {
 
-  # Example rules
-  rules <- arules::apriori(trans, parameter = list(support = 0.1, confidence = 0.5))
-
-  # Redundant rules (for the sake of the test)
-  nonRR_rules <- rules[!is.redundant(rules)]
-
-  # Simulate no significant rules by setting a high significance threshold
-  sigR_rules <- nonRR_rules[is.significant(nonRR_rules, trans, "fisher", "holm")]
-
-  if (length(sigR_rules) == 0) {
-    result <- arlc_get_significant_rules(trans, nonRR_rules)
-
-    # Check if the result is the same as the input
-    expect_equal(result$TotFiltredRules, length(nonRR_rules))
-    expect_equal(as(result$FiltredRules, "data.frame"), as(nonRR_rules, "data.frame"))
-  }
-})

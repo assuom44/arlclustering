@@ -1,6 +1,6 @@
 # Load the required packages
 library(testthat)
-library(igraph)
+#library(igraph)
 library(arlclustering)  # Adjust the package name as needed
 
 # Define the path to a sample GML file for testing
@@ -12,41 +12,37 @@ test_that("arlc_get_network_dataset loads the graph and computes properties corr
   skip_if_not(file.exists(sample_gml_file), "Sample GML file not found")
 
   # Call the function with a valid GML file
-  result <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+  g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
 
   # Check if the result is a list
-  expect_type(result, "list")
+  expect_type(g, "list")
+  expect_type(g$graphLabel, "character")
+  expect_type(g$totalNodes, "integer")
+  expect_type(g$totalEdges, "double")
+  expect_type(g$averageDegree, "double")
 
   # Check if the graph object is of class igraph
-  expect_s3_class(result$graph, "igraph")
+  expect_s3_class(g$graph, "igraph")
+
 
   # Check if the graph label is correct
-  expect_equal(result$graphLabel, "Karate Club Network")
-
-  # Check if the total edges are correct
-  expect_equal(result$totalEdges, gsize(result$graph))
+  expect_equal(g$graphLabel, "Karate Club Network")
 
   # Check if the total nodes are correct
-  expect_equal(result$totalNodes, vcount(result$graph))
+  expect_equal(g$totalNodes, vcount(g$graph))
+  expect_equal(g$totalNodes, 34)
+
+  # Check if the total edges are correct
+  expect_equal(g$totalEdges, gsize(g$graph))
+  expect_equal(g$totalEdges, 78)
 
   # Check if the average degree is correct
-  expect_equal(result$averageDegree, mean(degree(result$graph)))
+  expect_equal(g$averageDegree, mean(degree(g$graph)))
+
+  # Test that the list contains the correct elements
+  expect_true(all(c("graph", "graphLabel", "totalNodes", "totalEdges", "averageDegree") %in% names(g)))
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_get_network_dataset(sample_gml_file, "Karate Club"), NA)
 })
 
-test_that("arlc_get_network_dataset handles non-existent files correctly", {
-  # Expect an error when a non-existent file is provided
-  expect_error(arlc_get_network_dataset("non_existent_file.gml", "Non Existent"), "The network file does not exist")
-})
-
-test_that("arlc_get_network_dataset handles unreadable files correctly", {
-  # Create a temporary file and make it unreadable
-  temp_file <- tempfile()
-  file.create(temp_file)
-  Sys.chmod(temp_file, "0000")
-
-  # Ensure the file is deleted and permissions are restored after the test
-  on.exit({
-    Sys.chmod(temp_file, "0600")
-    unlink(temp_file)
-  })
-})

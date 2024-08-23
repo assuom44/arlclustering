@@ -23,11 +23,16 @@
 arlc_clusters_plot <- function(g, graphLabel, clusters) {
   # Display obtained clusters
   cat ("Total Identified Clusters: ", length(clusters))
-  cat ("\n =========================  ")
+  #cat ("\n =========================  ")
+  output <- NULL
+  output <- paste0(output, "=========================  ", "\n")
   for (i in 1:length(clusters)) {
-    cat("\n  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "))
+    #cat("\n  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "))
+    output <- paste0(output, "  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "), "\n")
   }
-  cat ("\n =========================  ")
+  #cat ("\n =========================  ")
+  output <- paste0(output, "=========================  ", "\n")
+  return (output)
 
   if (vcount (g) <= 100)
   {
