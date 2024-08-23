@@ -3,24 +3,22 @@ library(testthat)
 #library(arules) # Ensure this is available for is.significant
 library(arlclustering)
 
-# Load example data
-sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
-g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
-trans <- arlc_gen_transactions(g$graph)
-# Define support and confidence ranges
-supportRange <- seq(0.1, 0.2, by = 0.1)
-Conf <- 0.5
-# Getting parameters
-params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
-grossRules <- arlc_gen_gross_rules(trans,
-                                   params$minSupp,
-                                   params$minConf,
-                                   1,
-                                   params$lenRules)
-nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
 
 # Test cases
 test_that("arlc_get_significant_rules function works correctly", {
+  # Load example data
+  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+  g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+  trans <- arlc_gen_transactions(g$graph)
+  # Define support and confidence ranges
+  supportRange <- seq(0.1, 0.2, by = 0.1)
+  Conf <- 0.5
+  # Getting parameters
+  params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
+  grossRules <- arlc_gen_gross_rules(trans, params$minSupp, params$minConf, 1, params$lenRules)
+  nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
+
+
   # Check inputs
   expect_type(nonRR_rules, "list")
   expect_s4_class(trans, "transactions")

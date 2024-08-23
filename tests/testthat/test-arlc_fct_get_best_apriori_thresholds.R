@@ -2,18 +2,19 @@ library(testthat)
 #library(arules)
 library(arlclustering)
 
-# Load the Karate Club dataset from the arules package for testing
-# Load example data
-sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
-g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
-trans <- arlc_gen_transactions(g$graph)
-
-# Define support and confidence ranges for the tests
-supportRange <- seq(0.1, 0.2, by = 0.1)
-Conf <- 0.5
 
 # Define a test case for the function arlc_get_apriori_thresholds
 test_that("arlc_get_apriori_thresholds returns correct results", {
+  # Load the Karate Club dataset from the arules package for testing
+  # Load example data
+  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+  g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+  trans <- arlc_gen_transactions(g$graph)
+
+  # Define support and confidence ranges for the tests
+  supportRange <- seq(0.1, 0.2, by = 0.1)
+  Conf <- 0.5
+
 
   # Check inputs
   expect_s4_class(trans, "transactions")

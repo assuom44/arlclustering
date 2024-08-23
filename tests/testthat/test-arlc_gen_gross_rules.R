@@ -3,23 +3,23 @@
 library(testthat)
 library(arlclustering)
 
-# Load example data
-sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
-g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
-trans <- arlc_gen_transactions(g$graph)
-# Define support and confidence ranges
-supportRange <- seq(0.1, 0.2, by = 0.1)
-Conf <- 0.5
-# Getting parameters
-params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
-minSupp <- params$minSupp
-minConf <- params$minConf
-minLenRules <- 1
-maxLenRules <- params$lenRules
-
 
 test_that("arlc_gen_gross_rules function works correctly", {
-  # Checking inputs
+  # Load example data
+  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+  g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+  trans <- arlc_gen_transactions(g$graph)
+  # Define support and confidence ranges
+  supportRange <- seq(0.1, 0.2, by = 0.1)
+  Conf <- 0.5
+  # Getting parameters
+  params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
+  minSupp <- params$minSupp
+  minConf <- params$minConf
+  minLenRules <- 1
+  maxLenRules <- params$lenRules
+
+    # Checking inputs
   expect_true(is.numeric(as.numeric(params$minSupp)))
   expect_equal(params$minSupp, '0.1')
   expect_type(params$minSupp, "character")

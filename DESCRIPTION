@@ -16,13 +16,7 @@ Suggests:
     rmarkdown,
     tidyr
 Imports:
-    tools,
-    arulesViz,
-    Matrix,
     methods,
-    igraphdata,
-    dplyr,
-    ggplot2,
     igraph,
     arules,
     grDevices,

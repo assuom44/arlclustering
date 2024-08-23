@@ -3,11 +3,13 @@ library(testthat)
 #library(igraph)
 library(arlclustering)  # Adjust the package name as needed
 
-# Define the path to a sample GML file for testing
-sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+
 
 # Test cases for arlc_get_network_dataset
 test_that("arlc_get_network_dataset loads the graph and computes properties correctly", {
+  # Define the path to a sample GML file for testing
+  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+
   # Skip test if the sample GML file is not available
   skip_if_not(file.exists(sample_gml_file), "Sample GML file not found")
 

@@ -3,10 +3,11 @@ library(testthat)
 #library(arules)
 library (arlclustering)
 
-sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
-g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+
 
 test_that("arlc_gen_transactions returns a transactions object", {
+  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+  g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
 
   # Check inputs
   expect_type(g$graph, "list")

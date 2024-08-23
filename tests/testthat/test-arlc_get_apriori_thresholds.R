@@ -2,19 +2,23 @@
 library(testthat)
 library(arlclustering)
 
-
-# Load example data
-sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
-g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
-trans <- arlc_gen_transactions(g$graph)
-# Define support and confidence ranges
-supportRange <- seq(0.1, 0.2, by = 0.1)
-Conf <- 0.5
-
 # Define the test context
 test_that("arlc_get_apriori_thresholds function works correctly", {
+  # Load example data
+  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+  g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+  trans <- arlc_gen_transactions(g$graph)
+  # Define support and confidence ranges
+  supportRange <- seq(0.1, 0.2, by = 0.1)
+  Conf <- 0.5
+
 
   # Check inputs
+  expect_s4_class(trans, "transactions")
+  expect_type(Conf, "double")
+  expect_equal(supportRange, seq(0.1, 0.2, by = 0.1))
+  expect_equal(Conf, 0.5)
+
 
   # Run the function
   result <- arlc_get_apriori_thresholds(trans,

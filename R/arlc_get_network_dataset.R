@@ -57,10 +57,10 @@ arlc_get_network_dataset <- function(file_path, label) {
     return(list(
       graph = graphG,
       graphLabel = graph_label,
-      totalEdges = total_edges,
-      graphEdges = graphG$edges,
       totalNodes = total_nodes,
+      totalEdges = total_edges,
       graphNodes = graphG$names,
+      graphEdges = graphG$edges,
       averageDegree = average_degree
     ))
   }, error = function(e) {
