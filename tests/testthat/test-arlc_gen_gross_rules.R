@@ -59,6 +59,6 @@ test_that("arlc_gen_gross_rules function works correctly", {
   expect_true(all(length(result$GrossRules) <= maxLenRules))
 
   # Check that the function runs without error for different inputs
-  expect_error(arlc_gen_gross_rules(trans, minSupp, minConf, minLenRules, maxLenRules), NA)
+  expect_error(capture.output({ result <- arlc_gen_gross_rules(trans, minSupp, minConf, minLenRules, maxLenRules) }), NA)
 })
 
