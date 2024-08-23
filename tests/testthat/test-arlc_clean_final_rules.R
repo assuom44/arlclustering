@@ -4,25 +4,16 @@ library(testthat)
 library(arlclustering)  # Adjust the package name as needed
 
 
-
-
-
 # Test cases for arlc_clean_final_rules
 test_that("arlc_clean_final_rules cleans the rules correctly", {
   # Load example data
-  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
   g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
   trans <- arlc_gen_transactions(g$graph)
-  # Define support and confidence ranges
   supportRange <- seq(0.1, 0.2, by = 0.1)
   Conf <- 0.5
-  # Getting parameters
-  params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
-  grossRules <- arlc_gen_gross_rules(trans,
-                                     params$minSupp,
-                                     params$minConf,
-                                     1,
-                                     params$lenRules)
+  capture.output({ params <- arlc_get_apriori_thresholds(trans, supportRange, Conf) })
+  capture.output({ grossRules <- arlc_gen_gross_rules(trans, params$minSupp, params$minConf, 1, params$lenRules) })
   nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
   NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
 
@@ -46,25 +37,3 @@ test_that("arlc_clean_final_rules cleans the rules correctly", {
   # Check that the function runs without error for different inputs
   expect_error(arlc_clean_final_rules(NonRRSig_rules$FiltredRules), NA)
 })
-
-# test_that("arlc_clean_final_rules handles empty input correctly", {
-#   # Create an empty rules object
-#   #empty_rules <- new("rules")
-#   empty_rules <- generate_rules(minS=0.8, pas=0.1)
-#
-#
-#   # Call the function with the empty rules object
-#   cleaned_rules <- arlc_clean_final_rules(empty_rules)
-#
-#   # Check if the result is an empty list
-#   expect_equal(cleaned_rules, list())
-# })
-
-
-# test_that("arlc_clean_final_rules handles malformed rules correctly", {
-#   # Manually create a malformed rules object
-#   malformed_rules <- new("rules")
-#
-#   # Expect an error when a malformed rules object is provided
-#   expect_error(arlc_clean_final_rules(malformed_rules), "argument is not a valid 'rules' object")
-# })

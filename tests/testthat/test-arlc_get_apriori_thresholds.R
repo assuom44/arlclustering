@@ -5,13 +5,11 @@ library(arlclustering)
 # Define the test context
 test_that("arlc_get_apriori_thresholds function works correctly", {
   # Load example data
-  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering") # Adjust as needed
+  sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
   g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
   trans <- arlc_gen_transactions(g$graph)
-  # Define support and confidence ranges
   supportRange <- seq(0.1, 0.2, by = 0.1)
   Conf <- 0.5
-
 
   # Check inputs
   expect_s4_class(trans, "transactions")
@@ -21,9 +19,7 @@ test_that("arlc_get_apriori_thresholds function works correctly", {
 
 
   # Run the function
-  result <- arlc_get_apriori_thresholds(trans,
-                                        supportRange,
-                                        Conf)
+  capture.output({ result <- arlc_get_apriori_thresholds(trans, supportRange, Conf) })
 
   # Test that the list contains the correct elements
   expect_named(result, c("minSupp", "minConf", "bestLift", "lenRules", "ratio"))

@@ -42,9 +42,7 @@ arlc_get_apriori_thresholds <- function(trx, supportRange, Conf) {
   len_rules <- 0.0
 
   # Get thresholds based on support and confidence ranges
-  output_list <- arlc_fct_get_best_apriori_thresholds( trx,
-                                                       supportRange,
-                                                       Conf) #, minLenRules, maxLenRules)
+  output_list <- arlc_fct_get_best_apriori_thresholds( trx, supportRange, Conf)
 
   # Assign values from output_list
   min_supp <- as.double(format(output_list[[1]], scientific = FALSE))

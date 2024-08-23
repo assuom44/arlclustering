@@ -1,11 +1,13 @@
 Package: arlclustering
 Type: Package
-Title: Package for community detection in social network analysis
+Title: Community detection Package based Association Rules Learning
 Version: 1.0.3
 Authors@R: c(
     person("Mohamed", "El-Moussaoui", email = "med.elmoussaoui.ced@gmail.com", role = c("aut", "cre")))
 Maintainer: Mohamed El-MOUSSAOUI <med.elmoussaoui.ced@gmail.com>
-Description: This R package is designed for community detection in social networks using Association Rules Mining (ARM) techniques. It provides functions to preprocess network data, generate association rules, and identify clusters within the network based on these rules. The package aims to facilitate advanced data science research in the field of social network analysis by leveraging ARM methodologies for community detection.
+Description: ARLClustering implements a new approach for community detection in social networks, using association rules Learning (ARL) technique. 
+The ARLClusetring package provides functions for preprocessing graph and rules datasets, generating association rules, and identify clusters within the network based on itsnodes interactions perspective. 
+This package aims to facilitate advanced data science research in the field of social network analysis, by leveraging ARL approach for community detection field.
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
