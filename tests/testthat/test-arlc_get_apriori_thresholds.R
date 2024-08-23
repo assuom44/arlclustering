@@ -37,16 +37,16 @@ test_that("arlc_get_apriori_thresholds function works correctly", {
 
   # Check if the values are numeric (or can be converted to numeric)
   expect_true(is.numeric(as.numeric(result$minSupp)))
-  expect_equal(result$minSupp, '0.1')
-  expect_type(result$minSupp, "character")
+  expect_equal(result$minSupp, 0.1)
+  expect_type(result$minSupp, "double")
 
   expect_true(is.numeric(as.numeric(result$minConf)))
-  expect_equal(result$minConf, '0.5')
-  expect_type(result$minConf, "character")
+  expect_equal(result$minConf, 0.5)
+  expect_type(result$minConf, "double")
 
   expect_true(is.numeric(as.numeric(result$bestLift)))
-  expect_equal(result$bestLift, '7')
-  expect_type(result$bestLift, "character")
+  expect_equal(result$bestLift, 7)
+  expect_type(result$bestLift, "double")
 
   expect_true(is.numeric(result$lenRules))
   expect_equal(result$lenRules, 66)

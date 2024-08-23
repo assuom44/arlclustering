@@ -39,7 +39,7 @@ arlc_get_network_dataset <- function(file_path, label) {
   # Attempt to read the GML file
   tryCatch({
     # Load the graph from the GML file
-    graphG <- igraph::read.graph(file = file_path, format = "gml")
+    graphG <- igraph::read_graph(file = file_path, format = "gml")
 
     # Assign names to the vertices
     graphG$names <- V(graphG)
@@ -57,8 +57,8 @@ arlc_get_network_dataset <- function(file_path, label) {
     return(list(
       graph = graphG,
       graphLabel = graph_label,
-      totalNodes = total_nodes,
-      totalEdges = total_edges,
+      totalNodes = as.integer(total_nodes),
+      totalEdges = as.integer(total_edges),
       graphNodes = graphG$names,
       graphEdges = graphG$edges,
       averageDegree = average_degree

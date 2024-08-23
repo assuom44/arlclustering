@@ -20,7 +20,7 @@ test_that("arlc_get_network_dataset loads the graph and computes properties corr
   expect_type(g, "list")
   expect_type(g$graphLabel, "character")
   expect_type(g$totalNodes, "integer")
-  expect_type(g$totalEdges, "double")
+  expect_type(g$totalEdges, "integer")
   expect_type(g$averageDegree, "double")
 
   # Check if the graph object is of class igraph

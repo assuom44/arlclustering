@@ -13,7 +13,7 @@
 #' g <- make_ring(10)
 #' trans <- arlc_gen_transactions(g)
 #' }
-#' @importFrom igraph get.adjacency
+#' @importFrom igraph as_adjacency_matrix
 #' @importFrom methods as
 #' @export
 
@@ -23,7 +23,7 @@ arlc_gen_transactions <- function(graph) {
   }
 
   # Convert the graph to an adjacency matrix
-  adjMat <- as.matrix(igraph::get.adjacency(graph))
+  adjMat <- as.matrix(igraph::as_adjacency_matrix(graph))
 
   # Convert the adjacency matrix to transactions
   transactions_list <- apply(adjMat, 1, function(row) {

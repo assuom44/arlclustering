@@ -21,16 +21,16 @@ test_that("arlc_gen_gross_rules function works correctly", {
 
     # Checking inputs
   expect_true(is.numeric(as.numeric(params$minSupp)))
-  expect_equal(params$minSupp, '0.1')
-  expect_type(params$minSupp, "character")
+  expect_equal(params$minSupp, 0.1)
+  expect_type(params$minSupp, "double")
 
   expect_true(is.numeric(as.numeric(params$minConf)))
-  expect_equal(params$minConf, '0.5')
-  expect_type(params$minConf, "character")
+  expect_equal(params$minConf, 0.5)
+  expect_type(params$minConf, "double")
 
   expect_true(is.numeric(as.numeric(params$bestLift)))
-  expect_equal(params$bestLift, '7')
-  expect_type(params$bestLift, "character")
+  expect_equal(params$bestLift, 7)
+  expect_type(params$bestLift, "double")
 
   expect_true(is.numeric(params$lenRules))
   expect_equal(params$lenRules, 66)

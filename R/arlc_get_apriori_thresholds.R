@@ -36,10 +36,10 @@
 
 arlc_get_apriori_thresholds <- function(trx, supportRange, Conf) {
   # Initialize variables
-  min_supp <- 0
-  min_conf <- 0
-  best_lift <- 0
-  len_rules <- 0
+  min_supp <- 0.0
+  min_conf <- 0.0
+  best_lift <- 0.0
+  len_rules <- 0.0
 
   # Get thresholds based on support and confidence ranges
   output_list <- arlc_fct_get_best_apriori_thresholds( trx,
@@ -47,10 +47,10 @@ arlc_get_apriori_thresholds <- function(trx, supportRange, Conf) {
                                                        Conf) #, minLenRules, maxLenRules)
 
   # Assign values from output_list
-  min_supp <- format(output_list[[1]], scientific = FALSE)
-  min_conf <- format(output_list[[2]], scientific = FALSE)
-  best_lift <-  format(output_list[[3]], scientific = FALSE)
-  len_rules <- output_list[[4]]
+  min_supp <- as.double(format(output_list[[1]], scientific = FALSE))
+  min_conf <- as.double(format(output_list[[2]], scientific = FALSE))
+  best_lift <-  as.double(format(output_list[[3]], scientific = FALSE))
+  len_rules <- as.double(output_list[[4]])
 
   ##print(paste('-- > Generated rules represent approximately ', round(lenRules / length(trx), digits = 0), ' times the total number of transactions'))
 
