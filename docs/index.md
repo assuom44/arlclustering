@@ -2,7 +2,7 @@
 
 This paper presents ARLClustering, an R package that introduces a novel approach for community detection in social networks using data mining techniques, particularly the Apriori algorithm. Building on the foundation of existing research, ARLClustering leverages association rules to identify and analyze meaningful communities based on node interactions. The package provides a suite of functions tailored for social network analysis and data mining, tested on various synthetic and real-world datasets such as the Karate Club, Dolphins, LesMiserables, and facebook networks. By addressing the gap in open-source implementations of association rule-based community detection, ARLClustering serves as a crucial tool for both researchers and practitioners. It bridges theoretical insights with practical utility, promoting advancements in methodologies for community detection in social networks.
 
-### Used Dataset
+## Used Dataset
 
 The used dataset for this research paper is a manual dataset representing a synthetic social network, based on interactions of users.
 
@@ -14,7 +14,7 @@ The used dataset for this research paper is a manual dataset representing a synt
 -   NetScience network: N=1589; E=2742
 -   Facebook Friend social network: N=362; E=1988.
 
-### Using the package
+## Using the package
 
 In order to use the package, you must first install it from this GitHub repo, which can be done using the `devtools` package:
 
@@ -22,6 +22,8 @@ In order to use the package, you must first install it from this GitHub repo, wh
 library(devtools)
 devtools::install_github('assuom44/arlclustering')
 ```
+
+### Network dataset preparation:
 
 Next, you must load the R package:
 
@@ -40,15 +42,19 @@ g <- arlc_get_network_dataset(file, "Label")
 | g\$totalEdges    | Total of edges in the graph |
 | g\$averageDegree | Average degree of the graph |
 
+### Generating transactions:
+
 ```         
 transactions <- arlc_gen_transactions(g$graph)
 ```
 
 **Table 2**: Summary of returned values by the function arlc_gen_transactions
 
-| Returned values | Description                            |
-|-----------------|----------------------------------------|
-| transactions    | A vector of unique transactional items |
+| Returned values | Description                             |
+|-----------------|-----------------------------------------|
+| transactions    | A vector of unique transactionnal items |
+
+### Association rules extraction:
 
 ```         
 params <- arlc_get_apriori_thresholds ( transactions,
@@ -80,6 +86,8 @@ grossRules <- arlc_gen_gross_rules ( transactions,
 |----------------------------------------|----------------------------|
 | grossRules\$TotalRulesWithLengthFilter | The total generated rules  |
 | grossRules\$GrossRules                 | The set of the gross rules |
+
+### Gross rules processing:
 
 ```         
 NonRedRules <- arlc_get_NonR_rules(grossRules$GrossRules)
@@ -113,6 +121,8 @@ cleanedRules <- arlc_clean_final_rules(NonRSigRules$FiltredRules)
 |-----------------|--------------------------|
 | cleanedRules    | The set of cleaned rules |
 
+### Community detection:
+
 ```         
 clusters <- arlc_generate_clusters(cleanedRules)
 ```
@@ -123,6 +133,8 @@ clusters <- arlc_generate_clusters(cleanedRules)
 |-----------------------|-----------------------------------------|
 | clusters\$TotClusters | The total number of identified clusters |
 | clusters\$Clusters    | The set of clusters                     |
+
+### Community Visualization:
 
 ```         
 plot <- arlc_clusters_plot(g$graph, g$graphLabel, c$Clusters)
