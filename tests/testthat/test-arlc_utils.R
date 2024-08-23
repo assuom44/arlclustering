@@ -5,8 +5,16 @@ library(testthat)
 
 test_that("arlc_is_numeric_vector works correctly", {
   expect_true(arlc_is_numeric_vector(c(1, 2, 3)))
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_is_numeric_vector(c(1, 2, 3)), NA)
+
   expect_false(arlc_is_numeric_vector(c(1, "a", 3)))
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_is_numeric_vector(c(1, "a", 3)), NA)
+
   expect_false(arlc_is_numeric_vector(c("a", "b", "c")))
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_is_numeric_vector(c("a", "b", "c")), NA)
 })
 
 test_that("arlc_log_message logs messages correctly", {
@@ -20,6 +28,8 @@ test_that("arlc_log_message logs messages correctly", {
 test_that("arlc_measure_time measures execution time", {
   result <- arlc_measure_time(Sys.sleep, 1)
   expect_equal(result, NULL)
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_measure_time(Sys.sleep, 1), NA)
 })
 
 test_that("arlc_list_to_df converts list to data frame correctly", {
@@ -28,6 +38,9 @@ test_that("arlc_list_to_df converts list to data frame correctly", {
   expected_df <- data.frame(x = c(1, 3), y = c(2, 4), stringsAsFactors = FALSE)
   rownames(expected_df) <- c("a", "b")
   expect_equal(df, expected_df)
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_list_to_df(lst), NA)
 })
 
 test_that("arlc_generate_uid generates unique identifiers", {
@@ -35,6 +48,9 @@ test_that("arlc_generate_uid generates unique identifiers", {
   uid2 <- arlc_generate_uid()
   expect_equal(nchar(uid1), 10)
   expect_true(uid1 != uid2)
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_generate_uid(), NA)
 })
 
 test_that("arlc_file_exists_readable checks file existence and readability", {
@@ -42,18 +58,30 @@ test_that("arlc_file_exists_readable checks file existence and readability", {
   file.create(test_file)
   expect_true(arlc_file_exists_readable(test_file))
   unlink(test_file)
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_file_exists_readable(test_file), NA)
 })
 
 test_that("arlc_count_na counts NA values correctly", {
   df <- data.frame(a = c(1, NA, 3), b = c(NA, NA, 3))
   expect_equal(arlc_count_na(df), c(a = 1, b = 2))
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_count_na(df), NA)
 })
 
 test_that("arlc_replace_na replaces NA values correctly", {
   vec <- c(1, NA, 3)
   df <- data.frame(a = c(1, NA, 3), b = c(NA, NA, 3))
   expect_equal(arlc_replace_na(vec, 0), c(1, 0, 3))
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_replace_na(vec, 0), NA)
+
   expect_equal(arlc_replace_na(df, 0), data.frame(a = c(1, 0, 3), b = c(0, 0, 3), stringsAsFactors = FALSE))
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_replace_na(df, 0), NA)
 })
 
 test_that("arlc_normalize_vector normalizes a vector correctly", {

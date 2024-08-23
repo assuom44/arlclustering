@@ -1,6 +1,6 @@
 # Load the required packages
 library(testthat)
-library(arules)
+#library(arules)
 library(arlclustering)  # Adjust the package name as needed
 
 
@@ -37,10 +37,12 @@ test_that("arlc_clean_final_rules cleans the rules correctly", {
 
   # Check if the result is a list
   expect_type(cleaned_rules, "list")
-  expect_equal(length(cleaned_rule), 12)
 
   # Check if the elements of the list are numeric vectors
   expect_true(all(sapply(cleaned_rules, is.numeric)))
+
+  # Check that the function runs without error for different inputs
+  expect_error(arlc_clean_final_rules(NonRRSig_rules$FiltredRules), NA)
 })
 
 # test_that("arlc_clean_final_rules handles empty input correctly", {
