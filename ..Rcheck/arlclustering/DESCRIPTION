@@ -2,7 +2,8 @@ Package: arlclustering
 Type: Package
 Title: Community Detection Package Based Association Rules Learning
 Version: 1.0.4
-Author: Mohamed El-Moussaoui
+Author: c(
+    person("Mohamed", "El-Moussaoui", email = "med.elmoussaoui.ced@gmail.com", role = c("aut", "cre")))
 Maintainer: Mohamed El-Moussaoui <med.elmoussaoui.ced@gmail.com>
 Description: This package implements a new approach for community detection in social networks, using Association Rules Learning technique. The package provides functions for processing graphs and rules objects, generating association rules, and detecting communities within the networks based on nodes interactions perspectives. This package aims to facilitate advanced data science research in the field of Social Network Analysis leveraging association rules learning approach for community detection field.
 License: GPL-3
@@ -13,17 +14,8 @@ LazyLoad: false
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Suggests: 
-    testthat (>= 3.0.0),
-    knitr,
-    rmarkdown,
-    tidyr
-Imports:
-    methods,
-    igraph,
-    arules,
-    grDevices,
-    graphics,
-    stats
+Suggests: testthat (>= 3.0.0), knitr, rmarkdown, tidyr
+Imports: methods, igraph, arules, grDevices, graphics, stats
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+Built: R 4.1.2; ; 2024-08-23 23:33:28 UTC; unix

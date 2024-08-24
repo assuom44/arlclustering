@@ -1,0 +1,35 @@
+arlc_calculate_mode     Calculate the Mode of a Vector
+arlc_clean_final_rules
+                        Clean Final Rules
+arlc_clusters_plot      Plot Graph with Custom Layout and Communities
+arlc_convert_date_format
+                        Convert a Date to a Different Format
+arlc_count_na           Count NA Values in a Data Frame
+arlc_df_summary         Create a Summary of a Data Frame
+arlc_fct_clean_transactions
+                        Clean Transactions by Removing Overlapping Sets
+arlc_fct_get_best_apriori_thresholds
+                        Get Best Apriori Thresholds
+arlc_file_exists_readable
+                        Check if a File Exists and is Readable
+arlc_gen_gross_rules    Get Gross Rules
+arlc_gen_transactions   Get Transactional Dataset
+arlc_generate_clusters
+                        Generate Clusters
+arlc_generate_date_sequence
+                        Generate a Sequence of Dates
+arlc_generate_uid       Generate a Unique Identifier
+arlc_get_NonR_rules     Get Non-Redundant Rules
+arlc_get_apriori_thresholds
+                        Get Apriori Thresholds
+arlc_get_network_dataset
+                        Get Network Dataset
+arlc_get_significant_rules
+                        Get Significant Rules
+arlc_is_numeric_vector
+                        Check if a Vector is Numeric
+arlc_list_to_df         Convert List of Vectors to Data Frame
+arlc_log_message        Log Messages to a File
+arlc_measure_time       Measure Execution Time of a Function
+arlc_normalize_vector   Normalize a Numeric Vector
+arlc_replace_na         Replace NA with a Specified Value

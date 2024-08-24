@@ -17,6 +17,13 @@ test_that("arlc_is_numeric_vector works correctly", {
   expect_error(arlc_is_numeric_vector(c("a", "b", "c")), NA)
 })
 
+test_that("arlc_log_message logs messages correctly", {
+  log_file <- tempfile()
+  arlc_log_message("Test message", log_file)
+  log_contents <- readLines(log_file)
+  expect_equal(log_contents, "Test message")
+  unlink(log_file)
+})
 
 test_that("arlc_measure_time measures execution time", {
   result <- arlc_measure_time(Sys.sleep, 1)

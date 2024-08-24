@@ -1,8 +1,8 @@
 .Rproj.user
 .Rhistory
 .RData
+.DS_Store
 .Ruserdata
-inst/doc
-/doc/
+inst/docs
 /Meta/
 tests/testthat/Rplots.pdf

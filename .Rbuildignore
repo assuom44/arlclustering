@@ -5,3 +5,5 @@
 ^docs$
 ^doc$
 ^Meta$
+^log.txt$
+^tests\testhat\_snaps$

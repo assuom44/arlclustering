@@ -16,23 +16,6 @@ arlc_is_numeric_vector <- function(x) {
   return(all(sapply(x, is.numeric)))
 }
 
-#' Log Messages to a File
-#'
-#' This function logs messages to a specified file.
-#'
-#' @param message The message to log.
-#' @param file The file where the message should be logged.
-#' @param append Logical, whether to append to the file or overwrite it. Default is TRUE.
-#'
-#' @return None
-#'
-#' @examples
-#' arlc_log_message("This is a test message", "log.txt")
-#' @export
-arlc_log_message <- function(message, file, append = TRUE) {
-  cat(message, file = file, append = append, sep = "\n")
-}
-
 #' Measure Execution Time of a Function
 #'
 #' This function measures the execution time of a given function.
