@@ -9,8 +9,10 @@
 #' @examples
 #' \donttest{
 #' library(arlclustering)
-#' g <- make_ring(10)
-#' trans <- arlc_gen_transactions(g)
+#' # Create a sample transactions dataset
+#' sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
+#' g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+#' trans <- arlc_gen_transactions(g$graph)
 #' }
 #' @importFrom igraph as_adjacency_matrix
 #' @importFrom methods as

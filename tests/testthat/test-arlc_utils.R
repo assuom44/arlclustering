@@ -5,24 +5,22 @@ library(testthat)
 
 test_that("arlc_is_numeric_vector works correctly", {
   expect_true(arlc_is_numeric_vector(c(1, 2, 3)))
-  # Check that the function runs without error for different inputs
-  expect_error(arlc_is_numeric_vector(c(1, 2, 3)), NA)
+  expect_error(arlc_is_numeric_vector(c(1, 2, 3)), NA) # Check that the function runs without error
 
   expect_false(arlc_is_numeric_vector(c(1, "a", 3)))
-  # Check that the function runs without error for different inputs
-  expect_error(arlc_is_numeric_vector(c(1, "a", 3)), NA)
+  expect_error(arlc_is_numeric_vector(c(1, "a", 3)), NA) # Check that the function runs without error
 
   expect_false(arlc_is_numeric_vector(c("a", "b", "c")))
-  # Check that the function runs without error for different inputs
-  expect_error(arlc_is_numeric_vector(c("a", "b", "c")), NA)
+  expect_error(arlc_is_numeric_vector(c("a", "b", "c")), NA) # Check that the function runs without error
+
 })
 
 
 test_that("arlc_measure_time measures execution time", {
-  result <- arlc_measure_time(Sys.sleep, 1)
+  capture.output(suppressMessages({ result <- arlc_measure_time(Sys.sleep, 1) }))
   expect_equal(result, NULL)
   # Check that the function runs without error for different inputs
-  expect_error(arlc_measure_time(Sys.sleep, 1), NA)
+  expect_error(capture.output(suppressMessages({arlc_measure_time(Sys.sleep, 1)})), NA)
 })
 
 test_that("arlc_list_to_df converts list to data frame correctly", {
@@ -81,11 +79,13 @@ test_that("arlc_normalize_vector normalizes a vector correctly", {
   vec <- c(1, 2, 3, 4, 5)
   normalized_vec <- arlc_normalize_vector(vec)
   expect_equal(normalized_vec, c(0, 0.25, 0.5, 0.75, 1))
+  expect_error(arlc_normalize_vector(vec), NA)
 })
 
 test_that("arlc_calculate_mode calculates mode correctly", {
   vec <- c(1, 2, 2, 3, 4)
   expect_equal(arlc_calculate_mode(vec), 2)
+  expect_error(arlc_calculate_mode(vec), NA)
 })
 
 test_that("arlc_df_summary creates a summary correctly", {
@@ -101,6 +101,7 @@ test_that("arlc_df_summary creates a summary correctly", {
   )
   rownames(expected_summary) <- c("a", "b")
   expect_equal(summary_df, expected_summary, tolerance = 0.01)
+  expect_error(arlc_df_summary(df), NA)
 })
 
 
@@ -108,6 +109,7 @@ test_that("arlc_convert_date_format converts date formats correctly", {
   date_str <- "2023-01-01"
   new_date <- arlc_convert_date_format(date_str, "%Y-%m-%d", "%d-%m-%Y")
   expect_equal(new_date, "01-01-2023")
+  expect_error(arlc_convert_date_format(date_str, "%Y-%m-%d", "%d-%m-%Y"), NA)
 })
 
 test_that("arlc_generate_date_sequence generates date sequences correctly", {
@@ -116,4 +118,5 @@ test_that("arlc_generate_date_sequence generates date sequences correctly", {
   dates <- arlc_generate_date_sequence(start_date, end_date, "day")
   expected_dates <- seq.Date(as.Date(start_date), as.Date(end_date), by = "day")
   expect_equal(dates, expected_dates)
+  expect_error(arlc_generate_date_sequence(start_date, end_date, "day"), NA)
 })

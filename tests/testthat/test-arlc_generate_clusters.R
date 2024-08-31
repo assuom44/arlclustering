@@ -13,16 +13,16 @@ test_that("arlc_generate_clusters function works correctly", {
   Conf <- 0.5
   capture.output({ params <- arlc_get_apriori_thresholds(trans, supportRange, Conf) })
   capture.output({ grossRules <- arlc_gen_gross_rules(trans, params$minSupp, params$minConf, 1, params$lenRules) })
-  nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
-  NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
-  cleaned_rules <- arlc_clean_final_rules(NonRRSig_rules$FiltredRules)
+  capture.output({nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules) })
+  capture.output({NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules) })
+  capture.output({cleaned_rules <- arlc_clean_final_rules(NonRRSig_rules$FiltredRules) })
 
 
   # Checking inputs
   expect_type(cleaned_rules, "list")
 
   # Generate clusters
-  clusters <- arlc_generate_clusters(cleaned_rules)
+  capture.output({clusters <- arlc_generate_clusters(cleaned_rules) })
 
   # Test that the function returns
   expect_type(clusters, "list")

@@ -35,13 +35,20 @@ the pair that produces rules with the highest lift. The function then returns th
 along with the lift, number of rules, and their ratio to the total transactions.
 }
 \examples{
-\dontrun{
-library(arules)
-data(Groceries)
-supportRange <- seq(0.1, 0.9, by = 0.1)
+\donttest{
+library(arlclustering)
+# Create a sample transactions dataset
+sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+trans <- arlc_gen_transactions(g$graph)
+supportRange <- seq(0.1, 0.2, by = 0.1)
 Conf <- 0.5
-result <- arlc_get_apriori_thresholds(Groceries, supportRange, Conf)
-print(result)
+params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
+message(params$minSupp)
+message(params$minConf)
+message(params$bestLift)
+message(params$lenRules)
+message(params$ratio)
 }
 
 }

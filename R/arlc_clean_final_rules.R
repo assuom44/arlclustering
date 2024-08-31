@@ -10,12 +10,17 @@
 #' \donttest{
 #' library(arlclustering)
 #' # Create a sample transactions dataset
-#' data("Adult")
-#' transactions <- as(Adult, "transactions")
-#' # Generate rules
-#' rules <- apriori(transactions, parameter = list(supp = 0.5, conf = 0.9))
-#' # Clean the final rules
-#' cleaned_rules <- arlc_clean_final_rules(rules)
+#' sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
+#' g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+#' trans <- arlc_gen_transactions(g$graph)
+#' supportRange <- seq(0.1, 0.2, by = 0.1)
+#' Conf <- 0.5
+#' params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
+#' grossRules <- arlc_gen_gross_rules(trans, params$minSupp, params$minConf, 1, params$lenRules)
+#' nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
+#' NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
+#' cleaned_rules <- arlc_clean_final_rules(NonRRSig_rules$FiltredRules)
+#' message(cleaned_rules)
 #' }
 #' @import methods
 #' @export

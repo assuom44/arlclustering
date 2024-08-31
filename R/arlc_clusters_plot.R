@@ -11,9 +11,19 @@
 #' @examples
 #' \donttest{
 #' library(arlclustering)
-#' g <- make_ring(10)
-#' clusters <- list(1:5, 6:10)
-#' arlc_clusters_plot(g, "Sample Graph", clusters)
+#' # Create a sample transactions dataset
+#' sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
+#' g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+#' trans <- arlc_gen_transactions(g$graph)
+#' supportRange <- seq(0.1, 0.2, by = 0.1)
+#' Conf <- 0.5
+#' params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
+#' grossRules <- arlc_gen_gross_rules(trans, params$minSupp, params$minConf, 1, params$lenRules)
+#' nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
+#' NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
+#' cleaned_rules <- arlc_clean_final_rules(NonRRSig_rules$FiltredRules)
+#' clusters <- arlc_generate_clusters(cleaned_rules)
+#' arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters)
 #' }
 #' @importFrom graphics legend par
 #' @importFrom grDevices rainbow
@@ -22,12 +32,13 @@
 
 arlc_clusters_plot <- function(g, graphLabel, clusters) {
   # Display obtained clusters
-  message("Total Identified Clusters: ", length(clusters))
-  message("\n =========================  ")
+  message("\nTotal Identified Clusters: ", length(clusters))
+  message(" =========================  ")
   for (i in 1:length(clusters)) {
-    message("\n  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "))
+    message("  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "))
   }
-  message("\n =========================  ")
+  message(" =========================  ")
+
 
   if (vcount(g) <= 100) {
     # Calculate the layout once

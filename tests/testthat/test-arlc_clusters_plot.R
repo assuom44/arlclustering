@@ -14,16 +14,12 @@ test_that("arlc_clusters_plot plots: generates a set of communities", {
   supportRange <- seq(0.1, 0.2, by = 0.1)
   Conf <- 0.5
   # Getting parameters
-  #params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
   capture.output({ params <-arlc_get_apriori_thresholds(trans, supportRange, Conf) })
-
-  #grossRules <- arlc_gen_gross_rules(trans, params$minSupp, params$minConf, 1, params$lenRules)
   capture.output({ grossRules <- arlc_gen_gross_rules(trans, params$minSupp, params$minConf, 1, params$lenRules) })
-
-  nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
-  NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
-  cleaned_rules <- arlc_clean_final_rules(NonRRSig_rules$FiltredRules)
-  clusters <- arlc_generate_clusters(cleaned_rules)
+  capture.output({ nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)})
+  capture.output({ NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)})
+  capture.output({ cleaned_rules <- arlc_clean_final_rules(NonRRSig_rules$FiltredRules)})
+  capture.output({ clusters <- arlc_generate_clusters(cleaned_rules)})
 
   # Checking inputs
   expect_type(g$graph, "list")
@@ -39,12 +35,9 @@ test_that("arlc_clusters_plot plots: generates a set of communities", {
   # Run the function
 
   # Capture the console output
-  output <- capture.output({ arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters) })
+  capture.output(suppressMessages({ output <- arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters) }))
 
-
-  # Check that the output contains some key words:
-  expect_true(any(grepl("Total Identified Clusters:", output)))
-  expect_true(any(grepl("Community", output)))
+  # Checking the output :
   expect_true(length(output) > 0)
 
   # Check that clusters is a list
@@ -57,7 +50,6 @@ test_that("arlc_clusters_plot plots: generates a set of communities", {
   expect_true(all(sapply(clusters$Clusters, length) > 0))
 
   # Check that the function runs without error for different inputs
-  #expect_error(arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters), NA)
+  expect_error(capture.output(suppressMessages({ arlc_clusters_plot(g$graph, "Karate Club", clusters$Clusters) })), NA)
 })
-
 

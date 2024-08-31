@@ -12,9 +12,9 @@
 #'
 #' @examples
 #' \donttest{
-#' library(arlclustering)
-#' file_path <- system.file("extdata", "karate.gml", package = "arlclustering")
-#' loaded_karate <- arlc_get_network_dataset(file_path, "Karate Club")
+#' # Create a sample transactions dataset
+#' sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
+#' loaded_karate <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
 #' message(loaded_karate$graph)
 #' message(loaded_karate$graphLabel)
 #' message(loaded_karate$totalEdges)

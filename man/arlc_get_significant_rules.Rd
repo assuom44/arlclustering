@@ -22,7 +22,17 @@ and returns significant rules based on a specified method and adjustment.
 This function filters significant rules from a set of non-redundant rules.
 }
 \examples{
-\dontrun{
-arlc_get_significant_rules(all_trans, nonRR_rules)
+\donttest{
+library(arlclustering)
+# Create a sample transactions dataset
+sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+trans <- arlc_gen_transactions(g$graph)
+supportRange <- seq(0.1, 0.2, by = 0.1)
+Conf <- 0.5
+params <- arlc_get_apriori_thresholds(trans, supportRange, Conf)
+grossRules <- arlc_gen_gross_rules(trans, params$minSupp, params$minConf, 1, params$lenRules)
+nonRR_rules <- arlc_get_NonR_rules(grossRules$GrossRules)
+NonRRSig_rules <- arlc_get_significant_rules(trans, nonRR_rules$FiltredRules)
 }
 }

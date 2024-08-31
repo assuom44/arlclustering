@@ -27,13 +27,14 @@ applies the Apriori algorithm to find association rules for each pair of values,
 the pair that produces rules with the highest lift.
 }
 \examples{
-\dontrun{
-library(arules)
-data(Groceries)
-support_range <- seq(0.01, 0.03, by = 0.01)
-confidence <- 0.5
-best_thresholds <- arlc_fct_get_best_apriori_thresholds(Groceries, support_range, confidence)
-print(best_thresholds)
+\donttest{
+library(arlclustering)
+sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
+g <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+trans <- arlc_gen_transactions(g$graph)
+supportRange <- seq(0.1, 0.2, by = 0.1)
+Conf <- 0.5
+best_thresholds <- arlc_fct_get_best_apriori_thresholds(trans, supportRange, Conf)
 }
 
 }

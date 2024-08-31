@@ -22,15 +22,16 @@ various properties of the graph such as total edges, total nodes, and average de
 This function loads a network dataset from a specified GML file and computes basic graph properties.
 }
 \examples{
-\dontrun{
-file_path <- system.file("extdata", "karate.gml", package = "arlclustering")
-loaded_karate <- arlc_get_network_dataset(file_path, "Karate Club")
-print(loaded_karate$graph)
-print(loaded_karate$graphLabel)
-print(loaded_karate$totalEdges)
-print(loaded_karate$graphEdges)
-print(loaded_karate$totalNodes)
-print(loaded_karate$graphNodes)
-print(loaded_karate$averageDegree)
+\donttest{
+# Create a sample transactions dataset
+sample_gml_file <- system.file("extdata", "karate.gml", package = "arlclustering")
+loaded_karate <- arlc_get_network_dataset(sample_gml_file, "Karate Club")
+message(loaded_karate$graph)
+message(loaded_karate$graphLabel)
+message(loaded_karate$totalEdges)
+message(loaded_karate$graphEdges)
+message(loaded_karate$totalNodes)
+message(loaded_karate$graphNodes)
+message(loaded_karate$averageDegree)
 }
 }
