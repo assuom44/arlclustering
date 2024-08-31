@@ -9,8 +9,8 @@
 #' @return The function produces a plot as a side effect.
 #'
 #' @examples
-#' \dontrun{
-#' library(igraph)
+#' \donttest{
+#' library(arlclustering)
 #' g <- make_ring(10)
 #' clusters <- list(1:5, 6:10)
 #' arlc_clusters_plot(g, "Sample Graph", clusters)
@@ -22,26 +22,21 @@
 
 arlc_clusters_plot <- function(g, graphLabel, clusters) {
   # Display obtained clusters
-  cat ("Total Identified Clusters: ", length(clusters))
-  cat ("\n =========================  ")
-  #output <- NULL
-  #output <- paste0(output, "=========================  ", "\n")
+  message("Total Identified Clusters: ", length(clusters))
+  message("\n =========================  ")
   for (i in 1:length(clusters)) {
-    cat("\n  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "))
-    #output <- paste0(output, "  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "), "\n")
+    message("\n  Community ", sprintf("%02d", i), ":", paste(clusters[[i]], collapse = " "))
   }
-  cat ("\n =========================  ")
-  #output <- paste0(output, "=========================  ", "\n")
-  #return (output)
+  message("\n =========================  ")
 
-  if (vcount (g) <= 100)
-  {
+  if (vcount(g) <= 100) {
     # Calculate the layout once
     layout <- layout_with_fr(g)
     cluster_colors <- rainbow(length(clusters))
 
     # Set up the plotting area to have two plots side-by-side
-    par(mfrow = c(1, 2))
+    oldpar <- par(mfrow = c(1, 2))  # Store current par settings
+    on.exit(par(oldpar))  # Ensure par is reset when the function exits
 
     # Plot the original network
     plot(g,
@@ -69,21 +64,18 @@ arlc_clusters_plot <- function(g, graphLabel, clusters) {
          edge.color = "gray")
 
     # Add a legend to the second plot (optional)
-    #legend("bottomright", legend = 1:length(clusters), fill = cluster_colors, title = "Clusters", cex = 0.8, inset = 0.02)
-    #legend("center",legend = 1:length(clusters),ncol = 2,fill = cluster_colors,title = "Clusters",cex = 0.8,inset = 0.02,bty = "n",pt.cex = 1.5)
     legend("topleft",
            legend = 1:length(clusters),
            ncol = 5,
            fill = cluster_colors,
            title = "Clusters",
            cex = 0.6,
-           inset = c(-0.1, 0),           # Adjusting the inset to place legend outside
+           inset = c(-0.1, 0),  # Adjusting the inset to place legend outside
            bty = "n",
            pt.cex = 1.0,
-           xpd = TRUE)                   # Allow legend to be drawn outside the plot
+           xpd = TRUE)  # Allow legend to be drawn outside the plot
 
     # Reset to default single plot layout
     par(mfrow = c(1, 1))
   }
 }
-

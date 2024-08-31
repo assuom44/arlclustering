@@ -15,13 +15,13 @@
 #' the pair that produces rules with the highest lift.
 #'
 #' @examples
-#' \dontrun{
-#' library(arules)
+#' \donttest{
+#' library(arlclustering)
 #' data(Groceries)
 #' support_range <- seq(0.01, 0.03, by = 0.01)
 #' confidence <- 0.5
 #' best_thresholds <- arlc_fct_get_best_apriori_thresholds(Groceries, support_range, confidence)
-#' print(best_thresholds)
+#' message(best_thresholds)
 #' }
 #'
 #' @importFrom arules apriori

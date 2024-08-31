@@ -23,13 +23,13 @@
 #' along with the lift, number of rules, and their ratio to the total transactions.
 #'
 #' @examples
-#' \dontrun{
-#' library(arules)
+#' \donttest{
+#' library(arlclustering)
 #' data(Groceries)
 #' supportRange <- seq(0.1, 0.9, by = 0.1)
 #' Conf <- 0.5
 #' result <- arlc_get_apriori_thresholds(Groceries, supportRange, Conf)
-#' print(result)
+#' message(result)
 #' }
 #'
 #' @export
@@ -50,7 +50,7 @@ arlc_get_apriori_thresholds <- function(trx, supportRange, Conf) {
   best_lift <-  as.double(format(output_list[[3]], scientific = FALSE))
   len_rules <- as.double(output_list[[4]])
 
-  ##print(paste('-- > Generated rules represent approximately ', round(lenRules / length(trx), digits = 0), ' times the total number of transactions'))
+  ##message(paste('-- > Generated rules represent approximately ', round(lenRules / length(trx), digits = 0), ' times the total number of transactions'))
 
   # Return results as a list
   return(list(minSupp = min_supp,

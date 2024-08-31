@@ -7,8 +7,8 @@
 #' @return A cleaned set of rules.
 #'
 #' @examples
-#' \dontrun{
-#' library(arules)
+#' \donttest{
+#' library(arlclustering)
 #' # Create a sample transactions dataset
 #' data("Adult")
 #' transactions <- as(Adult, "transactions")

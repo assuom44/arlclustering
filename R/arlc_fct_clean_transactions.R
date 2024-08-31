@@ -9,7 +9,8 @@
 #' @details The function iterates through each set and checks if it is fully overlapped by any other set. If a set is fully overlapped, it is excluded from the final list of sets. The result is a list of sets with no fully overlapped sets.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' library(arlclustering)
 #' all_sets <- list(
 #'   c(1, 2, 3),
 #'   c(2, 3),
@@ -17,7 +18,7 @@
 #'   c(5, 6, 7)
 #' )
 #' cleaned_sets <- arlc_fct_clean_transactions(all_sets)
-#' print(cleaned_sets)
+#' message(cleaned_sets)
 #' }
 #'
 #' @export

@@ -11,7 +11,8 @@
 #' @return A list of unique and potential clusters.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' library(arlclustering)
 #' # Create a sample vector
 #' vec <- list(c(1, 2, 3), c(2, 3, 4), c(5, 6))
 #' # Generate clusters
@@ -38,9 +39,9 @@ arlc_generate_clusters <- function(vec) {
 
   # Display obtained clusters
   # if (genFileLog) {
-  #   cat("Total Clusters: ", length(clusters))
+  #   message("Total Clusters: ", length(clusters))
   #   for (i in 1:length(clusters)) {
-  #     cat("\n  Set ", i, ":", paste(clusters[[i]], collapse = " "))
+  #     message("\n  Set ", i, ":", paste(clusters[[i]], collapse = " "))
   #   }
   # }
 

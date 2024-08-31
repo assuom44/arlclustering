@@ -10,7 +10,7 @@
 #' @return A list containing the total number of non-redundant rules and the non-redundant rules.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(arlclustering)
 #' rules <- apriori(transactions, parameter = list(supp = 0.01, conf = 0.5))
 #' non_redundant_rules <- arlc_get_NonR_rules(rules)
@@ -23,7 +23,7 @@ arlc_get_NonR_rules <- function(gross_rules) {
   # Remove redundant rules
   nonRR_rules <- gross_rules[!is.redundant(gross_rules)]
   if (length(nonRR_rules) < 1) {
-    cat('Non-redundant rule set is the same as the gross rule set...')
+    message('Non-redundant rule set is the same as the gross rule set...')
     nonRR_rules <- gross_rules
   }
   # Compute number of non-redundant rules

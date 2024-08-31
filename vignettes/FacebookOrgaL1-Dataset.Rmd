@@ -33,7 +33,7 @@ The Facebook L1 organization social network dataset is a gml file, containing 57
 t1 <- system.time({
   dataset_path <- system.file("extdata", "Facebook_Org_L1.gml", package = "arlclustering")
   if (dataset_path == "") {
-    stop("Facebook_Org_L1.gml file not found in the package")
+    stop("Facebook_Org_L1.gml file not found")
   }
   
   g <- arlc_get_network_dataset(dataset_path, "Facebook L1 Organization")
@@ -44,7 +44,7 @@ t1 <- system.time({
 })
 
 # Display the total processing time
-cat("Graph loading Processing Time: ", t1["elapsed"], " seconds\n")
+message("Graph loading Processing Time: ", t1["elapsed"], " seconds\n")
 ```
 
 ## Generate Transactions
@@ -59,7 +59,7 @@ t2 <- system.time({
 })
 
 # Display the total processing time
-cat("Transaction dataset Processing Time: ", t2["elapsed"], " seconds\n")
+message("Transaction dataset Processing Time: ", t2["elapsed"], " seconds\n")
 ```
 
 ## Get Apriori Thresholds
@@ -85,7 +85,7 @@ t3 <- system.time({
 })
 
 # Display the total processing time
-cat("Graph loading Processing Time: ", t3["elapsed"], " seconds\n")
+message("Graph loading Processing Time: ", t3["elapsed"], " seconds\n")
 ```
 
 ## Generate Gross Rules
@@ -109,7 +109,7 @@ t4 <- system.time({
   grossRules$TotalRulesWithLengthFilter
 })
 # Display the total number of clusters and the total processing time
-cat("Gross rules generation Time: ", t4["elapsed"], " seconds\n")
+message("Gross rules generation Time: ", t4["elapsed"], " seconds\n")
 ```
 
 ## Filter Significant and Non-Redundant Rules
@@ -124,7 +124,7 @@ t5 <- system.time({
   NonRSigRules$TotFiltredRules
 })
 # Display the total number of clusters and the total processing time
-cat("\nClearing rules Processing Time: ", t5["elapsed"], " seconds\n")
+message("\nClearing rules Processing Time: ", t5["elapsed"], " seconds\n")
 ```
 
 ## Clean and genarate final Rules
@@ -138,9 +138,9 @@ t6 <- system.time({
   clusters$TotClusters
 })
 # Display the total number of clusters and the total processing time
-cat("Cleaning final rules Processing Time: ", t6["elapsed"], " seconds\n")
+message("Cleaning final rules Processing Time: ", t6["elapsed"], " seconds\n")
 
-cat("The total comsumed time is:",t1["elapsed"]+ t2["elapsed"]+t3["elapsed"]+t4["elapsed"]+t5["elapsed"]+t6["elapsed"], "seconds\n")
+message("The total comsumed time is:",t1["elapsed"]+ t2["elapsed"]+t3["elapsed"]+t4["elapsed"]+t5["elapsed"]+t6["elapsed"], "seconds\n")
 ```
 
 ## Plot Clusters

@@ -11,16 +11,17 @@
 #' @return A list containing the graph object and its properties: total edges, total nodes, and average degree.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' library(arlclustering)
 #' file_path <- system.file("extdata", "karate.gml", package = "arlclustering")
 #' loaded_karate <- arlc_get_network_dataset(file_path, "Karate Club")
-#' print(loaded_karate$graph)
-#' print(loaded_karate$graphLabel)
-#' print(loaded_karate$totalEdges)
-#' print(loaded_karate$graphEdges)
-#' print(loaded_karate$totalNodes)
-#' print(loaded_karate$graphNodes)
-#' print(loaded_karate$averageDegree)
+#' message(loaded_karate$graph)
+#' message(loaded_karate$graphLabel)
+#' message(loaded_karate$totalEdges)
+#' message(loaded_karate$graphEdges)
+#' message(loaded_karate$totalNodes)
+#' message(loaded_karate$graphNodes)
+#' message(loaded_karate$averageDegree)
 #' }
 #' @import igraph
 #' @export

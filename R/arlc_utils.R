@@ -33,7 +33,7 @@ arlc_measure_time <- function(func, ...) {
   result <- func(...)
   end_time <- Sys.time()
   elapsed_time <- end_time - start_time
-  cat("Elapsed time:", elapsed_time, "\n")
+  message("Elapsed time:", elapsed_time, "\n")
   return(result)
 }
 

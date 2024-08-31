@@ -7,9 +7,8 @@
 #' @return A transactional dataset.
 #'
 #' @examples
-#' \dontrun{
-#' library(igraph)
-#' library(arules)
+#' \donttest{
+#' library(arlclustering)
 #' g <- make_ring(10)
 #' trans <- arlc_gen_transactions(g)
 #' }
